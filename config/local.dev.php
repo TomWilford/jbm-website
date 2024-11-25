@@ -13,5 +13,8 @@ return function (array $settings): array {
     // Database
     $settings['db']['database'] = 'slim_skeleton_dev';
 
+    // Twig
+    $settings['twig']['cache'] = false;
+
     return $settings;
 };

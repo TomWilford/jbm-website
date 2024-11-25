@@ -17,6 +17,7 @@ use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Interfaces\RouteParserInterface;
+use Slim\Views\Twig;
 
 return [
     // Application settings
@@ -62,6 +63,12 @@ return [
 
     BasePathMiddleware::class => function (ContainerInterface $container) {
         return new BasePathMiddleware($container->get(App::class));
+    },
+
+    Twig::class => function (ContainerInterface $container) {
+        return Twig::create(__DIR__ . '/../resources/views', [
+            'cache' => $container->get('settings')['twig']['cache'],
+        ]);
     },
 
     LoggerInterface::class => function (ContainerInterface $container) {

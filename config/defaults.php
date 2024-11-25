@@ -40,4 +40,7 @@ $settings['db'] = [
     ],
 ];
 
+// Twig
+$settings['twig']['cache'] = __DIR__ . '/../var/cache';
+
 return $settings;
