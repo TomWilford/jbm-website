@@ -581,3 +581,7 @@
 .text-xxl {
     font-size: 11.089rem;
 }
+
+.pointer {
+    cursor: pointer;
+}

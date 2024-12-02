@@ -1,0 +1,119 @@
+/* Light Mode */
+.light-mode {
+    background: var(--light-color);
+    color: var(--dark-color);
+}
+
+.light-mode hr,
+.light-mode a:link,
+.light-mode a:visited,
+.light-mode input,
+.light-mode button,
+.light-mode textarea {
+    color: var(--dark-color-alt);
+}
+
+.light-mode hr:after {
+    border-color: var(--dark-color-alt);
+}
+
+.light-mode th,
+.light-mode td {
+    border-color: var(--dark-color);
+}
+
+.light-mode img,
+.light-mode ::placeholder,
+.light-mode ::-ms-input-placeholder {
+    color: var(--dark-color-alt);
+}
+
+.light-mode details,
+.light-mode input,
+.light-mode button,
+.light-mode textarea {
+    border-color: var(--dark-color);
+}
+
+.light-mode input[type=checkbox]:checked:before {
+    background: var(--dark-color);
+}
+
+.light-mode .tree ul li,
+.light-mode .tree ul li:last-child:after {
+    border-color: var(--dark-color);
+}
+
+.light-mode .tree ul li:before {
+    border-color: var(--dark-color);
+}
+
+.light-mode input,
+.light-mode button,
+.light-mode textarea {
+    background: var(--light-color);
+}
+
+.light-mode button:hover {
+    background: var(--light-color-alt);
+}
+
+/* Dark Mode */
+.dark-mode {
+    background: var(--dark-color);
+    color: var(--light-color);
+}
+
+.dark-mode hr,
+.dark-mode a:link,
+.dark-mode a:visited,
+.dark-mode input,
+.dark-mode button,
+.dark-mode textarea {
+    color: var(--light-color-alt);
+}
+
+.dark-mode hr:after {
+    border-color: var(--light-color-alt);
+}
+
+.dark-mode th,
+.dark-mode td {
+    border-color: var(--light-color);
+}
+
+.dark-mode img,
+.dark-mode ::placeholder,
+.dark-mode ::-ms-input-placeholder {
+    color: var(--light-color-alt);
+}
+
+.dark-mode details,
+.dark-mode input,
+.dark-mode button,
+.dark-mode textarea {
+    border-color: var(--light-color);
+}
+
+.dark-mode input[type=checkbox]:checked:before {
+    background: var(--light-color);
+}
+
+.dark-mode .tree ul li,
+.dark-mode .tree ul li:last-child:after {
+    border-color: var(--light-color);
+}
+
+.dark-mode .tree ul li:before {
+    border-color: var(--light-color);
+}
+
+.dark-mode input,
+.dark-mode button,
+.dark-mode textarea {
+    background: var(--dark-color);
+}
+
+.dark-mode button:hover {
+    background: var(--dark-color-alt);
+}

@@ -5,13 +5,17 @@
 @import url('https://fonts.cdnfonts.com/css/space-mono');
 
 :root {
+    --dark-color: #0434ff;
+    --dark-color-alt: #0424B3;
+    --light-color: #fff;
+    --light-color-alt: #eee;
     --font-family: 'Space Mono', monospace;
     --line-height: 1.20rem;
     --border-thickness: 2px;
-    --text-color: #0434ff;
-    --text-color-alt: #0424B3;
-    --background-color: #fff;
-    --background-color-alt: #eee;
+    --text-color: var(--dark-color);
+    --text-color-alt: var(--dark-color-alt);
+    --background-color: var(--light-color);
+    --background-color-alt: var(--light-color-alt);
 
     --font-weight-normal: 500;
     --font-weight-medium: 600;
@@ -27,10 +31,10 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --text-color: #fff;
-        --text-color-alt: #aaa;
-        --background-color: #0434ff;
-        --background-color-alt: #0424B3;
+        --text-color: var(--light-color);
+        --text-color-alt: var(--light-color-alt);
+        --background-color: var(--dark-color);
+        --background-color-alt: var(--dark-color-alt);
     }
 }
 
@@ -105,7 +109,7 @@ hr:after {
     top: calc(var(--line-height) / 2 - var(--border-thickness));
     left: 0;
     width: 100%;
-    border-top: calc(var(--border-thickness) * 3) double var(--text-color);
+    border-top: var(--border-thickness) dashed var(--text-color);
     height: 0;
 }
 

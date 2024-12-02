@@ -2,13 +2,24 @@
 
 include __DIR__ . '/vendor/autoload.php';
 
-$minifier = new MatthiasMullie\Minify\CSS();
+$cssMinifier = new MatthiasMullie\Minify\CSS();
 
 $cssIterator = new DirectoryIterator(__DIR__ . '/resources/css/');
 foreach ($cssIterator as $file) {
     if (!$file->isDot()) {
-        $minifier->add($file->getRealPath());
+        $cssMinifier->add($file->getRealPath());
     }
 }
 
-$minifier->minify(__DIR__ . '/public/css/style.css');
+$cssMinifier->minify(__DIR__ . '/public/css/style.css');
+
+$jsMinifier = new MatthiasMullie\Minify\JS();
+
+$jsIterator = new DirectoryIterator(__DIR__ . '/resources/js/');
+foreach ($jsIterator as $file) {
+    if (!$file->isDot()) {
+        $jsMinifier->add($file->getRealPath());
+    }
+}
+
+$jsMinifier->minify(__DIR__ . '/public/js/app.js');

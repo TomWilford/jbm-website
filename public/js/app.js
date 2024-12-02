@@ -1,0 +1,5 @@
+let darkModeState=!1;const button=document.querySelector(".theme-toggle");const useDark=window.matchMedia("(prefers-color-scheme: dark)");function toggleDarkMode(state){document.documentElement.classList.toggle("dark-mode",state);document.documentElement.classList.toggle("light-mode",!state);setPicturesThemed(state?'dark':'light');darkModeState=state}
+function setDarkModeLocalStorage(state){localStorage.setItem("dark-mode",state)}
+function setPicturesThemed(colorScheme){document.querySelectorAll("picture > source[data-cloned-theme]").forEach((el)=>{el.remove()});if(colorScheme){document.querySelectorAll(`picture > source[media*="(prefers-color-scheme: ${colorScheme})"]`).forEach((el)=>{const cloned=el.cloneNode();cloned.removeAttribute("media");cloned.setAttribute("data-cloned-theme",colorScheme);el.parentNode.prepend(cloned)})}}
+toggleDarkMode(localStorage.getItem("dark-mode")=="true");useDark.addEventListener('change',(evt)=>toggleDarkMode(evt.matches))
+button.addEventListener("click",(evt)=>{evt.preventDefault();darkModeState=!darkModeState;toggleDarkMode(darkModeState);setDarkModeLocalStorage(darkModeState)})
