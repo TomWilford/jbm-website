@@ -9,6 +9,9 @@
     --dark-color-alt: #0424B3;
     --light-color: #fff;
     --light-color-alt: #eee;
+    --light-break-image: url('/images/jolly-blue-break-white.svg');
+    --dark-break-image: url('/images/jolly-blue-break.svg');
+    --break-image: var(--dark-break-image);
     --font-family: 'Space Mono', monospace;
     --line-height: 1.20rem;
     --border-thickness: 2px;
@@ -35,6 +38,7 @@
         --text-color-alt: var(--light-color-alt);
         --background-color: var(--dark-color);
         --background-color-alt: var(--dark-color-alt);
+        --break-image: var(--light-break-image);
     }
 }
 
@@ -94,7 +98,7 @@ h2 {
     text-transform: uppercase;
 }
 
-hr {
+/*hr {
     position: relative;
     display: block;
     height: var(--line-height);
@@ -111,6 +115,18 @@ hr:after {
     width: 100%;
     border-top: var(--border-thickness) dashed var(--text-color);
     height: 0;
+}*/
+
+hr {
+    display:block;
+    border: 0;
+    height: var(--line-height);
+    margin: calc(var(--line-height) * 1.5) 0;
+    color: var(--text-color);
+    background-image: var(--break-image);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 a {

@@ -13,9 +13,13 @@
     color: var(--dark-color-alt);
 }
 
-.light-mode hr:after {
-    border-color: var(--dark-color-alt);
+.light-mode hr {
+    background-image: var(--dark-break-image);
 }
+
+/*.light-mode hr:after {
+    border-color: var(--dark-color-alt);
+}*/
 
 .light-mode th,
 .light-mode td {
@@ -73,9 +77,13 @@
     color: var(--light-color-alt);
 }
 
-.dark-mode hr:after {
-    border-color: var(--light-color-alt);
+.dark-mode hr {
+    background-image: var(--light-break-image);
 }
+
+/*.dark-mode hr:after {
+    border-color: var(--light-color-alt);
+}*/
 
 .dark-mode th,
 .dark-mode td {

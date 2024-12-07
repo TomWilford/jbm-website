@@ -49,7 +49,9 @@ function setPicturesThemed(colorScheme)
 }
 
 // Initial setting
-toggleDarkMode(localStorage.getItem("dark-mode") == "true");
+if (localStorage.getItem('dark-mode') !== null) {
+    toggleDarkMode(localStorage.getItem("dark-mode") == "true");
+}
 
 // Listen for changes in the OS settings.
 // Note: the arrow function shorthand works only in modern browsers,
