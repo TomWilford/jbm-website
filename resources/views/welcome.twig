@@ -12,6 +12,8 @@
     <hr>
     <section>
         <h2>Recent Things</h2>
-
+        {% for thing in things %}
+            <p>{{ thing.name }}</p>
+        {% endfor %}
     </section>
 {% endblock %}

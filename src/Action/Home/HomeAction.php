@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Action\Home;
 
+use App\Domain\Thing\ThingRepository;
 use App\Renderer\TwigRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,7 +14,7 @@ use Twig\Error\SyntaxError;
 
 final readonly class HomeAction
 {
-    public function __construct(private TwigRenderer $renderer)
+    public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
     {
         //
     }
@@ -24,7 +27,7 @@ final readonly class HomeAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         return $this->renderer->twig($response, 'welcome.twig', [
-            'world' => 'werld'
+            'things' => $this->things->all(),
         ]);
     }
 }
