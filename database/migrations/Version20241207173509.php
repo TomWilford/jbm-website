@@ -25,11 +25,11 @@ final class Version20241207173509 extends AbstractMigration
         $table->addColumn('name', Types::STRING, ['notnull' => true]);
         $table->addColumn('short_description', Types::STRING, ['notnull' => true]);
         $table->addColumn('description', Types::STRING, ['notnull' => true]);
-        $table->addColumn('image', Types::STRING, ['notnull' => false]);
+        $table->addColumn('featured', Types::BOOLEAN, ['notnull' => false]);
         $table->addColumn('url', Types::STRING, ['notnull' => false]);
         $table->addColumn('fault_level', Types::STRING, ['notnull' => true]);
-        $table->addColumn('from', Types::DATE_IMMUTABLE, ['notnull' => true]);
-        $table->addColumn('to', Types::DATE_MUTABLE, ['notnull' => false]);
+        $table->addColumn('active_from', Types::DATE_IMMUTABLE, ['notnull' => true]);
+        $table->addColumn('active_to', Types::DATE_MUTABLE, ['notnull' => false]);
         $table->addColumn('created_at', Types::DATE_IMMUTABLE, ['notnull' => true]);
         $table->addColumn('updated_at', Types::DATE_MUTABLE, ['notnull' => true]);
         $table->setPrimaryKey(['id']);

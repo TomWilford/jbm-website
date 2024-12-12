@@ -10,22 +10,22 @@ use JsonSerializable;
 readonly class Thing implements JsonSerializable
 {
     public function __construct(
-        private int $id,
+        private ?int $id,
         private string $name,
         private string $shortDescription,
         private string $description,
-        private ?string $image,
-        private ?string $url,
+        private bool $featured,
         private FaultLevel $faultLevel,
-        private int $from,
-        private ?int $to,
-        private int $createdAt,
-        private int $updatedAt,
+        private int $activeFrom,
+        private ?int $activeTo = null,
+        private ?string $url = null,
+        private ?int $createdAt = null,
+        private ?int $updatedAt = null
     ) {
         //
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -45,9 +45,9 @@ readonly class Thing implements JsonSerializable
         return $this->description;
     }
 
-    public function getImage(): ?string
+    public function getFeatured(): bool
     {
-        return $this->image;
+        return $this->featured;
     }
 
     public function getUrl(): ?string
@@ -55,9 +55,19 @@ readonly class Thing implements JsonSerializable
         return $this->url;
     }
 
-    public function getUrlHost(): string
+    public function getUrlHost(): ?string
     {
-        return parse_url($this->url, PHP_URL_HOST);
+        if (!$this->url) {
+            return null;
+        }
+
+        $parsedUrl = parse_url($this->url);
+
+        if (!$parsedUrl) {
+            return null;
+        }
+
+        return array_key_exists('host', $parsedUrl) ? $parsedUrl['host'] : null;
     }
 
     public function getFaultLevel(): FaultLevel
@@ -65,22 +75,22 @@ readonly class Thing implements JsonSerializable
         return $this->faultLevel;
     }
 
-    public function getFrom(): int
+    public function getActiveFrom(): int
     {
-        return $this->from;
+        return $this->activeFrom;
     }
 
-    public function getTo(): ?int
+    public function getActiveTo(): ?int
     {
-        return $this->to;
+        return $this->activeTo;
     }
 
-    public function getCreatedAt(): int
+    public function getCreatedAt(): ?int
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): int
+    public function getUpdatedAt(): ?int
     {
         return $this->updatedAt;
     }
@@ -92,11 +102,11 @@ readonly class Thing implements JsonSerializable
             'name' => $this->name,
             'short_description' => $this->shortDescription,
             'description' => $this->description,
-            'image' => $this->image,
+            'featured' => $this->featured,
             'url' => $this->url,
             'fault_level' => $this->faultLevel,
-            'from' => $this->from,
-            'to' => $this->to,
+            'active_from' => $this->activeFrom,
+            'active_to' => $this->activeTo,
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
         ];

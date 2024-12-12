@@ -6,5 +6,5 @@ enum FaultLevel: string
 {
     case ALL = 'all';
     case MOSTLY = 'most';
-    case PARTIALLY = 'part';
+    case PARTLY = 'part';
 }

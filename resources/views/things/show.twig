@@ -30,13 +30,15 @@
                     <td>
                         {% if thing.url %}
                             <a href="{{ thing.url }}">{{ thing.urlHost }}</a>
+                        {% else %}
+                            <span class="material-symbols-outlined text-m">link_off</span>
                         {% endif %}
                     </td>
                     <td>
-                        {{ (thing.from / 1000) |date('Y-m-d') }}
+                        {{ (thing.activeFrom) |date('Y-m-d') }}
                     </td>
                     <td>
-                        {{ thing.to ? thing.to |date('Y-m-d') : 'Present' }}
+                        {{ thing.activeTo ? activeTo.to |date('Y-m-d') : 'Present' }}
                     </td>
                 </tr>
             </tbody>
