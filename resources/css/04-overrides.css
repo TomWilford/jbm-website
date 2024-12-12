@@ -4,6 +4,10 @@ html {
     transition: color,background-color 0.3s cubic-bezier(.6,.04,.98,.34);
 }
 
+a {
+    text-underline-offset: 0.145rem;
+}
+
 header {
     display: flex;
     align-items: end;
@@ -13,6 +17,20 @@ header {
     width: 3.8rem;
     height: auto;
 }
+.home-link,
+.home-link:visited {
+    text-decoration: none;
+    color: var(--text-color);
+}
+.light-mode .home-link,
+.light-mode .home-link:visited {
+    color: var(--dark-color);
+}
+.dark-mode .home-link,
+.dark-mode .home-link:visited{
+    color: var(--light-color);
+}
+
 
 header h1 {
     font-family: 'NCL Aekabih Muskey', sans-serif;
@@ -33,8 +51,7 @@ header div {
 }
 
 .theme-toggle {
-    width: 2.618rem;
-    text-align: center;
+    text-align: right;
     color: var(--text-color-alt);
     transition: color 0.3s cubic-bezier(.6,.04,.98,.34);
 }
@@ -54,4 +71,28 @@ header div {
 }
 .dark-mode .theme-toggle:hover {
     color: var(--light-color);
+}
+
+.things-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1.618rem;
+    align-items: baseline;
+}
+
+.things-list p {
+    flex-grow: 1;
+}
+
+.things-details td,
+.things-details th {
+    width: 25%;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }

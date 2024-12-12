@@ -9,11 +9,13 @@
         </p>
         <p class="text-s">Sorry about that.</p>
     </section>
-    <hr>
+    <hr class="my-5">
     <section>
-        <h2>Recent Things</h2>
+        {% include 'components/subtitle.twig' with {'subtitle': 'Recent Things'} %}
         {% for thing in things %}
-            <p>{{ thing.name }}</p>
+            {% include 'components/things-list.twig' with {'thing': thing} %}
         {% endfor %}
+        <a href="/things" class="mt-3">More...</a>
     </section>
+    <hr class="my-5">
 {% endblock %}

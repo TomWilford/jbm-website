@@ -1,0 +1,47 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}{{ thing.name }} | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        <h2 class="text-m">{{ thing.name }}</h2>
+        <table class="things-details">
+            <thead>
+                <tr>
+                    <th>
+                        Fault Level
+                    </th>
+                    <th>
+                        URL
+                    </th>
+                    <th>
+                        From
+                    </th>
+                    <th>
+                        To
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ thing.faultLevel.name |capitalize }} My Fault
+                    </td>
+                    <td>
+                        {% if thing.url %}
+                            <a href="{{ thing.url }}">{{ thing.urlHost }}</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ (thing.from / 1000) |date('Y-m-d') }}
+                    </td>
+                    <td>
+                        {{ thing.to ? thing.to |date('Y-m-d') : 'Present' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>{{ thing.description }}</p>
+    </section>
+    <hr class="my-5">
+{% endblock %}

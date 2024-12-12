@@ -1,0 +1,13 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}Things | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        {% include 'components/subtitle.twig' with {'subtitle': 'All Things'} %}
+        {% for thing in things %}
+            {% include 'components/things-list.twig' with {'thing': thing} %}
+        {% endfor %}
+    </section>
+    <hr class="my-5">
+{% endblock %}

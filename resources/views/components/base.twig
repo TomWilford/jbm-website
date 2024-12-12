@@ -13,6 +13,92 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Jolly Blue Man" />
     <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <script>
+        /*!
+         * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
+         * Copyright 2011-2023 The Bootstrap Authors
+         * Licensed under the Creative Commons Attribution 3.0 Unported License.
+         * Modified by Tom Wilford 2024 to include:
+         *  - Image Mode Switcher: https://michaelti.ca/sandbox/2020/05/01/dark-mode-images-with-a-manual-toggle-switch/
+         */
+
+        (() => {
+            "use strict";
+
+            const getStoredTheme = () => localStorage.getItem("theme");
+            const setStoredTheme = (theme) => localStorage.setItem("theme", theme);
+
+            const getPreferredTheme = () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme) {
+                    return storedTheme;
+                }
+
+                return window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light";
+            };
+
+            const setTheme = (theme) => {
+                if (
+                    theme === "auto" &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                ) {
+                    document.documentElement.classList.add("dark-mode");
+                    document.documentElement.classList.remove("light-mode");
+                } else {
+                    const add = theme + '-mode';
+                    const remove = theme === 'dark' ? 'light-mode' : 'dark-mode';
+                    document.documentElement.classList.remove(remove);
+                    document.documentElement.classList.add(add);
+                }
+            };
+
+            const setPictureTheme = (colorScheme) =>
+            {
+                document.querySelectorAll("picture > source[data-cloned-theme]").forEach((el) => {
+                    el.remove();
+                });
+
+                if (colorScheme) {
+                    document
+                        .querySelectorAll(`picture > source[media*="(prefers-color-scheme: ${colorScheme})"]`)
+                        .forEach((el) => {
+                            const cloned = el.cloneNode();
+                            cloned.removeAttribute("media");
+                            cloned.setAttribute("data-cloned-theme", colorScheme);
+                            el.parentNode.prepend(cloned);
+                        });
+                }
+            };
+
+            setTheme(getPreferredTheme());
+            setPictureTheme(getPreferredTheme())
+
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .addEventListener("change", () => {
+                    const storedTheme = getStoredTheme();
+                    if (storedTheme !== "light" && storedTheme !== "dark") {
+                        setTheme(getPreferredTheme());
+                        setPictureTheme(getPreferredTheme())
+                    }
+                });
+
+            window.addEventListener("DOMContentLoaded", () => {
+                setPictureTheme(getPreferredTheme())
+
+                document.querySelectorAll(".theme-toggle").forEach((toggle) => {
+                    toggle.addEventListener("click", () => {
+                        const theme = getPreferredTheme() === 'dark' ? 'light' : 'dark';
+                        setStoredTheme(theme);
+                        setTheme(theme);
+                        setPictureTheme(theme)
+                    });
+                });
+            });
+        })();
+    </script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=routine" />
 </head>
@@ -21,6 +107,9 @@
     <main class="mt-5">
         {% block content %}{% endblock %}
     </main>
+    <footer>
+        <p class="text-s">hello@jollyblueman.com | © Tom Wilford</p>
+    </footer>
 </body>
 <script src="/js/app.js"></script>
 </html>

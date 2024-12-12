@@ -23,12 +23,15 @@ final class Version20241207173509 extends AbstractMigration
         $table = $schema->createTable('things');
         $table->addColumn('id', Types::INTEGER, ['autoincrement' => true]);
         $table->addColumn('name', Types::STRING, ['notnull' => true]);
-        $table->addColumn('description', Types::STRING, ['notnull' => true]);
         $table->addColumn('short_description', Types::STRING, ['notnull' => true]);
+        $table->addColumn('description', Types::STRING, ['notnull' => true]);
         $table->addColumn('image', Types::STRING, ['notnull' => false]);
         $table->addColumn('url', Types::STRING, ['notnull' => false]);
-        $table->addColumn('created_at', Types::STRING, ['notnull' => true]);
-        $table->addColumn('updated_at', Types::STRING, ['notnull' => true]);
+        $table->addColumn('fault_level', Types::STRING, ['notnull' => true]);
+        $table->addColumn('from', Types::DATE_IMMUTABLE, ['notnull' => true]);
+        $table->addColumn('to', Types::DATE_MUTABLE, ['notnull' => false]);
+        $table->addColumn('created_at', Types::DATE_IMMUTABLE, ['notnull' => true]);
+        $table->addColumn('updated_at', Types::DATE_MUTABLE, ['notnull' => true]);
         $table->setPrimaryKey(['id']);
     }
 
