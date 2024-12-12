@@ -84,6 +84,18 @@ header div {
     flex-grow: 1;
 }
 
+@media screen and (max-width: 480px) {
+    .things-list {
+        flex-direction: column;
+        gap: 0.236rem;
+        margin-bottom: 1.618rem;
+    }
+
+    .things-list p {
+        margin-bottom: 0;
+    }
+}
+
 .things-details td,
 .things-details th {
     width: 25%;
