@@ -4,9 +4,12 @@
     color: var(--dark-color);
 }
 
-.light-mode hr,
 .light-mode a:link,
-.light-mode a:visited,
+.light-mode a:visited {
+    color: var(--dark-color);
+}
+
+.light-mode hr,
 .light-mode input,
 .light-mode button,
 .light-mode textarea {
@@ -67,6 +70,12 @@
     background: var(--dark-color);
     color: var(--light-color);
 }
+
+.dark-mode a:link,
+.dark-mode a:visited {
+    color: var(--light-color);
+}
+
 
 .dark-mode hr,
 .dark-mode a:link,

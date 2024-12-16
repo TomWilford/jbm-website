@@ -10,23 +10,26 @@
                 <thead>
                     <tr>
                         <th>
-                            Fault Level
+                            From
+                        </th>
+                        <th>
+                            To
                         </th>
                         <th>
                             URL
                         </th>
                         <th>
-                            From
-                        </th>
-                        <th>
-                            To
+                            Fault Level
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            {{ thing.faultLevel.name |capitalize }} My Fault
+                            {{ (thing.activeFrom) |date('Y-m-d') }}
+                        </td>
+                        <td>
+                            {{ thing.activeTo ? activeTo.to |date('Y-m-d') : 'Present' }}
                         </td>
                         <td>
                             {% if thing.url %}
@@ -36,10 +39,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            {{ (thing.activeFrom) |date('Y-m-d') }}
-                        </td>
-                        <td>
-                            {{ thing.activeTo ? activeTo.to |date('Y-m-d') : 'Present' }}
+                            {{ thing.faultLevel.name |capitalize }} My Fault
                         </td>
                     </tr>
                 </tbody>

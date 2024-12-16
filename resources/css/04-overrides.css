@@ -118,4 +118,12 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
+    background: var(--background-color);
+}
+
+.light-mode footer {
+    background: var(--light-color);
+}
+.dark-mode footer {
+    background: var(--dark-color);
 }
