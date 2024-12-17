@@ -1,5 +1,6 @@
 <?php
 
+use App\Infrastructure\Database\DatabaseInterface;
 use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
 use Monolog\Formatter\LineFormatter;
@@ -17,6 +18,7 @@ use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Interfaces\RouteParserInterface;
+use Slim\Views\Twig;
 
 return [
     // Application settings
@@ -62,6 +64,20 @@ return [
 
     BasePathMiddleware::class => function (ContainerInterface $container) {
         return new BasePathMiddleware($container->get(App::class));
+    },
+
+    Twig::class => function (ContainerInterface $container) {
+        return Twig::create(__DIR__ . '/../resources/views', [
+            'cache' => $container->get('settings')['twig']['cache'],
+        ]);
+    },
+
+    DatabaseInterface::class => function (ContainerInterface $container) {
+        $database = match($container->get('settings')['db']['connection']) {
+            default => new \App\Infrastructure\Database\SQLiteDatabase($container->get('settings')['db']['dsn'])
+        };
+
+        return $database;
     },
 
     LoggerInterface::class => function (ContainerInterface $container) {

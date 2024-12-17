@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Home;
+namespace App\Action\Things;
 
 use App\Domain\Thing\ThingRepository;
 use App\Renderer\TwigRenderer;
@@ -12,7 +12,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final readonly class HomeAction
+final readonly class IndexAction
 {
     public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
     {
@@ -26,8 +26,8 @@ final readonly class HomeAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        return $this->renderer->twig($response, 'welcome.twig', [
-            'things' => $this->things->recent(),
+        return $this->renderer->twig($response, 'things/index.twig', [
+            'things' => $this->things->all(),
         ]);
     }
 }
