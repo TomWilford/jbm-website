@@ -3,6 +3,7 @@
 use App\Infrastructure\Database\DatabaseInterface;
 use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
+use App\Renderer\TwigRenderer;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
@@ -99,6 +100,7 @@ return [
         return new ExceptionMiddleware(
             $container->get(ResponseFactoryInterface::class),
             $container->get(JsonRenderer::class),
+            $container->get(TwigRenderer::class),
             $container->get(LoggerInterface::class),
             (bool)$settings['display_error_details'],
         );

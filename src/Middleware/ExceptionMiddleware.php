@@ -3,6 +3,7 @@
 namespace App\Middleware;
 
 use App\Renderer\JsonRenderer;
+use App\Renderer\TwigRenderer;
 use DomainException;
 use Fig\Http\Message\StatusCodeInterface;
 use InvalidArgumentException;
@@ -15,23 +16,16 @@ use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpException;
 use Throwable;
 
-final class ExceptionMiddleware implements MiddlewareInterface
+final readonly class ExceptionMiddleware implements MiddlewareInterface
 {
-    private ResponseFactoryInterface $responseFactory;
-    private JsonRenderer $renderer;
-    private ?LoggerInterface $logger;
-    private bool $displayErrorDetails;
-
     public function __construct(
-        ResponseFactoryInterface $responseFactory,
-        JsonRenderer $jsonRenderer,
-        LoggerInterface $logger = null,
-        bool $displayErrorDetails = false,
+        private ResponseFactoryInterface $responseFactory,
+        private JsonRenderer $jsonRenderer,
+        private TwigRenderer $twigRenderer,
+        private ?LoggerInterface $logger = null,
+        private bool $displayErrorDetails = false,
     ) {
-        $this->responseFactory = $responseFactory;
-        $this->renderer = $jsonRenderer;
-        $this->displayErrorDetails = $displayErrorDetails;
-        $this->logger = $logger;
+        //
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -84,7 +78,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
             ],
         ];
 
-        return $this->renderer->json($response, $data);
+        return $this->jsonRenderer->json($response, $data);
     }
 
     public function renderHtml(ResponseInterface $response, Throwable $exception): ResponseInterface
@@ -106,9 +100,15 @@ final class ExceptionMiddleware implements MiddlewareInterface
             );
         }
 
-        $response->getBody()->write($message);
+        try {
+            return $this->twigRenderer->twig($response, 'error.twig', [
+                'message' => $message
+            ]);
+        } catch (Throwable $exception) {
+            $response->getBody()->write($message);
 
-        return $response;
+            return $response;
+        }
     }
 
     private function getHttpStatusCode(Throwable $exception): int
