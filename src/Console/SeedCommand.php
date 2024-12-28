@@ -112,7 +112,7 @@ final class SeedCommand extends Command
                 featured: true,
                 faultLevel: FaultLevel::ALL,
                 activeFrom: (new \DateTimeImmutable('2016-08-16'))->getTimestamp(),
-                url: 'https://jollyblueman.com'
+                url: 'https://github.com/TomWilford/jbm-website'
             ),
         ];
     }
