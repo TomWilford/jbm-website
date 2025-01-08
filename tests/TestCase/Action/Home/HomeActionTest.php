@@ -2,7 +2,7 @@
 
 namespace App\Test\TestCase\Action\Home;
 
-use App\Action\Home\HomeAction;
+use App\Action\Home\Page\HomeAction;
 use App\Test\Traits\AppTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\Attributes\UsesClass;

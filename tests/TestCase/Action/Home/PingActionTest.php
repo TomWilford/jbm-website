@@ -2,7 +2,7 @@
 
 namespace App\Test\TestCase\Action\Home;
 
-use App\Action\Home\PingAction;
+use App\Action\Home\Page\PingAction;
 use App\Test\Traits\AppTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\Attributes\UsesClass;

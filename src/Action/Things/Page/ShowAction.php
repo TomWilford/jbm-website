@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Things;
+namespace App\Action\Things\Page;
 
 use App\Domain\Thing\ThingRepository;
 use App\Renderer\TwigRenderer;
