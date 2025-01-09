@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Thing;
 
-use App\Domain\Enums\FaultLevel;
+use App\Domain\Thing\Enum\FaultLevel;
 use JsonSerializable;
 
 readonly class Thing implements JsonSerializable

@@ -2,6 +2,7 @@
 
 namespace App\Renderer;
 
+use App\Infrastructure\Enum\HttpStatus;
 use Psr\Http\Message\ResponseInterface;
 
 final class JsonRenderer
@@ -22,20 +23,25 @@ final class JsonRenderer
         return $response;
     }
 
-    public function jsonResponse(
+    public function jsonWithStatus(
         ResponseInterface $response,
-        mixed $data = null,
-        int $statusCode = 200
+        mixed $data = [],
+        HttpStatus $httpStatus = HttpStatus::OK
     ): ResponseInterface {
         $response = $response->withHeader('Content-Type', 'application/json');
+        $status = HttpStatus::isSuccess($httpStatus) ? 'success' : 'error';
+        $key = HttpStatus::isSuccess($httpStatus) ? 'data' : 'messages';
 
         $response->getBody()->write(
             (string)json_encode(
-                $data,
+                [
+                    'status' => $status,
+                    $key => $data,
+                ],
                 JSON_UNESCAPED_SLASHES | JSON_PARTIAL_OUTPUT_ON_ERROR
             )
         );
 
-        return $response->withStatus($statusCode);
+        return $response->withStatus($httpStatus->value);
     }
 }

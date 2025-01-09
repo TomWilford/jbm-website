@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Thing;
 
-use App\Domain\Enums\FaultLevel;
+use App\Domain\Exception\DomainRecordNotFoundException;
+use App\Domain\Thing\Enum\FaultLevel;
 use App\Infrastructure\Persistence\Repository;
 
 class ThingRepository extends Repository
@@ -58,10 +59,15 @@ class ThingRepository extends Repository
         );
     }
 
+    /**
+     * @throws DomainRecordNotFoundException
+     */
     public function ofId(int $id): Thing
     {
-        if (!$result = $this->database->query('SELECT * FROM things WHERE id = :id', ['id' => $id])) {
-            throw new \Exception('Thing not found');
+        $result = $this->database->query('SELECT * FROM things WHERE id = :id', ['id' => $id]);
+
+        if (!$result) {
+            throw new DomainRecordNotFoundException('Thing not found');
         }
 
         return $this->arrayToObject(

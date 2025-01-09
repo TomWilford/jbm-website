@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Domain\Enums\FaultLevel;
+use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Thing;
 use App\Domain\Thing\ThingRepository;
 use Symfony\Component\Console\Command\Command;

@@ -52,7 +52,7 @@ $settings['doctrine']['migrations'] = [
     ],
 
     'migrations_paths' => [
-        'Database\Migrations' => __DIR__ .'/../database/migrations',
+        'Database\Migrations' => __DIR__ . '/../database/migrations',
     ],
 
     'all_or_nothing' => true,
@@ -65,5 +65,8 @@ $settings['doctrine']['migrations'] = [
 
 // Twig
 $settings['twig']['cache'] = __DIR__ . '/../var/cache';
+
+// API
+//$settings['api']['users']['username'] = 'password';
 
 return $settings;

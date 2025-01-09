@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Enums;
+namespace App\Domain\Thing\Enum;
 
 enum FaultLevel: string
 {
