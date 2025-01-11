@@ -13,5 +13,5 @@ return function (App $app) {
 
     $app->get('/api/things', \App\Action\Things\Api\IndexAction::class)->setName('api.things.index');
     $app->get('/api/things/{id:[0-9]+}', \App\Action\Things\Api\ShowAction::class)->setName('api.things.show');
-    $app->post('/api/things', App\Action\Things\Api\CreateAction::class)->setName('api.things.create');
+    $app->post('/api/things', \App\Action\Things\Api\CreateAction::class)->setName('api.things.create');
 };

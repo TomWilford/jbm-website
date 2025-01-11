@@ -11,14 +11,9 @@ use Doctrine\DBAL\Tools\DsnParser;
 
 class SQLiteDatabase implements DatabaseInterface
 {
-    private Connection $conn;
-
-    public function __construct(string $dsn)
+    public function __construct(private Connection $conn)
     {
-        $dsnParser = new DsnParser();
-        $connectionParams = $dsnParser->parse($dsn);
-
-        $this->conn = DriverManager::getConnection($connectionParams);
+        //
     }
 
     /**

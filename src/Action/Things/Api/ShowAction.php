@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Action\Things\Api;
 
 use App\Domain\Exception\DomainRecordNotFoundException;
-use App\Domain\Thing\ThingRepository;
+use App\Domain\Thing\Repository\ThingRepository;
 use App\Infrastructure\Enum\HttpStatus;
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;

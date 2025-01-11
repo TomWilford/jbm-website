@@ -3,8 +3,8 @@
 namespace App\Console;
 
 use App\Domain\Thing\Enum\FaultLevel;
+use App\Domain\Thing\Repository\ThingRepository;
 use App\Domain\Thing\Thing;
-use App\Domain\Thing\ThingRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;

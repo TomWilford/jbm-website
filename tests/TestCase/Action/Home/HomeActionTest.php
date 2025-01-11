@@ -4,6 +4,7 @@ namespace App\Test\TestCase\Action\Home;
 
 use App\Action\Home\Page\HomeAction;
 use App\Test\Traits\AppTestTrait;
+use App\Test\Traits\DatabaseTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
@@ -12,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 class HomeActionTest extends TestCase
 {
     use AppTestTrait;
+    use DatabaseTestTrait;
 
     public function testAction(): void
     {
@@ -19,7 +21,8 @@ class HomeActionTest extends TestCase
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertResponseContains('Welcome!', $response);
+        $this->assertResponseContains('Hello. I\'m Tom Wilford.', $response);
+        $this->assertResponseContains('Thing 1', $response);
     }
 
     public function testPageNotFound(): void

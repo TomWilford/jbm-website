@@ -4,6 +4,9 @@ use App\Infrastructure\Database\DatabaseInterface;
 use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
 use App\Renderer\TwigRenderer;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Tools\DsnParser;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
@@ -73,9 +76,16 @@ return [
         ]);
     },
 
+    Connection::class => function (ContainerInterface $container) {
+        $dsnParser = new DsnParser();
+        $connectionParams = $dsnParser->parse($container->get('settings')['db']['dsn']);
+
+        return DriverManager::getConnection($connectionParams);
+    },
+
     DatabaseInterface::class => function (ContainerInterface $container) {
-        $database = match($container->get('settings')['db']['connection']) {
-            default => new \App\Infrastructure\Database\SQLiteDatabase($container->get('settings')['db']['dsn'])
+        $database = match ($container->get('settings')['db']['connection']) {
+            default => new \App\Infrastructure\Database\SQLiteDatabase($container->get(Connection::class))
         };
 
         return $database;

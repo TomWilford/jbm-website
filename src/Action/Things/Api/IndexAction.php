@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Action\Things\Api;
 
-use App\Domain\Thing\ThingRepository;
+use App\Domain\Thing\Repository\ThingRepository;
 use App\Infrastructure\Enum\HttpStatus;
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
@@ -19,18 +21,19 @@ final readonly class IndexAction
     {
         $status = HttpStatus::OK;
         try {
-            $things = $this->things->all();
-            if (empty($things)) {
+            $data = $this->things->all();
+            if (empty($data)) {
                 $status = HttpStatus::NO_CONTENT;
             }
         } catch (\Throwable $exception) {
             $status = HttpStatus::INTERNAL_SERVER_ERROR;
-            $things = [];
+            $data = ['An error occurred. Sorry about that.'];
+            error_log($exception->getMessage());
         }
 
         return $this->renderer->jsonWithStatus(
             $response,
-            $things,
+            $data,
             $status
         );
     }

@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Thing;
+namespace App\Domain\Thing\Repository;
 
 use App\Domain\Exception\DomainRecordNotFoundException;
 use App\Domain\Thing\Enum\FaultLevel;
+use App\Domain\Thing\Thing;
 use App\Infrastructure\Persistence\Repository;
 
 class ThingRepository extends Repository

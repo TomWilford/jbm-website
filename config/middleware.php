@@ -12,9 +12,5 @@ return function (App $app) {
     $app->add(BasePathMiddleware::class);
     $app->add(ExceptionMiddleware::class);
     $app->add(TwigMiddleware::create($app, $app->getContainer()?->get(Twig::class)));
-    $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
-        "path" => "/api",
-        "realm" => "Protected",
-        "users" => $app->getContainer()?->get('settings')['api']['users']
-    ]));
+    $app->add(new Tuupola\Middleware\HttpBasicAuthentication($app->getContainer()?->get('settings')['api']));
 };
