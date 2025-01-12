@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Action\Things\Api;
 
 use App\Action\Things\Api\IndexAction;

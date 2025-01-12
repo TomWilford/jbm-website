@@ -111,4 +111,32 @@ readonly class Thing implements JsonSerializable
             'updated_at' => $this->updatedAt,
         ];
     }
+
+    public function cloneWith(
+        ?int $id = null,
+        ?string $name = null,
+        ?string $shortDescription = null,
+        ?string $description = null,
+        ?bool $featured = null,
+        ?FaultLevel $faultLevel = null,
+        ?int $activeFrom = null,
+        ?int $activeTo = null,
+        ?string $url = null,
+        ?int $createdAt = null,
+        ?int $updatedAt = null
+    ): self {
+        return new self(
+            $id ?? $this->id,
+            $name ?? $this->name,
+            $shortDescription ?? $this->shortDescription,
+            $description ?? $this->description,
+            $featured ?? $this->featured,
+            $faultLevel ?? $this->faultLevel,
+            $activeFrom ?? $this->activeFrom,
+            $activeTo ?? $this->activeTo,
+            $url ?? $this->url,
+            $createdAt ?? $this->createdAt,
+            $updatedAt ?? $this->updatedAt
+        );
+    }
 }

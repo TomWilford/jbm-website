@@ -49,7 +49,6 @@ trait AppTestTrait
             $this->initialiseTestDatabase();
             // Save any fixtures to the test database for unit tests
             if (method_exists($this, 'insertDefaultFixtureRecords')) {
-                // Automatically insert user roles
                 $this->insertDefaultFixtureRecords([ThingFixture::class]);
             }
         }

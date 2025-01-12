@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace App\Infrastructure\Database;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Tools\DsnParser;
 
-class SQLiteDatabase implements DatabaseInterface
+readonly class SQLiteDatabase implements DatabaseInterface
 {
     public function __construct(private Connection $conn)
     {

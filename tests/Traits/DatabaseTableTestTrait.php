@@ -23,7 +23,7 @@ namespace App\Test\Traits;
 trait DatabaseTableTestTrait
 {
     /**
-     * @param array{string} $fixtures
+     * @param array{class-string|string} $fixtures
      */
     protected function insertDefaultFixtureRecords(array $fixtures): void
     {
@@ -32,29 +32,37 @@ trait DatabaseTableTestTrait
         }
     }
 
+    /**
+     * @var class-string|string $className
+     */
     protected function processFixture(string $className): void
     {
         $fixture = new $className();
         $table = $fixture->getTable();
         /** @var array $record */
         foreach ($fixture->getRecords() as $record) {
-            $columns = implode(', ', array_keys($record));
-            $placeholders = implode(
-                ', ',
-                array_map(fn(string $value): string => ':' . $value, array_keys($record))
-            );
-            try {
-                $this->database->query(
-                    "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})",
-                    $record
-                );
-            } catch (\Throwable $exception) {
-                throw new \RuntimeException(
-                    "Failed to insert record into {$table}: " . $exception->getMessage(),
-                    0,
-                    $exception
-                );
+            $this->processRecord($record, $table);
+        }
+    }
+
+    protected function processRecord(array $record, string $table): void
+    {
+        try {
+            $qb = $this->connection->createQueryBuilder();
+            $qb->insert($table);
+
+            foreach ($record as $column => $value) {
+                $qb->setValue($column, ':' . $column);
+                $qb->setParameter($column, $value);
             }
+
+            $qb->executeStatement();
+        } catch (\Throwable $exception) {
+            throw new \RuntimeException(
+                "Failed to insert record into {$table}: " . $exception->getMessage(),
+                0,
+                $exception
+            );
         }
     }
 }

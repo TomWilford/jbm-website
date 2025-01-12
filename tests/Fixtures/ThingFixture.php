@@ -8,17 +8,17 @@ class ThingFixture implements FixtureInterface
 
     /**
      * @var array{array{
-     *      "id": int,
-     *      "name": string,
-     *      "short_description": string,
-     *      "description": string,
-     *      "featured": bool,
-     *      "fault_level": string,
-     *      "active_from": int,
-     *      "active_to": ?int,
-     *      "url": ?string,
-     *      "created_at": int,
-     *      "updated_at": int
+     *      id: int,
+     *      name: string,
+     *      short_description: string,
+     *      description: string,
+     *      featured: bool,
+     *      fault_level: string,
+     *      active_from: int,
+     *      active_to: ?int,
+     *      url: ?string,
+     *      created_at: int,
+     *      updated_at: int
      *  }} $records
      */
     private array $records = [
@@ -57,17 +57,17 @@ class ThingFixture implements FixtureInterface
 
     /**
      * @return array{array{
-     *       "id": int,
-     *       "name": string,
-     *       "short_description": string,
-     *       "description": string,
-     *       "featured": bool,
-     *       "fault_level": string,
-     *       "active_from": int,
-     *       "active_to": ?int,
-     *       "url": ?string,
-     *       "created_at": int,
-     *       "updated_at": int
+     *       id: int,
+     *       name: string,
+     *       short_description: string,
+     *       description: string,
+     *       featured: bool,
+     *       fault_level: string,
+     *       active_from: int,
+     *       active_to: ?int,
+     *       url: ?string,
+     *       created_at: int,
+     *       updated_at: int
      *   }}
      */
     public function getRecords(): array
