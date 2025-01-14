@@ -7,5 +7,5 @@ interface CreatorInterface
     /**
      * @param array{mixed} $data
      */
-    public function create(array $data): object;
+    public function createFromArray(array $data): object;
 }

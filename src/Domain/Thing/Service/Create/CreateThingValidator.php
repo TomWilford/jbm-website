@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Thing\Service;
+namespace App\Domain\Thing\Service\Create;
 
 use App\Domain\Thing\Enum\FaultLevel;
-use Respect\Validation\Exceptions\ValidationException;
 use App\Infrastructure\Service\Validator\Validator;
+use Respect\Validation\Exceptions\ValidationException;
 
 readonly class CreateThingValidator extends Validator
 {

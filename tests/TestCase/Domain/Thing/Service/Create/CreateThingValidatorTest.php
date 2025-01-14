@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Domain\Thing\Service;
+namespace App\Test\TestCase\Domain\Thing\Service\Create;
 
 use App\Domain\Thing\Enum\FaultLevel;
-use App\Domain\Thing\Service\CreateThingValidator;
+use App\Domain\Thing\Service\Create\CreateThingValidator;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Respect\Validation\Exceptions\ValidationException;
@@ -22,7 +22,7 @@ class CreateThingValidatorTest extends TestCase
 
     public function testValidateWithValidData(): void
     {
-        $validData = [
+        $data = [
             'name' => 'Thing Name',
             'short_description' => 'Short Description',
             'description' => 'A detailed description of the thing.',
@@ -34,12 +34,12 @@ class CreateThingValidatorTest extends TestCase
         ];
 
         $this->expectNotToPerformAssertions();
-        $this->validator->validate($validData);
+        $this->validator->validate($data);
     }
 
     public function testValidateWithInvalidName(): void
     {
-        $invalidData = [
+        $data = [
             'name' => '', // Invalid: Empty string
             'short_description' => 'Short Description',
             'description' => 'A detailed description of the thing.',
@@ -51,12 +51,12 @@ class CreateThingValidatorTest extends TestCase
         ];
 
         $this->expectException(ValidationException::class);
-        $this->validator->validate($invalidData);
+        $this->validator->validate($data);
     }
 
     public function testValidateWithInvalidFaultLevel(): void
     {
-        $invalidData = [
+        $data = [
             'name' => 'Thing Name',
             'short_description' => 'Short Description',
             'description' => 'A detailed description of the thing.',
@@ -68,12 +68,12 @@ class CreateThingValidatorTest extends TestCase
         ];
 
         $this->expectException(ValidationException::class);
-        $this->validator->validate($invalidData);
+        $this->validator->validate($data);
     }
 
     public function testValidateWithMissingOptionalUrl(): void
     {
-        $validData = [
+        $data = [
             'name' => 'Thing Name',
             'short_description' => 'Short Description',
             'description' => 'A detailed description of the thing.',
@@ -86,12 +86,12 @@ class CreateThingValidatorTest extends TestCase
 
         $this->expectNotToPerformAssertions();
         /* @phpstan-ignore-next-line */
-        $this->validator->validate($validData);
+        $this->validator->validate($data);
     }
 
     public function testValidateWithInvalidActiveFrom(): void
     {
-        $invalidData = [
+        $data = [
             'name' => 'Thing Name',
             'short_description' => 'Short Description',
             'description' => 'A detailed description of the thing.',
@@ -103,12 +103,12 @@ class CreateThingValidatorTest extends TestCase
         ];
 
         $this->expectException(ValidationException::class);
-        $this->validator->validate($invalidData);
+        $this->validator->validate($data);
     }
 
     public function testValidateWithMissingRequiredField(): void
     {
-        $invalidData = [
+        $data = [
             // Missing 'name'
             'short_description' => 'Short Description',
             'description' => 'A detailed description of the thing.',
@@ -121,6 +121,6 @@ class CreateThingValidatorTest extends TestCase
 
         $this->expectException(ValidationException::class);
         /* @phpstan-ignore-next-line */
-        $this->validator->validate($invalidData);
+        $this->validator->validate($data);
     }
 }

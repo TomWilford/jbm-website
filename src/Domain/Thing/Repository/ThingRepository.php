@@ -80,7 +80,7 @@ class ThingRepository extends Repository
     /**
      * @throws Exception
      */
-    public function update(Thing $thing): void
+    public function update(Thing $thing): Thing
     {
         $qb = $this->getQueryBuilder();
 
@@ -109,6 +109,8 @@ class ThingRepository extends Repository
         ]);
 
         $qb->executeStatement();
+
+        return $this->ofId($thing->getId());
     }
 
     /**

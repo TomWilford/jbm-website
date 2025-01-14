@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Thing;
 
 use App\Domain\Thing\Enum\FaultLevel;
+use App\Infrastructure\Enum\Unchanged;
 use JsonSerializable;
 
 readonly class Thing implements JsonSerializable
@@ -113,30 +114,30 @@ readonly class Thing implements JsonSerializable
     }
 
     public function cloneWith(
-        ?int $id = null,
-        ?string $name = null,
-        ?string $shortDescription = null,
-        ?string $description = null,
-        ?bool $featured = null,
-        ?FaultLevel $faultLevel = null,
-        ?int $activeFrom = null,
-        ?int $activeTo = null,
-        ?string $url = null,
-        ?int $createdAt = null,
-        ?int $updatedAt = null
-    ): self {
+        mixed $id = Unchanged::VALUE,
+        mixed $name = Unchanged::VALUE,
+        mixed $shortDescription = Unchanged::VALUE,
+        mixed $description = Unchanged::VALUE,
+        mixed $featured = Unchanged::VALUE,
+        mixed $faultLevel = Unchanged::VALUE,
+        mixed $activeFrom = Unchanged::VALUE,
+        mixed $activeTo = Unchanged::VALUE,
+        mixed $url = Unchanged::VALUE,
+        mixed $createdAt = Unchanged::VALUE,
+        mixed $updatedAt = Unchanged::VALUE
+    ) {
         return new self(
-            $id ?? $this->id,
-            $name ?? $this->name,
-            $shortDescription ?? $this->shortDescription,
-            $description ?? $this->description,
-            $featured ?? $this->featured,
-            $faultLevel ?? $this->faultLevel,
-            $activeFrom ?? $this->activeFrom,
-            $activeTo ?? $this->activeTo,
-            $url ?? $this->url,
-            $createdAt ?? $this->createdAt,
-            $updatedAt ?? $this->updatedAt
+            $id === Unchanged::VALUE ? $this->id : $id,
+            $name === Unchanged::VALUE ? $this->name : $name,
+            $shortDescription === Unchanged::VALUE ? $this->shortDescription : $shortDescription,
+            $description === Unchanged::VALUE ? $this->description : $description,
+            $featured === Unchanged::VALUE ? $this->featured : $featured,
+            $faultLevel === Unchanged::VALUE ? $this->faultLevel : $faultLevel,
+            $activeFrom === Unchanged::VALUE ? $this->activeFrom : $activeFrom,
+            $activeTo === Unchanged::VALUE ? $this->activeTo : $activeTo,
+            $url === Unchanged::VALUE ? $this->url : $url,
+            $createdAt === Unchanged::VALUE ? $this->createdAt : $createdAt,
+            $updatedAt === Unchanged::VALUE ? $this->updatedAt : $updatedAt
         );
     }
 }

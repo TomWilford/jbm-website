@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Domain\Thing\Service;
+declare(strict_types=1);
+
+namespace App\Domain\Thing\Service\Create;
 
 use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Repository\ThingRepository;
@@ -28,7 +30,7 @@ class ThingCreator implements CreatorInterface
      * } $data
      * @throws \Exception|Exception
      */
-    public function create(array $data): object
+    public function createFromArray(array $data): object
     {
         $thing = new Thing(
             id: null,
