@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 interface RepositoryInterface
 {
     public function __construct(Connection $connection);
+
+    public function getQueryBuilder(): QueryBuilder;
 
     /**
      * @param array{mixed} $array

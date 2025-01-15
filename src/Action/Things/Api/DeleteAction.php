@@ -20,6 +20,9 @@ final readonly class DeleteAction
         //
     }
 
+    /**
+     * @param array{id: string} $arguments
+     */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,

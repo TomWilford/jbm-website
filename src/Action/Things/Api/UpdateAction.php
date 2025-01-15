@@ -26,6 +26,9 @@ final readonly class UpdateAction
         //
     }
 
+    /**
+     * @param array{id: string} $arguments
+     */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
