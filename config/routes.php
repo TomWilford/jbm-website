@@ -2,7 +2,6 @@
 
 // Define app routes
 
-use App\Action\Things\Api\DeleteAction;
 use Slim\App;
 
 return function (App $app) {
@@ -16,5 +15,5 @@ return function (App $app) {
     $app->get('/api/things/{id:[0-9]+}', \App\Action\Things\Api\ShowAction::class)->setName('api.things.show');
     $app->post('/api/things', \App\Action\Things\Api\CreateAction::class)->setName('api.things.create');
     $app->patch('/api/things/{id:[0-9]+}', \App\Action\Things\Api\UpdateAction::class)->setName('api.things.update');
-    $app->delete('/api/things/{id:[0-9]+}', DeleteAction::class)->setName('api.things.delete');
+    $app->delete('/api/things/{id:[0-9]+}', \App\Action\Things\Api\DeleteAction::class)->setName('api.things.delete');
 };
