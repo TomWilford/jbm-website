@@ -2,7 +2,6 @@
 
 namespace App\Test\Traits;
 
-use App\Infrastructure\Database\DatabaseInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
 use Doctrine\Migrations\Configuration\Migration\PhpFile;
@@ -11,7 +10,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 
 trait DatabaseConnectionTestTrait
 {
-    protected DatabaseInterface $database;
     protected Connection $connection;
     protected DependencyFactory $dependencyFactory;
 

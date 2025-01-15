@@ -10,7 +10,7 @@ use App\Domain\Thing\Thing;
 use App\Infrastructure\Service\Creator\CreatorInterface;
 use Doctrine\DBAL\Exception;
 
-class ThingCreator implements CreatorInterface
+final readonly class ThingCreator implements CreatorInterface
 {
     public function __construct(protected ThingRepository $repository)
     {

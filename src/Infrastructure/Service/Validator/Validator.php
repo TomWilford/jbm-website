@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Service\Validator;
+declare(strict_types=1);
 
-use App\Infrastructure\Service\Validator\ValidatorInterface;
+namespace App\Infrastructure\Service\Validator;
 
 abstract readonly class Validator implements ValidatorInterface
 {

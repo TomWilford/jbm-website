@@ -19,8 +19,8 @@ final readonly class IndexAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $status = HttpStatus::OK;
         try {
+            $status = HttpStatus::OK;
             $data = $this->things->all();
             if (empty($data)) {
                 $status = HttpStatus::NO_CONTENT;
@@ -31,10 +31,6 @@ final readonly class IndexAction
             error_log($exception->getMessage());
         }
 
-        return $this->renderer->jsonWithStatus(
-            $response,
-            $data,
-            $status
-        );
+        return $this->renderer->jsonWithStatus($response, $data, $status);
     }
 }

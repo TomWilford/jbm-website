@@ -11,7 +11,7 @@ use App\Infrastructure\Enum\Unchanged;
 use App\Infrastructure\Service\Updater\UpdaterInterface;
 use Doctrine\DBAL\Exception;
 
-class ThingUpdater implements UpdaterInterface
+final readonly class ThingUpdater implements UpdaterInterface
 {
     public function __construct(protected ThingRepository $repository)
     {

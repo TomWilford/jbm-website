@@ -10,7 +10,7 @@ use App\Domain\Thing\Thing;
 use App\Infrastructure\Persistence\Repository;
 use Doctrine\DBAL\Exception;
 
-class ThingRepository extends Repository
+final class ThingRepository extends Repository
 {
     /**
      * @throws Exception

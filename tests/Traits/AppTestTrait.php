@@ -2,7 +2,6 @@
 
 namespace App\Test\Traits;
 
-use App\Infrastructure\Database\DatabaseInterface;
 use App\Test\Fixtures\ThingFixture;
 use DI\ContainerBuilder;
 use Doctrine\DBAL\Connection;
@@ -43,7 +42,6 @@ trait AppTestTrait
                 throw new UnexpectedValueException('Test database name MUST contain the word "memory"');
             }
             // Pass through DatabaseInterface & existing (Doctrine) Connection
-            $this->database = $this->container->get(DatabaseInterface::class);
             $this->connection = $this->container->get(Connection::class);
             // Find the migrations and execute them to build the test database
             $this->initialiseTestDatabase();

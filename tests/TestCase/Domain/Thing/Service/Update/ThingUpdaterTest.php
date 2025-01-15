@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Domain\Thing\Service\Update;
 
 use App\Domain\Thing\Enum\FaultLevel;
@@ -9,8 +11,10 @@ use App\Domain\Thing\Thing;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
+#[UsesClass(ThingUpdater::class)]
 class ThingUpdaterTest extends TestCase
 {
     use AppTestTrait;

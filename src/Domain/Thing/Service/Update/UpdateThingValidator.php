@@ -8,7 +8,7 @@ use App\Domain\Thing\Enum\FaultLevel;
 use App\Infrastructure\Service\Validator\Validator;
 use Respect\Validation\Exceptions\ValidationException;
 
-readonly class UpdateThingValidator extends Validator
+final readonly class UpdateThingValidator extends Validator
 {
     /**
      * @param array{

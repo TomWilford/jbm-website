@@ -11,8 +11,10 @@ use App\Domain\Thing\Thing;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
+#[UsesClass(ThingCreator::class)]
 class ThingCreatorTest extends TestCase
 {
     use AppTestTrait;

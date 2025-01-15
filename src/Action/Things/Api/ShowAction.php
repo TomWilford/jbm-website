@@ -26,8 +26,8 @@ final readonly class ShowAction
         ResponseInterface $response,
         array $arguments
     ): ResponseInterface {
-        $status = HttpStatus::OK;
         try {
+            $status = HttpStatus::OK;
             $data = $this->things->ofId((int)$arguments['id']);
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
@@ -38,10 +38,6 @@ final readonly class ShowAction
             error_log($exception->getMessage());
         }
 
-        return $this->renderer->jsonWithStatus(
-            $response,
-            $data,
-            $status
-        );
+        return $this->renderer->jsonWithStatus($response, $data, $status);
     }
 }

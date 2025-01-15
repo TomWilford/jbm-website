@@ -1,6 +1,5 @@
 <?php
 
-use App\Infrastructure\Database\DatabaseInterface;
 use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
 use App\Renderer\TwigRenderer;
@@ -81,14 +80,6 @@ return [
         $connectionParams = $dsnParser->parse($container->get('settings')['db']['dsn']);
 
         return DriverManager::getConnection($connectionParams);
-    },
-
-    DatabaseInterface::class => function (ContainerInterface $container) {
-        $database = match ($container->get('settings')['db']['connection']) {
-            default => new \App\Infrastructure\Database\SQLiteDatabase($container->get(Connection::class))
-        };
-
-        return $database;
     },
 
     LoggerInterface::class => function (ContainerInterface $container) {
