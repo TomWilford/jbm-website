@@ -8,9 +8,15 @@ ini_set('display_errors', '0');
 ini_set('display_startup_errors', '0');
 
 // Timezone
-date_default_timezone_set('Europe/Berlin');
+date_default_timezone_set('Europe/London');
+
+// Set default locale
+setlocale(LC_ALL, 'en_GB.UTF-8', 'en_GB');
 
 $settings = [];
+
+// Project root dir
+$settings['root_dir'] = dirname(__DIR__, 1);
 
 // Error handler
 $settings['error'] = [
@@ -29,7 +35,7 @@ $settings['logger'] = [
 // Database settings
 $settings['db'] = [
     'connection' => 'sqlite',
-    'dsn' => 'pdo-sqlite:///' . __DIR__ . '/../database/database.sqlite',
+    'dsn' => 'pdo-sqlite:///' . dirname(__DIR__, 1) . '/database/database.sqlite',
     'host' => 'localhost',
     'encoding' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
@@ -52,7 +58,7 @@ $settings['doctrine']['migrations'] = [
     ],
 
     'migrations_paths' => [
-        'Database\Migrations' => __DIR__ .'/../database/migrations',
+        'Database\Migrations' => dirname(__DIR__, 1) . '/database/migrations',
     ],
 
     'all_or_nothing' => true,
@@ -64,6 +70,15 @@ $settings['doctrine']['migrations'] = [
 ];
 
 // Twig
-$settings['twig']['cache'] = __DIR__ . '/../var/cache';
+$settings['twig']['cache'] = dirname(__DIR__, 1) . '/var/cache';
+
+// API
+$settings['api'] = [
+    "path" => "/api",
+    "realm" => "Protected",
+    "secure" => true,
+    "relaxed" => ["localhost"],
+];
+//$settings['api']['users']['username'] = 'password';
 
 return $settings;

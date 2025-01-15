@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Action\Home;
+declare(strict_types=1);
+
+namespace App\Action\Home\Page;
 
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;

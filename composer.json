@@ -6,16 +6,19 @@
     "require": {
         "php": "8.2.* || 8.3.*",
         "ext-json": "*",
+        "doctrine/dbal": "^4.2",
         "doctrine/migrations": "^3.8",
         "fig/http-message-util": "^1.1",
         "monolog/monolog": "^3",
         "nyholm/psr7": "^1.8.1",
         "nyholm/psr7-server": "^1.1",
         "php-di/php-di": "^7",
+        "respect/validation": "^2.4",
         "selective/basepath": "^2",
         "slim/slim": "^4",
         "slim/twig-view": "^3.4",
-        "symfony/console": "^7.2"
+        "symfony/console": "^7.2",
+        "tuupola/slim-basic-auth": "^3.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3",

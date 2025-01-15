@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Thing;
 
-use App\Domain\Enums\FaultLevel;
+use App\Domain\Thing\Enum\FaultLevel;
+use App\Infrastructure\Enum\Unchanged;
 use JsonSerializable;
 
 readonly class Thing implements JsonSerializable
@@ -110,5 +111,33 @@ readonly class Thing implements JsonSerializable
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
         ];
+    }
+
+    public function cloneWith(
+        mixed $id = Unchanged::VALUE,
+        mixed $name = Unchanged::VALUE,
+        mixed $shortDescription = Unchanged::VALUE,
+        mixed $description = Unchanged::VALUE,
+        mixed $featured = Unchanged::VALUE,
+        mixed $faultLevel = Unchanged::VALUE,
+        mixed $activeFrom = Unchanged::VALUE,
+        mixed $activeTo = Unchanged::VALUE,
+        mixed $url = Unchanged::VALUE,
+        mixed $createdAt = Unchanged::VALUE,
+        mixed $updatedAt = Unchanged::VALUE
+    ) {
+        return new self(
+            $id === Unchanged::VALUE ? $this->id : $id,
+            $name === Unchanged::VALUE ? $this->name : $name,
+            $shortDescription === Unchanged::VALUE ? $this->shortDescription : $shortDescription,
+            $description === Unchanged::VALUE ? $this->description : $description,
+            $featured === Unchanged::VALUE ? $this->featured : $featured,
+            $faultLevel === Unchanged::VALUE ? $this->faultLevel : $faultLevel,
+            $activeFrom === Unchanged::VALUE ? $this->activeFrom : $activeFrom,
+            $activeTo === Unchanged::VALUE ? $this->activeTo : $activeTo,
+            $url === Unchanged::VALUE ? $this->url : $url,
+            $createdAt === Unchanged::VALUE ? $this->createdAt : $createdAt,
+            $updatedAt === Unchanged::VALUE ? $this->updatedAt : $updatedAt
+        );
     }
 }
