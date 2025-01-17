@@ -82,6 +82,10 @@ final class ThingRepository extends Repository
      */
     public function update(Thing $thing): Thing
     {
+        if (is_null($thing->getId())) {
+            throw new DomainRecordNotFoundException('Cannot update provided Thing');
+        }
+
         $qb = $this->getQueryBuilder();
 
         $qb->update('things')
@@ -150,7 +154,7 @@ final class ThingRepository extends Repository
      *     url: ?string,
      *     created_at: int,
      *     updated_at: int
-     * } $array
+     * }|array<string, mixed> $array
      */
     public function arrayToObject(array $array): Thing
     {

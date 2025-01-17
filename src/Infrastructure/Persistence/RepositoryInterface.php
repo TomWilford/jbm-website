@@ -14,13 +14,13 @@ interface RepositoryInterface
     public function getQueryBuilder(): QueryBuilder;
 
     /**
-     * @param array{mixed} $array
+     * @param array<string, mixed> $array
      */
     public function arrayToObject(array $array): object;
 
     /**
-     * @param array{mixed} $array
-     * @return array{mixed}
+     * @param array<string, mixed> $array
+     * @return array{object}
      */
     public function arrayToObjects(array $array): array;
 }

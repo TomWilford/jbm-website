@@ -37,8 +37,8 @@ final readonly class UpdateAction
         try {
             $status = HttpStatus::OK;
             $thing = $this->things->ofId((int)$arguments['id']);
-            $this->validator->validate($request->getParsedBody());
-            $data = $this->updater->updateFromArray($request->getParsedBody(), $thing);
+            $this->validator->validate((array)$request->getParsedBody());
+            $data = $this->updater->updateFromArray((array)$request->getParsedBody(), $thing);
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

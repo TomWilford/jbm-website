@@ -29,8 +29,8 @@ final readonly class CreateAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $this->validator->validate($request->getParsedBody());
-            $data = $this->creator->createFromArray($request->getParsedBody());
+            $this->validator->validate((array)$request->getParsedBody());
+            $data = $this->creator->createFromArray((array)$request->getParsedBody());
         } catch (ValidationException $exception) {
             $status = HttpStatus::BAD_REQUEST;
             /** @var NestedValidationException $exception */

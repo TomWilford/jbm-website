@@ -7,7 +7,7 @@ namespace App\Infrastructure\Service\Creator;
 interface CreatorInterface
 {
     /**
-     * @param array{mixed} $data
+     * @param array<string, mixed> $data
      */
     public function createFromArray(array $data): object;
 }

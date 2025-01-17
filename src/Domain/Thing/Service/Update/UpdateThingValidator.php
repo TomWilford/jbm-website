@@ -20,7 +20,7 @@ final readonly class UpdateThingValidator extends Validator
      *     active_from: string,
      *     active_to: string,
      *     url: string,
-     * } $data
+     * }|array<string, mixed> $data
      * @throws ValidationException
      */
     public function validate(array $data): void

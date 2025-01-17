@@ -27,7 +27,7 @@ final readonly class ThingCreator implements CreatorInterface
      *      fault_level: string,
      *      active_from: string,
      *      active_to: string
-     * } $data
+     * }|array<string, mixed> $data
      * @throws \Exception|Exception
      */
     public function createFromArray(array $data): object

@@ -28,7 +28,7 @@ final readonly class ThingUpdater implements UpdaterInterface
      *      active_from: string,
      *      active_to: string,
      *      url: string,
-     *  } $data
+     *  }|array<string, mixed> $data
      * @param Thing $entity
      * @return Thing
      * @throws Exception

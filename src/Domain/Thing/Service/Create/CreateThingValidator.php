@@ -20,7 +20,7 @@ final readonly class CreateThingValidator extends Validator
      *     fault_level: string,
      *     active_from: string,
      *     active_to: string
-     * } $data
+     * }|array<string, mixed> $data
      * @throws ValidationException
      */
     public function validate(array $data): void
