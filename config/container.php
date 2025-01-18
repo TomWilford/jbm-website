@@ -1,5 +1,8 @@
 <?php
 
+use App\Console\SeedCommand;
+use App\Database\Seeds\ThingSeed;
+use App\Domain\Thing\Repository\ThingRepository;
 use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
 use App\Renderer\TwigRenderer;
@@ -80,6 +83,11 @@ return [
         $connectionParams = $dsnParser->parse($container->get('settings')['db']['dsn']);
 
         return DriverManager::getConnection($connectionParams);
+    },
+    SeedCommand::class => function (ContainerInterface $container) {
+        return new SeedCommand([
+            new ThingSeed($container->get(ThingRepository::class))
+        ]);
     },
 
     LoggerInterface::class => function (ContainerInterface $container) {

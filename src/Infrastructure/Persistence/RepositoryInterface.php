@@ -13,6 +13,14 @@ interface RepositoryInterface
 
     public function getQueryBuilder(): QueryBuilder;
 
+    public function store(object $entity): object;
+
+    public function ofId(int $id): object;
+
+    public function update(object $entity): object;
+
+    public function destroy(object $entity): void;
+
     /**
      * @param array<string, mixed> $array
      */
