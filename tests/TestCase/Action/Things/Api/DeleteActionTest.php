@@ -9,12 +9,16 @@ use App\Domain\Exception\DomainRecordNotFoundException;
 use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Repository\ThingRepository;
 use App\Domain\Thing\Thing;
+use App\Infrastructure\Enum\HttpStatus;
+use App\Renderer\JsonRenderer;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
 use Fig\Http\Message\StatusCodeInterface;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 #[UsesClass(DeleteAction::class)]
 class DeleteActionTest extends TestCase
@@ -55,10 +59,39 @@ class DeleteActionTest extends TestCase
 
     public function testDeleteUnknownId(): void
     {
-        $request = $this->createRequest('DELETE', '/api/things/bontrager')
+        $request = $this->createRequest('DELETE', '/api/things/909090')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'));
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_NOT_FOUND, $response->getStatusCode());
+        $this->assertResponseContains('Thing not found', $response);
+    }
+
+    public function testUnexpectedError(): void
+    {
+        $mockRenderer = $this->createMock(JsonRenderer::class);
+        $mockRenderer->expects($this->once())
+            ->method('jsonWithStatus')
+            ->willReturnCallback(function (
+                ResponseInterface $response,
+                array $data,
+                HttpStatus $status
+            ) {
+                // Assert the response data and status
+                $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
+                $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
+                return $response;
+            });
+
+        $mockRepository = $this->createMock(ThingRepository::class);
+        $mockRepository->method('destroy')->willThrowException(new \RuntimeException());
+
+        $action = new DeleteAction($mockRenderer, $mockRepository);
+
+        $request = (new Psr17Factory())->createServerRequest('DELETE', '/api/things/23456');
+
+        $response = (new Psr17Factory())->createResponse();
+
+        $action($request, $response, []);
     }
 }

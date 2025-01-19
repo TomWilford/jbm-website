@@ -25,4 +25,12 @@ class ShowActionTest extends TestCase
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
         $this->assertResponseContains('Thing 1', $response);
     }
+
+    public function testInvalidIdThrows404(): void
+    {
+        $request = $this->createRequest('GET', '/things/6789');
+        $response = $this->app->handle($request);
+
+        $this->assertSame(StatusCodeInterface::STATUS_NOT_FOUND, $response->getStatusCode());
+    }
 }

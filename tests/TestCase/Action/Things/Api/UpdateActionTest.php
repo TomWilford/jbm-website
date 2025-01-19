@@ -7,7 +7,11 @@ namespace App\Test\TestCase\Action\Things\Api;
 use App\Action\Things\Api\UpdateAction;
 use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Repository\ThingRepository;
+use App\Domain\Thing\Service\Update\ThingUpdater;
+use App\Domain\Thing\Service\Update\UpdateThingValidator;
 use App\Domain\Thing\Thing;
+use App\Infrastructure\Enum\HttpStatus;
+use App\Renderer\JsonRenderer;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
@@ -15,6 +19,7 @@ use Fig\Http\Message\StatusCodeInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 #[UsesClass(UpdateAction::class)]
 class UpdateActionTest extends TestCase
@@ -86,7 +91,7 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = $this->createRequest('PATCH', '/api/things/lawnswood')
+        $request = $this->createRequest('PATCH', '/api/things/345678')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'))
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
@@ -117,5 +122,53 @@ class UpdateActionTest extends TestCase
 
         $this->assertSame(StatusCodeInterface::STATUS_BAD_REQUEST, $response->getStatusCode());
         $this->assertResponseContains('active_from must be a valid date in the format', $response);
+    }
+
+
+    public function testUnexpectedError(): void
+    {
+        $mockRepository = $this->createMock(ThingRepository::class);
+
+        $mockValidator = $this->createMock(UpdateThingValidator::class);
+
+        $mockCreator = $this->createMock(ThingUpdater::class);
+        $mockCreator->method('updateFromArray')
+            ->willThrowException(new \RuntimeException());
+
+        $mockRenderer = $this->createMock(JsonRenderer::class);
+        $mockRenderer->expects($this->once())
+            ->method('jsonWithStatus')
+            ->willReturnCallback(function (
+                ResponseInterface $response,
+                array $data,
+                HttpStatus $status
+            ) {
+                // Assert the response data and status
+                $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
+                $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
+                return $response;
+            });
+
+        $action = new UpdateAction($mockRenderer, $mockRepository, $mockValidator, $mockCreator);
+
+        $formData = [
+            'name' => 'Thing 1',
+            'short_description' => 'Short description',
+            'description' => 'Long description',
+            'featured' => 1,
+            'url' => 'https://example.com',
+            'fault_level' => 'all',
+            'active_from' => '1970-01-01',
+            'active_to' => ''
+        ];
+        $body = (new Psr17Factory())->createStream(http_build_query($formData));
+
+        $request = (new Psr17Factory())->createServerRequest('PUT', '/api/things/1')
+            ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
+            ->withBody($body);
+
+        $response = (new Psr17Factory())->createResponse();
+
+        $action($request, $response, ['id' => '1']);
     }
 }

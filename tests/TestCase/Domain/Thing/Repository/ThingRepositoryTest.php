@@ -11,8 +11,10 @@ use App\Domain\Thing\Thing;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 #[UsesClass(ThingRepository::class)]
 class ThingRepositoryTest extends TestCase
@@ -107,6 +109,25 @@ class ThingRepositoryTest extends TestCase
         $repository->ofId($newThing->getId());
     }
 
+    public function testDestroyNonexistentThing(): void
+    {
+        $thing = new Thing(
+            id: 9999999999,
+            name: 'Test 3',
+            shortDescription: 'Short description 3',
+            description: 'Long description 3',
+            featured: false,
+            faultLevel: FaultLevel::ALL,
+            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeTo: null,
+            url: 'https://example.com/',
+        );
+        $repository = new ThingRepository($this->container?->get(Connection::class));
+
+        $this->expectException(DomainRecordNotFoundException::class);
+        $repository->destroy($thing);
+    }
+
     public function testRecent(): void
     {
         $repository = new ThingRepository($this->container?->get(Connection::class));
@@ -114,5 +135,47 @@ class ThingRepositoryTest extends TestCase
         $this->assertIsArray($result);
         $this->assertInstanceOf(Thing::class, $result[0]);
         $this->assertEquals(1, $result[0]->getId());
+    }
+
+    public function testStoreThrowsExceptionWhenWrongEntityProvided()
+    {
+        $invalidClass = new stdClass();
+        $repository = new ThingRepository($this->container?->get(Connection::class));
+        $this->expectException(InvalidArgumentException::class);
+        $repository->store($invalidClass);
+    }
+
+    public function testUpdateThrowsExceptionWhenWrongEntityProvided()
+    {
+        $invalidClass = new stdClass();
+        $repository = new ThingRepository($this->container?->get(Connection::class));
+        $this->expectException(InvalidArgumentException::class);
+        $repository->update($invalidClass);
+    }
+
+    public function testDestroyThrowsExceptionWhenWrongEntityProvided()
+    {
+        $invalidClass = new stdClass();
+        $repository = new ThingRepository($this->container?->get(Connection::class));
+        $this->expectException(InvalidArgumentException::class);
+        $repository->destroy($invalidClass);
+    }
+
+    public function testUpdateThrowsExceptionWhenEntityWithNullIdProvided()
+    {
+        $thing = new Thing(
+            id: null,
+            name: 'Test 3',
+            shortDescription: 'Short description 3',
+            description: 'Long description 3',
+            featured: false,
+            faultLevel: FaultLevel::ALL,
+            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeTo: null,
+            url: 'https://example.com/',
+        );
+        $repository = new ThingRepository($this->container?->get(Connection::class));
+        $this->expectException(DomainRecordNotFoundException::class);
+        $repository->update($thing);
     }
 }

@@ -6,10 +6,13 @@ namespace App\Domain\Thing;
 
 use App\Domain\Thing\Enum\FaultLevel;
 use App\Infrastructure\Enum\Unchanged;
+use App\Infrastructure\Service\Updater\ResolveValueTrait;
 use JsonSerializable;
 
 readonly class Thing implements JsonSerializable
 {
+    use ResolveValueTrait;
+
     public function __construct(
         private ?int $id,
         private string $name,
@@ -127,17 +130,17 @@ readonly class Thing implements JsonSerializable
         mixed $updatedAt = Unchanged::VALUE
     ): Thing {
         return new self(
-            $id === Unchanged::VALUE ? $this->id : $id,
-            $name === Unchanged::VALUE ? $this->name : $name,
-            $shortDescription === Unchanged::VALUE ? $this->shortDescription : $shortDescription,
-            $description === Unchanged::VALUE ? $this->description : $description,
-            $featured === Unchanged::VALUE ? $this->featured : $featured,
-            $faultLevel === Unchanged::VALUE ? $this->faultLevel : $faultLevel,
-            $activeFrom === Unchanged::VALUE ? $this->activeFrom : $activeFrom,
-            $activeTo === Unchanged::VALUE ? $this->activeTo : $activeTo,
-            $url === Unchanged::VALUE ? $this->url : $url,
-            $createdAt === Unchanged::VALUE ? $this->createdAt : $createdAt,
-            $updatedAt === Unchanged::VALUE ? $this->updatedAt : $updatedAt
+            $this->resolveValue($id, $this->id),
+            $this->resolveValue($name, $this->name),
+            $this->resolveValue($shortDescription, $this->shortDescription),
+            $this->resolveValue($description, $this->description),
+            $this->resolveValue($featured, $this->featured),
+            $this->resolveValue($faultLevel, $this->faultLevel),
+            $this->resolveValue($activeFrom, $this->activeFrom),
+            $this->resolveValue($activeTo, $this->activeTo),
+            $this->resolveValue($url, $this->url),
+            $this->resolveValue($createdAt, $this->createdAt),
+            $this->resolveValue($updatedAt, $this->updatedAt)
         );
     }
 }

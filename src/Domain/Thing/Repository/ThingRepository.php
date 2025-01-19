@@ -11,7 +11,7 @@ use App\Infrastructure\Persistence\Repository;
 use Doctrine\DBAL\Exception;
 use InvalidArgumentException;
 
-final class ThingRepository extends Repository
+class ThingRepository extends Repository
 {
     /**
      * @throws Exception
@@ -131,8 +131,14 @@ final class ThingRepository extends Repository
      */
     public function destroy(object $entity): void
     {
-        if (!$entity instanceof Thing) {
-            throw new InvalidArgumentException('Entity must be an instance of Thing');
+        if (!$entity instanceof Thing || is_null($entity->getId())) {
+            throw new InvalidArgumentException('Entity must be a valid instance of Thing');
+        }
+
+        try {
+            $this->ofId($entity->getId());
+        } catch (DomainRecordNotFoundException $exception) {
+            throw new DomainRecordNotFoundException('Thing not found');
         }
 
         $qb = $this->getQueryBuilder();

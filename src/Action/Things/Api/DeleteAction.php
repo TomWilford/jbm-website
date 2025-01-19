@@ -38,7 +38,7 @@ final readonly class DeleteAction
             $data = [$exception->getMessage()];
         } catch (\Throwable $exception) {
             $status = HttpStatus::INTERNAL_SERVER_ERROR;
-            $data = ['An error occurred. Sorry about that.'];
+            $data = ['An unknown error occurred. Sorry about that.'];
             error_log($exception->getMessage());
         }
 
