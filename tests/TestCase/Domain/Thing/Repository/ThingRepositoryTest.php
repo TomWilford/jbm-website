@@ -26,8 +26,9 @@ class ThingRepositoryTest extends TestCase
     {
         $repository = new ThingRepository($this->container?->get(Connection::class));
         $result = $repository->ofId(1);
+
         $this->assertInstanceOf(Thing::class, $result);
-        $this->assertEquals(1, $result->getId());
+        $this->assertSame(1, $result->getId());
     }
 
     public function testStore(): void
@@ -47,16 +48,17 @@ class ThingRepositoryTest extends TestCase
         $result = $repository->store($thing);
 
         $this->assertInstanceOf(Thing::class, $result);
-        $this->assertEquals(100, $result->getId());
+        $this->assertSame(100, $result->getId());
     }
 
-    public function testFindAll(): void
+    public function testAll(): void
     {
         $repository = new ThingRepository($this->container?->get(Connection::class));
         $result = $repository->all();
-        $this->assertIsArray($result);
+
+        $this->assertIsIterable($result);
         $this->assertInstanceOf(Thing::class, $result[0]);
-        $this->assertEquals(1, $result[0]->getId());
+        $this->assertSame(1, $result[0]->getId());
     }
 
     public function testUpdate(): void
@@ -76,13 +78,11 @@ class ThingRepositoryTest extends TestCase
         $newThing = $repository->store($thing);
 
         $updatedThing = $newThing->cloneWith(name: 'Updated Test');
-        $repository->update($updatedThing);
-
-        $result = $repository->ofId($updatedThing->getId());
+        $result = $repository->update($updatedThing);
 
         $this->assertInstanceOf(Thing::class, $result);
-        $this->assertEquals($updatedThing->getId(), $result->getId());
-        $this->assertEquals('Updated Test', $result->getName());
+        $this->assertSame($updatedThing->getId(), $result->getId());
+        $this->assertSame('Updated Test', $result->getName());
     }
 
     public function testDestroy(): void
@@ -137,7 +137,7 @@ class ThingRepositoryTest extends TestCase
         $this->assertEquals(1, $result[0]->getId());
     }
 
-    public function testStoreThrowsExceptionWhenWrongEntityProvided()
+    public function testStoreThrowsExceptionWhenWrongEntityProvided(): void
     {
         $invalidClass = new stdClass();
         $repository = new ThingRepository($this->container?->get(Connection::class));
@@ -145,7 +145,7 @@ class ThingRepositoryTest extends TestCase
         $repository->store($invalidClass);
     }
 
-    public function testUpdateThrowsExceptionWhenWrongEntityProvided()
+    public function testUpdateThrowsExceptionWhenWrongEntityProvided(): void
     {
         $invalidClass = new stdClass();
         $repository = new ThingRepository($this->container?->get(Connection::class));
@@ -153,7 +153,7 @@ class ThingRepositoryTest extends TestCase
         $repository->update($invalidClass);
     }
 
-    public function testDestroyThrowsExceptionWhenWrongEntityProvided()
+    public function testDestroyThrowsExceptionWhenWrongEntityProvided(): void
     {
         $invalidClass = new stdClass();
         $repository = new ThingRepository($this->container?->get(Connection::class));
@@ -161,7 +161,7 @@ class ThingRepositoryTest extends TestCase
         $repository->destroy($invalidClass);
     }
 
-    public function testUpdateThrowsExceptionWhenEntityWithNullIdProvided()
+    public function testUpdateThrowsExceptionWhenEntityWithNullIdProvided(): void
     {
         $thing = new Thing(
             id: null,

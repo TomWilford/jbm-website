@@ -128,7 +128,7 @@ readonly class Thing implements JsonSerializable
         mixed $url = Unchanged::VALUE,
         mixed $createdAt = Unchanged::VALUE,
         mixed $updatedAt = Unchanged::VALUE
-    ): Thing {
+    ): self {
         return new self(
             $this->resolveValue($id, $this->id),
             $this->resolveValue($name, $this->name),

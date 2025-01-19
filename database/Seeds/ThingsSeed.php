@@ -9,7 +9,7 @@ use App\Domain\Thing\Repository\ThingRepository;
 use App\Domain\Thing\Thing;
 use App\Infrastructure\Persistence\RepositoryInterface;
 
-readonly class ThingSeed implements SeedInterface
+readonly class ThingsSeed implements SeedInterface
 {
     public function __construct(private ThingRepository $repository)
     {

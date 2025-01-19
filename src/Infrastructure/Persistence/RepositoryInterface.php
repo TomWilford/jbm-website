@@ -15,6 +15,11 @@ interface RepositoryInterface
 
     public function store(object $entity): object;
 
+    /**
+     * @return array<object>
+     */
+    public function all(): iterable;
+
     public function ofId(int $id): object;
 
     public function update(object $entity): object;

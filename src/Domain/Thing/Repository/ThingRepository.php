@@ -19,7 +19,7 @@ class ThingRepository extends Repository
     public function store(object $entity): Thing
     {
         if (!$entity instanceof Thing) {
-            throw new InvalidArgumentException('Entity must be an instance of Thing');
+            throw new InvalidArgumentException('Entity must be an instance of ' . Thing::class);
         }
 
         $qb = $this->getQueryBuilder();
@@ -76,7 +76,7 @@ class ThingRepository extends Repository
         $result = $this->fetch('things', ['id' => $id]);
 
         if (!$result) {
-            throw new DomainRecordNotFoundException('Thing not found');
+            throw new DomainRecordNotFoundException(Thing::class . ' not found');
         }
 
         return $this->arrayToObject($result[0]);
@@ -88,11 +88,11 @@ class ThingRepository extends Repository
     public function update(object $entity): Thing
     {
         if (!$entity instanceof Thing) {
-            throw new InvalidArgumentException('Entity must be an instance of Thing');
+            throw new InvalidArgumentException('Entity must be an instance of ' . Thing::class);
         }
 
         if (is_null($entity->getId())) {
-            throw new DomainRecordNotFoundException('Cannot update provided Thing');
+            throw new DomainRecordNotFoundException('Cannot update provided ' . Thing::class);
         }
 
         $qb = $this->getQueryBuilder();
@@ -132,13 +132,13 @@ class ThingRepository extends Repository
     public function destroy(object $entity): void
     {
         if (!$entity instanceof Thing || is_null($entity->getId())) {
-            throw new InvalidArgumentException('Entity must be a valid instance of Thing');
+            throw new InvalidArgumentException('Entity must be an instance of ' . Thing::class);
         }
 
         try {
             $this->ofId($entity->getId());
         } catch (DomainRecordNotFoundException $exception) {
-            throw new DomainRecordNotFoundException('Thing not found');
+            throw new DomainRecordNotFoundException(Thing::class . ' not found');
         }
 
         $qb = $this->getQueryBuilder();
