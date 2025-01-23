@@ -2,21 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Things\Api;
+namespace App\Action\Bits\Api;
 
+use App\Domain\Bit\Repository\BitRepository;
+use App\Domain\Bit\Service\Update\BitUpdater;
+use App\Domain\Bit\Service\Update\UpdateBitValidator;
 use App\Domain\Exception\DomainRecordNotFoundException;
-use App\Domain\Thing\Repository\ThingRepository;
-use App\Domain\Thing\Thing;
 use App\Infrastructure\Enum\HttpStatus;
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Respect\Validation\Exceptions\NestedValidationException;
+use Respect\Validation\Exceptions\ValidationException;
 
-final readonly class DeleteAction
+final readonly class UpdateAction
 {
     public function __construct(
         private JsonRenderer $renderer,
-        private ThingRepository $things
+        private BitRepository $bits,
+        private UpdateBitValidator $validator,
+        private BitUpdater $updater
     ) {
         //
     }
@@ -31,12 +36,16 @@ final readonly class DeleteAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->things->ofId((int)$arguments['id']);
-            $this->things->destroy($thing);
-            $data = ['Thing deleted successfully.'];
+            $thing = $this->bits->ofId((int)$arguments['id']);
+            $this->validator->validate((array)$request->getParsedBody());
+            $data = $this->updater->updateFromArray((array)$request->getParsedBody(), $thing);
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];
+        } catch (ValidationException $exception) {
+            $status = HttpStatus::BAD_REQUEST;
+            /** @var NestedValidationException $exception */
+            $data = [$exception->getMessages()];
         } catch (\Throwable $exception) {
             $status = HttpStatus::INTERNAL_SERVER_ERROR;
             $data = ['An unknown error occurred. Sorry about that.'];

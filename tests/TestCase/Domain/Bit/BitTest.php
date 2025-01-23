@@ -49,7 +49,7 @@ class BitTest extends TestCase
             'id' => 1,
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
-            'language' => Language::PHP,
+            'language' => Language::PHP->name,
             'description' => 'Test description',
             'created_at' => 1600000000,
             'updated_at' => 1601000000,

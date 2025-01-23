@@ -68,7 +68,7 @@ class BitRepository extends Repository
         $result = $this->fetch('bits', ['id' => $id]);
 
         if (!$result) {
-            throw new DomainRecordNotFoundException(Bit::class . ' not found');
+            throw new DomainRecordNotFoundException('Bit not found');
         }
 
         return $this->arrayToObject($result[0]);
@@ -84,7 +84,7 @@ class BitRepository extends Repository
         }
 
         if (is_null($entity->getId())) {
-            throw new DomainRecordNotFoundException('Cannot update provided ' . Bit::class);
+            throw new DomainRecordNotFoundException('Cannot update provided Bit');
         }
 
         $qb = $this->getQueryBuilder();
@@ -122,7 +122,7 @@ class BitRepository extends Repository
         try {
             $this->ofId($entity->getId());
         } catch (DomainRecordNotFoundException $exception) {
-            throw new DomainRecordNotFoundException(Bit::class . ' not found');
+            throw new DomainRecordNotFoundException('Bit not found');
         }
 
         $qb = $this->getQueryBuilder();

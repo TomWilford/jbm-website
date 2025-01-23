@@ -19,5 +19,9 @@ return function (App $app) {
     $app->delete('/api/things/{id:[0-9]+}', \App\Action\Things\Api\DeleteAction::class)->setName('api.things.delete');
     // Bits
     // - API
+    $app->get('/api/bits', \App\Action\Bits\Api\IndexAction::class)->setName('api.bits.index');
+    $app->get('/api/bits/{id:[0-9]+}', \App\Action\Bits\Api\ShowAction::class)->setName('api.bits.show');
     $app->post('/api/bits', \App\Action\Bits\Api\CreateAction::class)->setName('api.bits.create');
+    $app->patch('/api/bits/{id:[0-9]+}', \App\Action\Bits\Api\UpdateAction::class)->setName('api.bits.update');
+    $app->delete('/api/bits/{id:[0-9]+}', \App\Action\Bits\Api\DeleteAction::class)->setName('api.bits.delete');
 };

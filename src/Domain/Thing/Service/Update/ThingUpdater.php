@@ -29,12 +29,14 @@ readonly class ThingUpdater implements UpdaterInterface
      *      active_to: string,
      *      url: string,
      *  }|array<string, mixed> $data
-     * @param Thing $entity
      * @return Thing
      * @throws Exception
      */
-    public function updateFromArray(array $data, object $entity): object
+    public function updateFromArray(array $data, object $entity): Thing
     {
+        if (!$entity instanceof Thing) {
+            throw new \InvalidArgumentException('Entity must be instance of ' . Thing::class);
+        }
         $thing = $entity->cloneWith(
             name: ($data['name'] === '') ? Unchanged::VALUE : $data['name'],
             shortDescription: ($data['short_description'] === '') ? Unchanged::VALUE : $data['short_description'],
@@ -65,7 +67,7 @@ readonly class ThingUpdater implements UpdaterInterface
 
     private function resolveUrlValue(string $url): Unchanged|string|null
     {
-        return $url !== 'null'
+        return ($url !== 'null')
             ? ($url === '' ? Unchanged::VALUE : $url)
             : null;
     }

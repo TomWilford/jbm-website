@@ -76,7 +76,7 @@ class ThingRepository extends Repository
         $result = $this->fetch('things', ['id' => $id]);
 
         if (!$result) {
-            throw new DomainRecordNotFoundException(Thing::class . ' not found');
+            throw new DomainRecordNotFoundException('Thing not found');
         }
 
         return $this->arrayToObject($result[0]);
@@ -92,7 +92,7 @@ class ThingRepository extends Repository
         }
 
         if (is_null($entity->getId())) {
-            throw new DomainRecordNotFoundException('Cannot update provided ' . Thing::class);
+            throw new DomainRecordNotFoundException('Cannot update provided Thing');
         }
 
         $qb = $this->getQueryBuilder();
@@ -138,7 +138,7 @@ class ThingRepository extends Repository
         try {
             $this->ofId($entity->getId());
         } catch (DomainRecordNotFoundException $exception) {
-            throw new DomainRecordNotFoundException(Thing::class . ' not found');
+            throw new DomainRecordNotFoundException('Thing not found');
         }
 
         $qb = $this->getQueryBuilder();

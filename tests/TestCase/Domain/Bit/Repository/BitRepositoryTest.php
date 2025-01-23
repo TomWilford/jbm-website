@@ -121,7 +121,7 @@ class BitRepositoryTest extends TestCase
         $repository = new BitRepository($this->container?->get(Connection::class));
 
         $this->expectException(DomainRecordNotFoundException::class);
-        $repository->ofId($bit->getId());
+        $repository->destroy($bit);
     }
 
     public function testStoreThrowsExceptionWhenWrongEntityProvided(): void

@@ -61,7 +61,7 @@ class CreateBitValidatorTest extends TestCase
         $data = [
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
-            'language' => 'capybara',  // Invalid: Not in Language::cases()
+            'language' => 'capybara',  // Invalid: Not in Language::values()
             'description' => 'Test bit description',
         ];
 

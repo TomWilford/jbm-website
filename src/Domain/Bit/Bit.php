@@ -66,7 +66,7 @@ readonly class Bit implements JsonSerializable
             'id' => $this->id,
             'name' => $this->name,
             'code' => $this->code,
-            'language' => $this->language,
+            'language' => $this->language->name,
             'description' => $this->description,
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,

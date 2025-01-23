@@ -41,8 +41,8 @@ class ThingCreatorTest extends TestCase
         $this->assertInstanceOf(Thing::class, $result);
         $this->assertTrue($result->getFeatured());
         $this->assertSame(FaultLevel::MOSTLY, $result->getFaultLevel());
-        $this->assertSame('-3600', $result->getActiveFrom());
-        $this->assertSame('3155760000', $result->getActiveTo());
+        $this->assertSame(-3600, $result->getActiveFrom());
+        $this->assertSame(3155760000, $result->getActiveTo());
     }
 
     public function testAlternativeDataTransformsSuccessfully(): void
