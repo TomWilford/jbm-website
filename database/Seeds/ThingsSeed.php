@@ -21,11 +21,14 @@ readonly class ThingsSeed implements SeedInterface
         return 'Things';
     }
 
-    public function getRepository(): RepositoryInterface
+    public function getRepository(): ThingRepository
     {
         return $this->repository;
     }
 
+    /**
+     * @return Thing[]
+     */
     public function getData(): array
     {
         return [

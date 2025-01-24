@@ -22,20 +22,23 @@ readonly class BitCreator implements CreatorInterface
      *     name: string,
      *     code: string,
      *     language: string,
-     *     description: string
+     *     description: string,
+     *     returns: string
      * }|array<string, mixed> $data
      * @throws Exception
      */
     public function createFromArray(array $data): Bit
     {
         $language = $this->normaliseLanguageInput($data['language']);
-        $description = $this->normaliseDescriptionInput($data['description']);
+        $description = $this->normaliseNullableInput($data['description']);
+        $returns = $this->normaliseNullableInput($data['returns']);
         $bit = new Bit(
             id: null,
             name: $data['name'],
             code: $data['code'],
             language: Language::{$language},
             description: $description,
+            returns: $returns
         );
 
         return $this->repository->store($bit);
@@ -46,8 +49,8 @@ readonly class BitCreator implements CreatorInterface
         return strtoupper($language);
     }
 
-    private function normaliseDescriptionInput(string $description): ?string
+    private function normaliseNullableInput(string $input): ?string
     {
-        return $description === '' ? null : $description;
+        return $input === '' ? null : $input;
     }
 }

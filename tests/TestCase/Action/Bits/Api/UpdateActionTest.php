@@ -36,7 +36,8 @@ class UpdateActionTest extends TestCase
             'Initial Name',
             'Initial Code',
             Language::PHP,
-            'Initial Description'
+            'Initial Description',
+            'Initial Returns'
         );
 
         $bit = $repository->store($bit);
@@ -46,6 +47,7 @@ class UpdateActionTest extends TestCase
             'code' => 'New Code',
             'language' => 'MIXED',
             'description' => 'New Description',
+            'returns' => 'New Returns'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -61,6 +63,7 @@ class UpdateActionTest extends TestCase
         $this->assertResponseContains('New Code', $response);
         $this->assertResponseContains('MIXED', $response);
         $this->assertResponseContains('New Description', $response);
+        $this->assertResponseContains('New Returns', $response);
     }
 
     public function testInvalidIdInRequest(): void
@@ -70,6 +73,7 @@ class UpdateActionTest extends TestCase
             'code' => 'New Code',
             'language' => 'MIXED',
             'description' => 'New Description',
+            'returns' => 'New Returns'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -89,6 +93,7 @@ class UpdateActionTest extends TestCase
             'code' => 'New Code',
             'language' => 'ESPERANTO', // Invalid language option
             'description' => 'New Description',
+            'returns' => 'New Returns'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -133,6 +138,7 @@ class UpdateActionTest extends TestCase
             'code' => 'New Code',
             'language' => 'MIXED',
             'description' => 'New Description',
+            'returns' => 'New Returns'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 

@@ -14,7 +14,8 @@ readonly class CreateBitValidator extends Validator
      * @param array{
      *     name: string,
      *     code: string,
-     *     description: string
+     *     description: string,
+     *     returns: string
      * }|array<string, mixed> $data
      * @throws ValidationException
      */
@@ -24,6 +25,7 @@ readonly class CreateBitValidator extends Validator
             ->key('code', $this->v::stringType()->length(1, 255))
             ->key('language', $this->v::in(Language::values()))
             ->key('description', $this->v::optional($this->v::stringType()->length(1, 255)))
+            ->key('returns', $this->v::optional($this->v::stringType()->length(1, 255)))
             ->assert($data);
     }
 }

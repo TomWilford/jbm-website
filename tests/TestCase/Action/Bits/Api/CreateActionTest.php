@@ -29,7 +29,8 @@ class CreateActionTest extends TestCase
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
-            'description' => 'Test bit description'
+            'description' => 'Test bit description',
+            'returns' => 'string(12) "Hello World!"'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -49,7 +50,8 @@ class CreateActionTest extends TestCase
             'name' => '', //Invalid: Empty string
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
-            'description' => 'Test bit description'
+            'description' => 'Test bit description',
+            'returns' => 'string(12) "Hello World!"'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -91,7 +93,8 @@ class CreateActionTest extends TestCase
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
-            'description' => 'Test bit description'
+            'description' => 'Test bit description',
+            'returns' => 'string(12) "Hello World!"'
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 

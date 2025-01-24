@@ -26,6 +26,7 @@ final class Version20250119115157 extends AbstractMigration
         $table->addColumn('code', Types::STRING, ['notnull' => true]);
         $table->addColumn('language', Types::STRING, ['notnull' => true]);
         $table->addColumn('description', Types::STRING, ['notnull' => false]);
+        $table->addColumn('returns', Types::STRING, ['notnull' => false]);
         $table->addColumn('created_at', Types::DATE_IMMUTABLE, ['notnull' => true]);
         $table->addColumn('updated_at', Types::DATE_MUTABLE, ['notnull' => true]);
         $table->setPrimaryKey(['id']);

@@ -1,0 +1,19 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}{{ bit.name }} | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        <h2 class="text-m">{{ bit.name }}</h2>
+        {% if bit.description %}
+            <p>{{ bit.description }}</p>
+        {% endif %}
+        <h4>Snippet:</h4>
+        <pre class="p-2"><code>{{ bit.code }}</code></pre>
+        {% if bit.returns %}
+            <h4>Returns:</h4>
+            <pre class="p-2"><code>{{ bit.returns }}</code></pre>
+        {% endif %}
+    </section>
+    <hr class="my-5">
+{% endblock %}

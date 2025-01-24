@@ -10,7 +10,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final readonly class TwigRenderer
+readonly class TwigRenderer
 {
     public function __construct(private Twig $twig)
     {

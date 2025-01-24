@@ -26,6 +26,7 @@ class UpdateBitValidatorTest extends TestCase
             'code' => 'ABC123',
             'language' => 'PHP',
             'description' => 'A valid description.',
+            'returns' => 'string(12) "Hello World!"'
         ];
 
         $this->expectNotToPerformAssertions();
@@ -39,6 +40,7 @@ class UpdateBitValidatorTest extends TestCase
             'code' => '',
             'language' => '',
             'description' => '',
+            'returns' => ''
         ];
 
         $this->expectNotToPerformAssertions(); // Validation should pass without exceptions
@@ -52,6 +54,7 @@ class UpdateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'A valid description.',
+            'returns' => 'string(12) "Hello World!"'
         ];
 
         $this->expectException(ValidationException::class);
@@ -65,6 +68,7 @@ class UpdateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'capybara', // Invalid: Not in Language::values()
             'description' => 'A valid description.',
+            'returns' => 'string(12) "Hello World!"'
         ];
 
         $this->expectException(ValidationException::class);
@@ -78,6 +82,7 @@ class UpdateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => str_repeat('A', 256), // Exceeds max length of 255
+            'returns' => 'string(12) "Hello World!"'
         ];
 
         $this->expectException(ValidationException::class);

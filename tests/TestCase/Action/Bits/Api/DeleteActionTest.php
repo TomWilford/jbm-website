@@ -36,6 +36,7 @@ class DeleteActionTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"'
         );
 
         $bit = $repository->store($bit);

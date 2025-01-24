@@ -19,6 +19,7 @@ readonly class Bit implements JsonSerializable
         private string $code,
         private Language $language,
         private ?string $description = null,
+        private ?string $returns = null,
         private ?int $createdAt = null,
         private ?int $updatedAt = null
     ) {
@@ -50,6 +51,11 @@ readonly class Bit implements JsonSerializable
         return $this->description;
     }
 
+    public function getReturns(): ?string
+    {
+        return $this->returns;
+    }
+
     public function getCreatedAt(): ?int
     {
         return $this->createdAt;
@@ -68,6 +74,7 @@ readonly class Bit implements JsonSerializable
             'code' => $this->code,
             'language' => $this->language->name,
             'description' => $this->description,
+            'returns' => $this->returns,
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
         ];
@@ -79,6 +86,7 @@ readonly class Bit implements JsonSerializable
         mixed $code = Unchanged::VALUE,
         mixed $language = Unchanged::VALUE,
         mixed $description = Unchanged::VALUE,
+        mixed $returns = Unchanged::VALUE,
         mixed $createdAt = Unchanged::VALUE,
         mixed $updatedAt = Unchanged::VALUE
     ): self {
@@ -88,6 +96,7 @@ readonly class Bit implements JsonSerializable
             $this->resolveValue($code, $this->code),
             $this->resolveValue($language, $this->language),
             $this->resolveValue($description, $this->description),
+            $this->resolveValue($returns, $this->returns),
             $this->resolveValue($createdAt, $this->createdAt),
             $this->resolveValue($updatedAt, $this->updatedAt)
         );

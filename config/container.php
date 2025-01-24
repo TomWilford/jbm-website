@@ -1,7 +1,9 @@
 <?php
 
 use App\Console\SeedCommand;
+use App\Database\Seeds\BitsSeed;
 use App\Database\Seeds\ThingsSeed;
+use App\Domain\Bit\Repository\BitRepository;
 use App\Domain\Thing\Repository\ThingRepository;
 use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
@@ -86,7 +88,8 @@ return [
     },
     SeedCommand::class => function (ContainerInterface $container) {
         return new SeedCommand([
-            new ThingsSeed($container->get(ThingRepository::class))
+            new ThingsSeed($container->get(ThingRepository::class)),
+            new BitsSeed($container->get(BitRepository::class))
         ]);
     },
 

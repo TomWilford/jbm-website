@@ -20,6 +20,7 @@ class BitTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -29,6 +30,7 @@ class BitTest extends TestCase
         $this->assertSame("var_dump(sprintf('%s %s!', 'Hello', 'World'));", $bit->getCode());
         $this->assertSame(Language::PHP, $bit->getLanguage());
         $this->assertSame('Test description', $bit->getDescription());
+        $this->assertSame('string(12) "Hello World!"', $bit->getReturns());
         $this->assertSame(1600000000, $bit->getCreatedAt());
         $this->assertSame(1601000000, $bit->getUpdatedAt());
     }
@@ -41,6 +43,7 @@ class BitTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -51,6 +54,7 @@ class BitTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => Language::PHP->name,
             'description' => 'Test description',
+            'returns' => 'string(12) "Hello World!"',
             'created_at' => 1600000000,
             'updated_at' => 1601000000,
         ];
@@ -66,6 +70,7 @@ class BitTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -86,6 +91,7 @@ class BitTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -97,6 +103,7 @@ class BitTest extends TestCase
         $this->assertSame("var_dump(sprintf('%s %s!', 'Hello', 'World'));", $clonedBit->getCode());
         $this->assertSame(Language::PHP, $clonedBit->getLanguage());
         $this->assertSame('Test description', $clonedBit->getDescription());
+        $this->assertSame('string(12) "Hello World!"', $clonedBit->getReturns());
         $this->assertSame(1600000000, $clonedBit->getCreatedAt());
         $this->assertSame(1601000000, $clonedBit->getUpdatedAt());
     }

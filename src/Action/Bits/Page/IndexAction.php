@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Things\Page;
+namespace App\Action\Bits\Page;
 
-use App\Domain\Thing\Repository\ThingRepository;
+use App\Domain\Bit\Repository\BitRepository;
+use App\Renderer\JsonRenderer;
 use App\Renderer\TwigRenderer;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
@@ -15,7 +16,7 @@ use Twig\Error\SyntaxError;
 
 final readonly class IndexAction
 {
-    public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
+    public function __construct(private TwigRenderer $renderer, private BitRepository $bits)
     {
         //
     }
@@ -27,8 +28,8 @@ final readonly class IndexAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        return $this->renderer->twig($response, 'things/index.twig', [
-            'things' => $this->things->all(),
+        return $this->renderer->twig($response, 'bits/index.twig', [
+            'bits' => $this->bits->all(),
         ]);
     }
 }

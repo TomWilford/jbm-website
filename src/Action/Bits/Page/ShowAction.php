@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Things\Page;
+namespace App\Action\Bits\Page;
 
+use App\Domain\Bit\Repository\BitRepository;
 use App\Domain\Exception\DomainRecordNotFoundException;
-use App\Domain\Thing\Repository\ThingRepository;
 use App\Renderer\TwigRenderer;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
@@ -17,7 +17,7 @@ use Twig\Error\SyntaxError;
 
 final readonly class ShowAction
 {
-    public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
+    public function __construct(private TwigRenderer $renderer, private BitRepository $bits)
     {
         //
     }
@@ -34,8 +34,8 @@ final readonly class ShowAction
     ): ResponseInterface {
 
         try {
-            return $this->renderer->twig($response, 'things/show.twig', [
-                'thing' => $this->things->ofId((int)$arguments['id']),
+            return $this->renderer->twig($response, 'bits/show.twig', [
+                'bit' => $this->bits->ofId((int)$arguments['id']),
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

@@ -5,6 +5,11 @@
 {% block content %}
     <section>
         {% include 'components/subtitle.twig' with {'subtitle': 'All Things'} %}
+        <p class="mb-3">
+            These <em>things</em> are all projects that I've worked on. Some of them are totally my fault, some of them
+            I worked on with other people and others are jobs where I've worked with a larger team. Some of them go
+            way back; sorry about that.
+        </p>
         {% for thing in things %}
             {% include 'components/things-list.twig' with {'thing': thing} %}
         {% endfor %}

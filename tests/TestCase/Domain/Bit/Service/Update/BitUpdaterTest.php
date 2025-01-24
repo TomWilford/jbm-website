@@ -29,7 +29,8 @@ class BitUpdaterTest extends TestCase
             'Initial Name',
             'Initial Code',
             Language::PHP,
-            'Initial Description'
+            'Initial Description',
+            'Initial Returns'
         );
 
         $bit = $repository->store($bit);
@@ -39,6 +40,7 @@ class BitUpdaterTest extends TestCase
             'code' => 'New Code',
             'language' => 'MIXED',
             'description' => 'New Description',
+            'returns' => 'New Returns',
         ];
 
         $bitUpdater = new BitUpdater($repository);
@@ -50,6 +52,7 @@ class BitUpdaterTest extends TestCase
         $this->assertSame('New Code', $result->getCode());
         $this->assertSame(Language::MIXED, $result->getLanguage());
         $this->assertSame('New Description', $result->getDescription());
+        $this->assertSame('New Returns', $result->getReturns());
     }
 
     public function testUpdateAllFieldsWhenBlankFromArray(): void
@@ -61,7 +64,8 @@ class BitUpdaterTest extends TestCase
             'Initial Name',
             'Initial Code',
             Language::PHP,
-            'Initial Description'
+            'Initial Description',
+            'Initial Returns'
         );
 
         $bit = $repository->store($bit);
@@ -71,6 +75,7 @@ class BitUpdaterTest extends TestCase
             'code' => '',
             'language' => '',
             'description' => '',
+            'returns' => ''
         ];
 
         $bitUpdater = new BitUpdater($repository);
@@ -82,6 +87,7 @@ class BitUpdaterTest extends TestCase
         $this->assertSame('Initial Code', $result->getCode());
         $this->assertSame(Language::PHP, $result->getLanguage());
         $this->assertSame('Initial Description', $result->getDescription());
+        $this->assertSame('Initial Returns', $result->getReturns());
     }
 
     public function testUpdateWithNullableValues(): void
@@ -93,7 +99,8 @@ class BitUpdaterTest extends TestCase
             'Initial Name',
             'Initial Code',
             Language::PHP,
-            'Initial Description'
+            'Initial Description',
+            'Initial Returns'
         );
 
         $bit = $repository->store($bit);
@@ -103,6 +110,7 @@ class BitUpdaterTest extends TestCase
             'code' => 'New Code',
             'language' => 'MIXED',
             'description' => 'null',
+            'returns' => 'null',
         ];
 
         $bitUpdater = new BitUpdater($repository);
@@ -114,6 +122,7 @@ class BitUpdaterTest extends TestCase
         $this->assertSame('New Code', $result->getCode());
         $this->assertSame(Language::MIXED, $result->getLanguage());
         $this->assertNull($result->getDescription());
+        $this->assertNull($result->getReturns());
     }
 
     public function testWrongEntityPassedToUpdater(): void
@@ -126,6 +135,7 @@ class BitUpdaterTest extends TestCase
             'code' => 'New Code',
             'language' => 'MIXED',
             'description' => 'null',
+            'returns' => 'null',
         ];
 
         $invalidClass = new \stdClass();

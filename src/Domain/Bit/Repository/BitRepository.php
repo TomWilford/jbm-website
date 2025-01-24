@@ -29,6 +29,7 @@ class BitRepository extends Repository
                 'code' => ':code',
                 'language' => ':language',
                 'description' => ':description',
+                'returns' => ':returns',
                 'created_at' => ':created_at',
                 'updated_at' => ':updated_at',
             ])
@@ -37,6 +38,7 @@ class BitRepository extends Repository
                 'code' => $entity->getCode(),
                 'language' => $entity->getLanguage()->name,
                 'description' => $entity->getDescription(),
+                'returns' => $entity->getReturns(),
                 'created_at' => (new \DateTimeImmutable())->getTimestamp(),
                 'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
             ]);
@@ -94,6 +96,7 @@ class BitRepository extends Repository
             ->set('code', ':code')
             ->set('language', ':language')
             ->set('description', ':description')
+            ->set('returns', ':returns')
             ->set('updated_at', ':updated_at')
             ->where('id = :id')
         ->setParameters([
@@ -101,6 +104,7 @@ class BitRepository extends Repository
             'code' => $entity->getCode(),
             'language' => $entity->getLanguage()->name,
             'description' => $entity->getDescription(),
+            'returns' => $entity->getReturns(),
             'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
             'id' => $entity->getId()
         ]);
@@ -141,6 +145,7 @@ class BitRepository extends Repository
      *     code: string,
      *     language: string,
      *     description: ?string,
+     *     returns: ?string,
      *     created_at: int,
      *     updated_at: int
      * }|array<string, mixed> $array
@@ -153,6 +158,7 @@ class BitRepository extends Repository
             $array['code'],
             Language::{$array['language']},
             $array['description'],
+            $array['returns'],
             $array['created_at'],
             $array['updated_at'],
         );

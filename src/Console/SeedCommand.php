@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class SeedCommand extends Command
 {
@@ -31,22 +32,23 @@ final class SeedCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('<info>Importing Seed Data</info>');
+        $io = new SymfonyStyle($input, $output);
+        $io->title('Importing Seed Data');
 
         foreach ($this->seeds as $seed) {
-            $output->writeln(sprintf('<info>Seeding %s</info>', $seed->getName()));
+            $io->section(sprintf('Seeding %s', $seed->getName()));
 
-            $progressBar = new ProgressBar($output, count($seed->getData()));
+            $io->progressStart(count($seed->getData()));
 
             foreach ($seed->getData() as $entity) {
                 $seed->getRepository()->store($entity);
-                $progressBar->advance();
+                $io->progressAdvance();
             }
-            $progressBar->finish();
+            $io->progressFinish();
         }
+        $io->newLine();
 
-        $output->writeln('');
-        $output->writeln('<info>Seed Data Imported</info>');
+        $io->success('Seed Data Imported');
 
         return 0;
     }

@@ -23,7 +23,8 @@ class BitUpdater implements UpdaterInterface
      *     name: string,
      *     code: string,
      *     language: string,
-     *     description: string
+     *     description: string,
+     *     returns: string,
      * }|array<string, mixed> $data
      * @throws Exception
      */
@@ -36,7 +37,8 @@ class BitUpdater implements UpdaterInterface
             name: ($data['name'] === '') ? Unchanged::VALUE : $data['name'],
             code: ($data['code'] === '') ? Unchanged::VALUE : $data['code'],
             language: $this->resolveLanguageValue($data['language']),
-            description: $this->resolveDescriptionValue($data['description'])
+            description: $this->resolveNullableString($data['description']),
+            returns: $this->resolveNullableString($data['returns'])
         );
 
         return $this->repository->update($bit);
@@ -47,10 +49,10 @@ class BitUpdater implements UpdaterInterface
         return $language === '' ? Unchanged::VALUE : Language::{strtoupper($language)};
     }
 
-    private function resolveDescriptionValue(string $description): Unchanged|string|null
+    private function resolveNullableString(string $string): Unchanged|string|null
     {
-        return ($description !== 'null')
-            ? ($description === '' ? Unchanged::VALUE : $description)
+        return ($string !== 'null')
+            ? ($string === '' ? Unchanged::VALUE : $string)
             : null;
     }
 }

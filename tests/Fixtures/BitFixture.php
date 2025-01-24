@@ -13,6 +13,7 @@ class BitFixture implements FixtureInterface
      *     name: string,
      *     code: string,
      *     description: ?string,
+     *     returns: ?string,
      *     created_at: int,
      *     updated_at: int
      * }} $records
@@ -24,6 +25,7 @@ class BitFixture implements FixtureInterface
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit description',
+            'returns' => 'string(12) "Hello World!"',
             'created_at' => 1600000000,
             'updated_at' => 1601000000,
         ],
@@ -33,6 +35,7 @@ class BitFixture implements FixtureInterface
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit 99 description',
+            'returns' => 'string(12) "Hello World!"',
             'created_at' => 1600000000,
             'updated_at' => 1601000000,
         ]

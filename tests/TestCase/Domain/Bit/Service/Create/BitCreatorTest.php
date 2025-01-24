@@ -26,7 +26,8 @@ class BitCreatorTest extends TestCase
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
-            'description' => 'Test bit description'
+            'description' => 'Test bit description',
+            'returns' => 'string(12) "Hello World!"'
         ];
 
         $repository = new BitRepository($this->container?->get(Connection::class));
@@ -45,7 +46,8 @@ class BitCreatorTest extends TestCase
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'php',
-            'description' => ''
+            'description' => '',
+            'returns' => ''
         ];
 
         $repository = new BitRepository($this->container?->get(Connection::class));

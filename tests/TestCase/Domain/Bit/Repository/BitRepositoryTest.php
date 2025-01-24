@@ -39,6 +39,7 @@ class BitRepositoryTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -68,6 +69,7 @@ class BitRepositoryTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -91,6 +93,7 @@ class BitRepositoryTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -114,6 +117,7 @@ class BitRepositoryTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
@@ -156,6 +160,7 @@ class BitRepositoryTest extends TestCase
             code: "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             language: Language::PHP,
             description: 'Test description',
+            returns: 'string(12) "Hello World!"',
             createdAt: 1600000000,
             updatedAt: 1601000000
         );
