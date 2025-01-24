@@ -10,7 +10,7 @@ use App\Domain\Thing\Thing;
 use App\Infrastructure\Service\Creator\CreatorInterface;
 use Doctrine\DBAL\Exception;
 
-final readonly class ThingCreator implements CreatorInterface
+readonly class ThingCreator implements CreatorInterface
 {
     public function __construct(protected ThingRepository $repository)
     {
@@ -32,6 +32,8 @@ final readonly class ThingCreator implements CreatorInterface
      */
     public function createFromArray(array $data): object
     {
+        $activeTo = $this->normaliseActiveToInput($data['active_to']);
+        $url = $this->normaliseUrlInput($data['url']);
         $thing = new Thing(
             id: null,
             name: $data['name'],
@@ -40,9 +42,20 @@ final readonly class ThingCreator implements CreatorInterface
             featured: (bool)$data['featured'],
             faultLevel: FaultLevel::from($data['fault_level']),
             activeFrom: (new \DateTimeImmutable($data['active_from']))->getTimestamp(),
-            activeTo: $data['active_to'] ? (new \DateTimeImmutable($data['active_to']))->getTimestamp() : null,
-            url: $data['url'] ?: null,
+            activeTo: $activeTo,
+            url: $url,
         );
+
         return $this->repository->store($thing);
+    }
+
+    private function normaliseActiveToInput(string $activeTo): ?int
+    {
+        return $activeTo === '' ? null : (new \DateTimeImmutable($activeTo))->getTimestamp();
+    }
+
+    private function normaliseUrlInput(string $url): ?string
+    {
+        return $url === '' ? null : $url;
     }
 }

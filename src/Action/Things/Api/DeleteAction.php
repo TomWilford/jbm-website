@@ -6,6 +6,7 @@ namespace App\Action\Things\Api;
 
 use App\Domain\Exception\DomainRecordNotFoundException;
 use App\Domain\Thing\Repository\ThingRepository;
+use App\Domain\Thing\Thing;
 use App\Infrastructure\Enum\HttpStatus;
 use App\Renderer\JsonRenderer;
 use Psr\Http\Message\ResponseInterface;
@@ -38,7 +39,7 @@ final readonly class DeleteAction
             $data = [$exception->getMessage()];
         } catch (\Throwable $exception) {
             $status = HttpStatus::INTERNAL_SERVER_ERROR;
-            $data = ['An error occurred. Sorry about that.'];
+            $data = ['An unknown error occurred. Sorry about that.'];
             error_log($exception->getMessage());
         }
 

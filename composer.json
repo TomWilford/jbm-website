@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "8.2.* || 8.3.*",
+        "php": "8.3.*",
         "ext-json": "*",
         "doctrine/dbal": "^4.2",
         "doctrine/migrations": "^3.8",
@@ -30,7 +30,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "App\\Database\\": "database/"
         }
     },
     "autoload-dev": {

@@ -47,7 +47,7 @@ trait AppTestTrait
             $this->initialiseTestDatabase();
             // Save any fixtures to the test database for unit tests
             if (method_exists($this, 'insertDefaultFixtureRecords')) {
-                $this->insertDefaultFixtureRecords([ThingFixture::class]);
+                $this->insertDefaultFixtureRecords($this->container->get('settings')['fixtures']);
             }
         }
     }

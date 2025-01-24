@@ -7,7 +7,7 @@ namespace App\Renderer;
 use App\Infrastructure\Enum\HttpStatus;
 use Psr\Http\Message\ResponseInterface;
 
-final class JsonRenderer
+class JsonRenderer
 {
     public function json(
         ResponseInterface $response,

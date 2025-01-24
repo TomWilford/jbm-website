@@ -1,0 +1,23 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}Bits | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        {% include 'components/subtitle.twig' with {'subtitle': 'All Bits'} %}
+        <p class="mb-3">
+            These <em>bits</em> of code are part code-golf, part snippet library. The main reason they're here is for
+            me to refer back to, but hopefully you might find them handy too. If they don't end up working for you;
+            sorry about that.
+        </p>
+        <ul class="link-list">
+            {% for bit in bits %}
+                <li class="mb-2">
+                    <strong>{{ bit.name }}</strong>
+                    <a href="/bits/{{ bit.id }}">View</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <hr class="my-5">
+{% endblock %}

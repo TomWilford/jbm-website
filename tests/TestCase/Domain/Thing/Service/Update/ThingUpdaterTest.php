@@ -20,7 +20,7 @@ class ThingUpdaterTest extends TestCase
     use AppTestTrait;
     use DatabaseTestTrait;
 
-    public function testUpdateAllFieldsFromArray()
+    public function testUpdateAllFieldsFromArray(): void
     {
         $repository = new ThingRepository($this->container?->get(Connection::class));
 
@@ -56,17 +56,17 @@ class ThingUpdaterTest extends TestCase
         $result = $thingUpdater->updateFromArray($data, $thing);
 
         $this->assertInstanceOf(Thing::class, $result);
-        $this->assertEquals('New Name', $result->getName());
-        $this->assertEquals('New Short Description', $result->getShortDescription());
-        $this->assertEquals('New Description', $result->getDescription());
+        $this->assertSame('New Name', $result->getName());
+        $this->assertSame('New Short Description', $result->getShortDescription());
+        $this->assertSame('New Description', $result->getDescription());
         $this->assertFalse($result->getFeatured());
-        $this->assertEquals(FaultLevel::MOSTLY, $result->getFaultLevel());
-        $this->assertEquals(1735689600, $result->getActiveFrom());
-        $this->assertEquals(1767139200, $result->getActiveTo());
-        $this->assertEquals('https://example.co.uk', $result->getUrl());
+        $this->assertSame(FaultLevel::MOSTLY, $result->getFaultLevel());
+        $this->assertSame(1735689600, $result->getActiveFrom());
+        $this->assertSame(1767139200, $result->getActiveTo());
+        $this->assertSame('https://example.co.uk', $result->getUrl());
     }
 
-    public function testUpdateAllFieldsWhenBlankFromArray()
+    public function testUpdateAllFieldsWhenBlankFromArray(): void
     {
         $repository = new ThingRepository($this->container?->get(Connection::class));
 
@@ -102,17 +102,17 @@ class ThingUpdaterTest extends TestCase
         $result = $thingUpdater->updateFromArray($data, $thing);
 
         $this->assertInstanceOf(Thing::class, $result);
-        $this->assertEquals('Initial Name', $result->getName());
-        $this->assertEquals('Initial Short Description', $result->getShortDescription());
-        $this->assertEquals('Initial Description', $result->getDescription());
+        $this->assertSame('Initial Name', $result->getName());
+        $this->assertSame('Initial Short Description', $result->getShortDescription());
+        $this->assertSame('Initial Description', $result->getDescription());
         $this->assertTrue($result->getFeatured());
-        $this->assertEquals(FaultLevel::ALL, $result->getFaultLevel());
-        $this->assertEquals(-3600, $result->getActiveFrom());
-        $this->assertEquals(3155760000, $result->getActiveTo());
-        $this->assertEquals('https://example.com', $result->getUrl());
+        $this->assertSame(FaultLevel::ALL, $result->getFaultLevel());
+        $this->assertSame(-3600, $result->getActiveFrom());
+        $this->assertSame(3155760000, $result->getActiveTo());
+        $this->assertSame('https://example.com', $result->getUrl());
     }
 
-    public function testUpdateWithNullableValues()
+    public function testUpdateWithNullableValues(): void
     {
         $repository = new ThingRepository($this->container?->get(Connection::class));
 
@@ -151,5 +151,27 @@ class ThingUpdaterTest extends TestCase
 
         $this->assertNull($result->getActiveTo());
         $this->assertNull($result->getUrl());
+    }
+
+    public function testWrongEntityPassedToUpdater(): void
+    {
+        $repository = new ThingRepository($this->container?->get(Connection::class));
+        $bitUpdater = new ThingUpdater($repository);
+
+        $data = [
+            'name' => '',
+            'short_description' => '',
+            'description' => '',
+            'featured' => '',
+            'fault_level' => '',
+            'active_from' => '',
+            'active_to' => 'null',
+            'url' => 'null',
+        ];
+
+        $invalidClass = new \stdClass();
+
+        $this->expectException(\InvalidArgumentException::class);
+        $result = $bitUpdater->updateFromArray($data, $invalidClass);
     }
 }

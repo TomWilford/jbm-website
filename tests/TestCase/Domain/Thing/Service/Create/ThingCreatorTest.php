@@ -40,9 +40,9 @@ class ThingCreatorTest extends TestCase
 
         $this->assertInstanceOf(Thing::class, $result);
         $this->assertTrue($result->getFeatured());
-        $this->assertEquals(FaultLevel::MOSTLY, $result->getFaultLevel());
-        $this->assertEquals('-3600', $result->getActiveFrom());
-        $this->assertEquals('3155760000', $result->getActiveTo());
+        $this->assertSame(FaultLevel::MOSTLY, $result->getFaultLevel());
+        $this->assertSame(-3600, $result->getActiveFrom());
+        $this->assertSame(3155760000, $result->getActiveTo());
     }
 
     public function testAlternativeDataTransformsSuccessfully(): void
@@ -55,7 +55,7 @@ class ThingCreatorTest extends TestCase
             'fault_level' => 'all',
             'active_from' => '1970-01-01',
             'active_to' => '',
-            'url' => 'https://example.com/',
+            'url' => '',
         ];
 
         $repository = new ThingRepository($this->container?->get(Connection::class));
@@ -65,7 +65,8 @@ class ThingCreatorTest extends TestCase
 
         $this->assertInstanceOf(Thing::class, $result);
         $this->assertFalse($result->getFeatured());
-        $this->assertEquals(FaultLevel::ALL, $result->getFaultLevel());
+        $this->assertSame(FaultLevel::ALL, $result->getFaultLevel());
         $this->assertNull($result->getActiveTo());
+        $this->assertNull($result->getUrl());
     }
 }

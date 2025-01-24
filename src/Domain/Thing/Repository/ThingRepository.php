@@ -9,14 +9,19 @@ use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Thing;
 use App\Infrastructure\Persistence\Repository;
 use Doctrine\DBAL\Exception;
+use InvalidArgumentException;
 
-final class ThingRepository extends Repository
+class ThingRepository extends Repository
 {
     /**
      * @throws Exception
      */
-    public function store(Thing $thing): Thing
+    public function store(object $entity): Thing
     {
+        if (!$entity instanceof Thing) {
+            throw new InvalidArgumentException('Entity must be an instance of ' . Thing::class);
+        }
+
         $qb = $this->getQueryBuilder();
 
         $qb->insert('things')
@@ -33,14 +38,14 @@ final class ThingRepository extends Repository
                 'updated_at' => ':updated_at',
             ])
             ->setParameters([
-                'name' => $thing->getName(),
-                'short_description' => $thing->getShortDescription(),
-                'description' => $thing->getDescription(),
-                'featured' => $thing->getFeatured(),
-                'fault_level' => $thing->getFaultLevel()->value,
-                'active_from' => $thing->getActiveFrom(),
-                'active_to' => $thing->getActiveTo(),
-                'url' => $thing->getUrl(),
+                'name' => $entity->getName(),
+                'short_description' => $entity->getShortDescription(),
+                'description' => $entity->getDescription(),
+                'featured' => $entity->getFeatured(),
+                'fault_level' => $entity->getFaultLevel()->value,
+                'active_from' => $entity->getActiveFrom(),
+                'active_to' => $entity->getActiveTo(),
+                'url' => $entity->getUrl(),
                 'created_at' => (new \DateTimeImmutable())->getTimestamp(),
                 'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
         ]);
@@ -80,9 +85,13 @@ final class ThingRepository extends Repository
     /**
      * @throws Exception
      */
-    public function update(Thing $thing): Thing
+    public function update(object $entity): Thing
     {
-        if (is_null($thing->getId())) {
+        if (!$entity instanceof Thing) {
+            throw new InvalidArgumentException('Entity must be an instance of ' . Thing::class);
+        }
+
+        if (is_null($entity->getId())) {
             throw new DomainRecordNotFoundException('Cannot update provided Thing');
         }
 
@@ -100,33 +109,43 @@ final class ThingRepository extends Repository
             ->set('updated_at', ':updated_at')
             ->where('id = :id')
         ->setParameters([
-            'name' => $thing->getName(),
-            'short_description' => $thing->getShortDescription(),
-            'description' => $thing->getDescription(),
-            'featured' => $thing->getFeatured(),
-            'fault_level' => $thing->getFaultLevel()->value,
-            'active_from' => $thing->getActiveFrom(),
-            'active_to' => $thing->getActiveTo(),
-            'url' => $thing->getUrl(),
+            'name' => $entity->getName(),
+            'short_description' => $entity->getShortDescription(),
+            'description' => $entity->getDescription(),
+            'featured' => $entity->getFeatured(),
+            'fault_level' => $entity->getFaultLevel()->value,
+            'active_from' => $entity->getActiveFrom(),
+            'active_to' => $entity->getActiveTo(),
+            'url' => $entity->getUrl(),
             'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
-            'id' => $thing->getId(),
+            'id' => $entity->getId(),
         ]);
 
         $qb->executeStatement();
 
-        return $this->ofId($thing->getId());
+        return $this->ofId($entity->getId());
     }
 
     /**
      * @throws Exception
      */
-    public function destroy(Thing $thing): void
+    public function destroy(object $entity): void
     {
+        if (!$entity instanceof Thing || is_null($entity->getId())) {
+            throw new InvalidArgumentException('Entity must be an instance of ' . Thing::class);
+        }
+
+        try {
+            $this->ofId($entity->getId());
+        } catch (DomainRecordNotFoundException $exception) {
+            throw new DomainRecordNotFoundException('Thing not found');
+        }
+
         $qb = $this->getQueryBuilder();
 
         $qb->delete('things')
             ->where('id = :id')
-            ->setParameter('id', $thing->getId());
+            ->setParameter('id', $entity->getId());
 
         $qb->executeStatement();
     }

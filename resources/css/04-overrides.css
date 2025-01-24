@@ -122,6 +122,37 @@ header div {
     white-space: nowrap;
 }
 
+.link-list {
+    padding: 0;
+}
+
+.link-list li {
+    display: flex;
+    flex-direction: row;
+    gap: 1.618rem;
+    align-items: baseline;
+}
+
+.link-list li strong {
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 480px) {
+    .link-list li {
+        flex-direction: column;
+        gap: 0.236rem;
+        margin-bottom: 1.618rem;
+    }
+
+    .link-list li strong {
+        margin-bottom: 0;
+    }
+}
+
+pre {
+    border-radius: 0.236rem;
+}
+
 footer {
     position: absolute;
     left: 0;
