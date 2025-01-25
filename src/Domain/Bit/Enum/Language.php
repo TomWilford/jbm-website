@@ -7,7 +7,7 @@ namespace App\Domain\Bit\Enum;
 enum Language
 {
     case PHP;
-    case JAVASCRIPT;
+    case JS;
     case MIXED;
 
     /**

@@ -134,7 +134,7 @@ class ThingRepositoryTest extends TestCase
         $result = $repository->recent();
         $this->assertIsArray($result);
         $this->assertInstanceOf(Thing::class, $result[0]);
-        $this->assertEquals(1, $result[0]->getId());
+        $this->assertSame(1, $result[0]->getId());
     }
 
     public function testStoreThrowsExceptionWhenWrongEntityProvided(): void

@@ -13,8 +13,8 @@
         <ul class="link-list">
             {% for bit in bits %}
                 <li class="mb-2">
-                    <strong>{{ bit.name }}</strong>
-                    <a href="/bits/{{ bit.id }}">View</a>
+                    <strong>{{ bit.name }} <span class="text-s">[{{ bit.language.name }}]</span></strong>
+                    <a href="{{ url_for('bits.show', {id: bit.id}) }}">View</a>
                 </li>
             {% endfor %}
         </ul>

@@ -47,6 +47,6 @@ class SeedCommandTest extends TestCase
         $this->assertStringContainsString('Seed Data Imported', $output);
 
         // Assert the command returned a success status code
-        $this->assertEquals(0, $commandTester->getStatusCode());
+        $this->assertSame(0, $commandTester->getStatusCode());
     }
 }

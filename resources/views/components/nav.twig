@@ -1,5 +1,5 @@
 <header>
-    <a href="/" class="home-link">
+    <a href="{{ url_for('home') }}" class="home-link" {% if is_current_url('home') %}aria-current="page"{% endif %}>
     <picture>
         <source srcset="/images/jolly-blue-man-logo-white.svg" media="(prefers-color-scheme: dark)">
         <source srcset="/images/jolly-blue-man-logo.svg" media="(prefers-color-scheme: light)">
@@ -10,8 +10,8 @@
     <div>
         <span class="material-symbols-outlined theme-toggle pointer">routine</span>
         <nav>
-            <a href="/things">Things</a>
-            <a href="/bits">Bits</a>
+            {% include 'components/nav-link.twig' with {'route_name': 'things.index', 'link_text': 'Things'} %}
+            {% include 'components/nav-link.twig' with {'route_name': 'bits.index', 'link_text': 'Bits'} %}
         </nav>
     </div>
 </header>
