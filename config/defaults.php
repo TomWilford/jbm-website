@@ -58,7 +58,7 @@ $settings['doctrine']['migrations'] = [
     ],
 
     'migrations_paths' => [
-        'Database\Migrations' => dirname(__DIR__, 1) . '/database/migrations',
+        'App\Database\Migrations' => dirname(__DIR__, 1) . '/database/Migrations',
     ],
 
     'all_or_nothing' => true,

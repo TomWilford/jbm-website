@@ -159,4 +159,20 @@ class ThingTest extends TestCase
 
         $this->assertNull($thing->getUrlHost());
     }
+
+    public function testGetUrlHostHandlesDifferentInvalidUrl(): void
+    {
+        $thing = new Thing(
+            id: null,
+            name: 'Invalid URL',
+            shortDescription: '',
+            description: '',
+            featured: false,
+            faultLevel: FaultLevel::ALL,
+            activeFrom: 1620000000,
+            url: '/search/publication_year:2019'
+        );
+
+        $this->assertNull($thing->getUrlHost());
+    }
 }

@@ -9,7 +9,7 @@ interface FixtureInterface
     public function getTable(): string;
 
     /**
-     * @return array{array{mixed}}
+     * @return array{array{string:mixed}}
      */
     public function getRecords(): array;
 }

@@ -2,6 +2,9 @@
 
 // Phpunit test environment
 
+use App\Test\Fixtures\BitFixture;
+use App\Test\Fixtures\ThingFixture;
+
 return function (array $settings): array {
     $settings['error']['display_error_details'] = true;
 
@@ -28,6 +31,11 @@ return function (array $settings): array {
         "relaxed" => ["localhost"],
     ];
     $settings['api']['users']['test'] = 'test';
+
+    $settings['fixtures'] = [
+        ThingFixture::class,
+        BitFixture::class,
+    ];
 
     return $settings;
 };

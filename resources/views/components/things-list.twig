@@ -1,5 +1,5 @@
 <div class="things-list">
     <strong>{{ thing.name }}</strong>
     <p>{{ thing.shortDescription }}</p>
-    <a href="/things/{{ thing.id }}">Details</a>
+    <a href="{{ url_for('things.show', {id: thing.id}) }}">Details</a>
 </div>

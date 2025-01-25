@@ -7,6 +7,7 @@ namespace App\Action\Things\Page;
 use App\Domain\Exception\DomainRecordNotFoundException;
 use App\Domain\Thing\Repository\ThingRepository;
 use App\Renderer\TwigRenderer;
+use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpNotFoundException;
@@ -24,7 +25,7 @@ final readonly class ShowAction
     /**
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError
+     * @throws LoaderError|Exception
      */
     public function __invoke(
         ServerRequestInterface $request,

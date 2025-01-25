@@ -6,6 +6,7 @@ namespace App\Action\Things\Page;
 
 use App\Domain\Thing\Repository\ThingRepository;
 use App\Renderer\TwigRenderer;
+use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Twig\Error\LoaderError;
@@ -22,7 +23,7 @@ final readonly class IndexAction
     /**
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError
+     * @throws LoaderError|Exception
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
