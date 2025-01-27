@@ -1,7 +1,7 @@
 {
     "name": "tomwilford/jollyblueman",
     "description": "Jolly Blue Man Website",
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "type": "project",
     "require": {
         "php": "8.3.*",
