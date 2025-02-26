@@ -12,15 +12,15 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Exceptions\ValidationException;
+use Throwable;
 
 final readonly class CreateAction
 {
     public function __construct(
         private JsonRenderer $renderer,
         private CreateBitValidator $validator,
-        private BitCreator $creator
+        private BitCreator $creator,
     ) {
-        //
     }
 
     public function __invoke(
@@ -36,7 +36,7 @@ final readonly class CreateAction
             $status = HttpStatus::BAD_REQUEST;
             /** @var NestedValidationException $exception */
             $data = [$exception->getMessages()];
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $status = HttpStatus::INTERNAL_SERVER_ERROR;
             $data = ['An unknown error occurred. Sorry about that.'];
             error_log($exception->getMessage());

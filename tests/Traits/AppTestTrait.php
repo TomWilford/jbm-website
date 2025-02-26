@@ -2,7 +2,6 @@
 
 namespace App\Test\Traits;
 
-use App\Test\Fixtures\ThingFixture;
 use DI\ContainerBuilder;
 use Doctrine\DBAL\Connection;
 use Slim\App;

@@ -8,13 +8,13 @@ use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Repository\ThingRepository;
 use App\Domain\Thing\Thing;
 use App\Infrastructure\Service\Creator\CreatorInterface;
+use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
 
 readonly class ThingCreator implements CreatorInterface
 {
     public function __construct(protected ThingRepository $repository)
     {
-        //
     }
 
     /**
@@ -28,6 +28,7 @@ readonly class ThingCreator implements CreatorInterface
      *      active_from: string,
      *      active_to: string
      * }|array<string, mixed> $data
+     *
      * @throws \Exception|Exception
      */
     public function createFromArray(array $data): object
@@ -41,7 +42,7 @@ readonly class ThingCreator implements CreatorInterface
             description: $data['description'],
             featured: (bool)$data['featured'],
             faultLevel: FaultLevel::from($data['fault_level']),
-            activeFrom: (new \DateTimeImmutable($data['active_from']))->getTimestamp(),
+            activeFrom: (new DateTimeImmutable($data['active_from']))->getTimestamp(),
             activeTo: $activeTo,
             url: $url,
         );
@@ -51,7 +52,7 @@ readonly class ThingCreator implements CreatorInterface
 
     private function normaliseActiveToInput(string $activeTo): ?int
     {
-        return $activeTo === '' ? null : (new \DateTimeImmutable($activeTo))->getTimestamp();
+        return $activeTo === '' ? null : (new DateTimeImmutable($activeTo))->getTimestamp();
     }
 
     private function normaliseUrlInput(string $url): ?string

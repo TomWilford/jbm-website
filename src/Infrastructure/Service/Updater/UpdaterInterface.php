@@ -8,6 +8,7 @@ interface UpdaterInterface
 {
     /**
      * @param array<string, mixed> $data
+     * @param object $entity
      */
     public function updateFromArray(array $data, object $entity): object;
 }

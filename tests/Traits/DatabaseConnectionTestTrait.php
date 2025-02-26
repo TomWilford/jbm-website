@@ -6,7 +6,6 @@ use Doctrine\DBAL\Connection;
 use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
 use Doctrine\Migrations\Configuration\Migration\PhpFile;
 use Doctrine\Migrations\DependencyFactory;
-use Symfony\Component\Console\Input\ArrayInput;
 
 trait DatabaseConnectionTestTrait
 {

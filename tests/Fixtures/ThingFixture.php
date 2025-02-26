@@ -49,7 +49,7 @@ class ThingFixture implements FixtureInterface
             'active_to' => null,
             'created_at' => 1471298400,
             'updated_at' => 1471298400,
-        ]
+        ],
     ];
 
     public function getTable(): string

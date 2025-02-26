@@ -29,7 +29,7 @@ trait HttpTestTrait
     protected function createRequest(
         string $method,
         string|UriInterface $uri,
-        array $serverParams = []
+        array $serverParams = [],
     ): ServerRequestInterface {
         if (!$this->container instanceof ContainerInterface) {
             throw new RuntimeException('DI container not found');

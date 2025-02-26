@@ -8,12 +8,12 @@ use App\Middleware\ExceptionMiddleware;
 use App\Renderer\JsonRenderer;
 use App\Renderer\TwigRenderer;
 use App\Test\Traits\AppTestTrait;
+use Exception;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 class ExceptionMiddlewareTest extends TestCase
 {
@@ -25,9 +25,9 @@ class ExceptionMiddlewareTest extends TestCase
         $responseFactory = $this->createMock(ResponseFactoryInterface::class);
         $jsonRenderer = $this->createMock(JsonRenderer::class);
         $twigRenderer = $this->createMock(TwigRenderer::class);
-        $twigRenderer->method('twig')->willThrowException(new \Exception());
+        $twigRenderer->method('twig')->willThrowException(new Exception());
 
-        $exception = new \RuntimeException('Test exception', 500);
+        $exception = new RuntimeException('Test exception', 500);
 
         $middleware = new ExceptionMiddleware(
             $responseFactory,

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Domain\Thing;
 
-use App\Domain\Thing\Thing;
 use App\Domain\Thing\Enum\FaultLevel;
+use App\Domain\Thing\Thing;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 

@@ -20,6 +20,7 @@ use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 #[UsesClass(UpdateAction::class)]
 class UpdateActionTest extends TestCase
@@ -110,7 +111,7 @@ class UpdateActionTest extends TestCase
             'url' => 'https://example.com',
             'fault_level' => 'all',
             'active_from' => '00000000', // Invalid date format
-            'active_to' => ''
+            'active_to' => '',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -124,7 +125,6 @@ class UpdateActionTest extends TestCase
         $this->assertResponseContains('active_from must be a valid date in the format', $response);
     }
 
-
     public function testUnexpectedError(): void
     {
         $mockRepository = $this->createMock(ThingRepository::class);
@@ -133,7 +133,7 @@ class UpdateActionTest extends TestCase
 
         $mockCreator = $this->createMock(ThingUpdater::class);
         $mockCreator->method('updateFromArray')
-            ->willThrowException(new \RuntimeException());
+            ->willThrowException(new RuntimeException());
 
         $mockRenderer = $this->createMock(JsonRenderer::class);
         $mockRenderer->expects($this->once())
@@ -141,11 +141,12 @@ class UpdateActionTest extends TestCase
             ->willReturnCallback(function (
                 ResponseInterface $response,
                 array $data,
-                HttpStatus $status
+                HttpStatus $status,
             ) {
                 // Assert the response data and status
                 $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
                 $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
+
                 return $response;
             });
 
@@ -159,7 +160,7 @@ class UpdateActionTest extends TestCase
             'url' => 'https://example.com',
             'fault_level' => 'all',
             'active_from' => '1970-01-01',
-            'active_to' => ''
+            'active_to' => '',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 

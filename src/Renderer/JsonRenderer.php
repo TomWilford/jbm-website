@@ -28,7 +28,7 @@ class JsonRenderer
     public function jsonWithStatus(
         ResponseInterface $response,
         mixed $data = [],
-        HttpStatus $httpStatus = HttpStatus::OK
+        HttpStatus $httpStatus = HttpStatus::OK,
     ): ResponseInterface {
         $response = $response->withHeader('Content-Type', 'application/json');
         $status = HttpStatus::isSuccess($httpStatus) ? 'success' : 'error';

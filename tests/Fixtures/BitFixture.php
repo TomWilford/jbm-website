@@ -38,7 +38,7 @@ class BitFixture implements FixtureInterface
             'returns' => 'string(12) "Hello World!"',
             'created_at' => 1600000000,
             'updated_at' => 1601000000,
-        ]
+        ],
     ];
 
     public function getTable(): string

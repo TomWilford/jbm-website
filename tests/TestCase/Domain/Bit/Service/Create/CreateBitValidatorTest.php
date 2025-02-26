@@ -24,7 +24,7 @@ class CreateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit description',
-            'returns' => 'string(12) "Hello World!"'
+            'returns' => 'string(12) "Hello World!"',
         ];
 
         $this->expectNotToPerformAssertions();
@@ -38,7 +38,7 @@ class CreateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit description',
-            'returns' => 'string(12) "Hello World!"'
+            'returns' => 'string(12) "Hello World!"',
         ];
 
         $this->expectException(ValidationException::class);
@@ -52,7 +52,7 @@ class CreateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => '',
-            'returns' => ''
+            'returns' => '',
         ];
 
         $this->expectNotToPerformAssertions();
@@ -66,7 +66,7 @@ class CreateBitValidatorTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'capybara',  // Invalid: Not in Language::values()
             'description' => 'Test bit description',
-            'returns' => 'string(12) "Hello World!"'
+            'returns' => 'string(12) "Hello World!"',
         ];
 
         $this->expectException(ValidationException::class);

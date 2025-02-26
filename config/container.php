@@ -89,7 +89,7 @@ return [
     SeedCommand::class => function (ContainerInterface $container) {
         return new SeedCommand([
             new ThingsSeed($container->get(ThingRepository::class)),
-            new BitsSeed($container->get(BitRepository::class))
+            new BitsSeed($container->get(BitRepository::class)),
         ]);
     },
 

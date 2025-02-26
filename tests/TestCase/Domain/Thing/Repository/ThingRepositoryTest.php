@@ -10,6 +10,7 @@ use App\Domain\Thing\Repository\ThingRepository;
 use App\Domain\Thing\Thing;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
+use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -40,7 +41,7 @@ class ThingRepositoryTest extends TestCase
             description: 'Long description 3',
             featured: false,
             faultLevel: FaultLevel::ALL,
-            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeFrom: (new DateTimeImmutable('2013-05-18'))->getTimestamp(),
             activeTo: null,
             url: 'https://example.com/',
         );
@@ -70,7 +71,7 @@ class ThingRepositoryTest extends TestCase
             description: 'Long description 3',
             featured: false,
             faultLevel: FaultLevel::ALL,
-            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeFrom: (new DateTimeImmutable('2013-05-18'))->getTimestamp(),
             activeTo: null,
             url: 'https://example.com/',
         );
@@ -94,7 +95,7 @@ class ThingRepositoryTest extends TestCase
             description: 'Long description 3',
             featured: false,
             faultLevel: FaultLevel::ALL,
-            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeFrom: (new DateTimeImmutable('2013-05-18'))->getTimestamp(),
             activeTo: null,
             url: 'https://example.com/',
         );
@@ -118,7 +119,7 @@ class ThingRepositoryTest extends TestCase
             description: 'Long description 3',
             featured: false,
             faultLevel: FaultLevel::ALL,
-            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeFrom: (new DateTimeImmutable('2013-05-18'))->getTimestamp(),
             activeTo: null,
             url: 'https://example.com/',
         );
@@ -170,7 +171,7 @@ class ThingRepositoryTest extends TestCase
             description: 'Long description 3',
             featured: false,
             faultLevel: FaultLevel::ALL,
-            activeFrom: (new \DateTimeImmutable('2013-05-18'))->getTimestamp(),
+            activeFrom: (new DateTimeImmutable('2013-05-18'))->getTimestamp(),
             activeTo: null,
             url: 'https://example.com/',
         );

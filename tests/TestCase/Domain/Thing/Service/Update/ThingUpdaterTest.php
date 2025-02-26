@@ -11,8 +11,10 @@ use App\Domain\Thing\Thing;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 #[UsesClass(ThingUpdater::class)]
 class ThingUpdaterTest extends TestCase
@@ -169,9 +171,9 @@ class ThingUpdaterTest extends TestCase
             'url' => 'null',
         ];
 
-        $invalidClass = new \stdClass();
+        $invalidClass = new stdClass();
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $result = $bitUpdater->updateFromArray($data, $invalidClass);
     }
 }

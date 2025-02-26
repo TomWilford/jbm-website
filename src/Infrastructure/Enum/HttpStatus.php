@@ -28,7 +28,7 @@ enum HttpStatus: int
     {
         return match ($status) {
             self::OK, self::CREATED => true,
-            default => false
+            default => false,
         };
     }
 }

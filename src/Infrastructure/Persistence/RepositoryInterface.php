@@ -33,6 +33,7 @@ interface RepositoryInterface
 
     /**
      * @param array<string, mixed> $array
+     *
      * @return array{object}
      */
     public function arrayToObjects(array $array): array;

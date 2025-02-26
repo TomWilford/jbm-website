@@ -16,10 +16,12 @@ final readonly class HomeAction
 {
     public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
     {
-        //
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError

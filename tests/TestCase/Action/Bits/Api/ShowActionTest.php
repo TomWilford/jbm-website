@@ -15,6 +15,7 @@ use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 #[UsesClass(ShowAction::class)]
 class ShowActionTest extends TestCase
@@ -58,16 +59,17 @@ class ShowActionTest extends TestCase
             ->willReturnCallback(function (
                 ResponseInterface $response,
                 array $data,
-                HttpStatus $status
+                HttpStatus $status,
             ) {
                 // Assert the response data and status
                 $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
                 $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
+
                 return $response;
             });
 
         $mockRepository = $this->createMock(BitRepository::class);
-        $mockRepository->method('ofId')->willThrowException(new \RuntimeException());
+        $mockRepository->method('ofId')->willThrowException(new RuntimeException());
 
         $action = new ShowAction($mockRenderer, $mockRepository);
 

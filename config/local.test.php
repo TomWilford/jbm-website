@@ -25,10 +25,10 @@ return function (array $settings): array {
     ];
 
     $settings['api'] = [
-        "path" => "/api",
-        "realm" => "Protected",
-        "secure" => false,
-        "relaxed" => ["localhost"],
+        'path' => '/api',
+        'realm' => 'Protected',
+        'secure' => false,
+        'relaxed' => ['localhost'],
     ];
     $settings['api']['users']['test'] = 'test';
 

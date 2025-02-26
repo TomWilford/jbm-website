@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Exception;
 
-class DomainRecordNotFoundException extends \RuntimeException
+use RuntimeException;
+
+class DomainRecordNotFoundException extends RuntimeException
 {
 }

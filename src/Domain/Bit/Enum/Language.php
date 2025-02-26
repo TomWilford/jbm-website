@@ -8,6 +8,8 @@ enum Language
 {
     case PHP;
     case JS;
+    case HTML;
+    case CSS;
     case MIXED;
 
     /**
@@ -15,6 +17,6 @@ enum Language
      */
     public static function values(): array
     {
-        return array_map(fn(self $item): string => $item->name, self::cases());
+        return array_map(fn (self $item): string => $item->name, self::cases());
     }
 }
