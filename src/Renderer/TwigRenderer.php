@@ -14,10 +14,13 @@ readonly class TwigRenderer
 {
     public function __construct(private Twig $twig)
     {
-        //
     }
 
     /**
+     * @param ResponseInterface $response
+     * @param string $template
+     * @param mixed|null $data
+     *
      * @throws SyntaxError
      * @throws RuntimeError
      * @throws LoaderError

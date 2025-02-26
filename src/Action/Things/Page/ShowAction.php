@@ -19,10 +19,13 @@ final readonly class ShowAction
 {
     public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
     {
-        //
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param mixed $arguments
+     *
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws LoaderError|Exception
@@ -30,9 +33,8 @@ final readonly class ShowAction
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        mixed $arguments = []
+        mixed $arguments = [],
     ): ResponseInterface {
-
         try {
             return $this->renderer->twig($response, 'things/show.twig', [
                 'thing' => $this->things->ofId((int)$arguments['id']),

@@ -74,11 +74,11 @@ $settings['twig']['cache'] = dirname(__DIR__, 1) . '/var/cache';
 
 // API
 $settings['api'] = [
-    "path" => "/api",
-    "realm" => "Protected",
-    "secure" => true,
-    "relaxed" => ["localhost"],
+    'path' => '/api',
+    'realm' => 'Protected',
+    'secure' => true,
+    'relaxed' => ['localhost'],
 ];
-//$settings['api']['users']['username'] = 'password';
+// $settings['api']['users']['username'] = 'password';
 
 return $settings;

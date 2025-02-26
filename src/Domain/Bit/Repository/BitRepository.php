@@ -8,17 +8,21 @@ use App\Domain\Bit\Bit;
 use App\Domain\Bit\Enum\Language;
 use App\Domain\Exception\DomainRecordNotFoundException;
 use App\Infrastructure\Persistence\Repository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
+use InvalidArgumentException;
 
 class BitRepository extends Repository
 {
     /**
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function store(object $entity): Bit
     {
         if (!$entity instanceof Bit) {
-            throw new \InvalidArgumentException('Entity must be instance of ' . Bit::class);
+            throw new InvalidArgumentException('Entity must be instance of ' . Bit::class);
         }
 
         $qb = $this->getQueryBuilder();
@@ -39,8 +43,8 @@ class BitRepository extends Repository
                 'language' => $entity->getLanguage()->name,
                 'description' => $entity->getDescription(),
                 'returns' => $entity->getReturns(),
-                'created_at' => (new \DateTimeImmutable())->getTimestamp(),
-                'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
+                'created_at' => (new DateTimeImmutable())->getTimestamp(),
+                'updated_at' => (new DateTimeImmutable())->getTimestamp(),
             ]);
 
         $qb->executeStatement();
@@ -51,8 +55,9 @@ class BitRepository extends Repository
     }
 
     /**
-     * @return Bit[]
      * @throws Exception
+     *
+     * @return Bit[]
      */
     public function all(): iterable
     {
@@ -62,6 +67,8 @@ class BitRepository extends Repository
     }
 
     /**
+     * @param int $id
+     *
      * @throws DomainRecordNotFoundException
      * @throws Exception
      */
@@ -77,12 +84,14 @@ class BitRepository extends Repository
     }
 
     /**
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function update(object $entity): Bit
     {
         if (!$entity instanceof Bit) {
-            throw new \InvalidArgumentException('Entity must be instance of ' . Bit::class);
+            throw new InvalidArgumentException('Entity must be instance of ' . Bit::class);
         }
 
         if (is_null($entity->getId())) {
@@ -105,8 +114,8 @@ class BitRepository extends Repository
             'language' => $entity->getLanguage()->name,
             'description' => $entity->getDescription(),
             'returns' => $entity->getReturns(),
-            'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
-            'id' => $entity->getId()
+            'updated_at' => (new DateTimeImmutable())->getTimestamp(),
+            'id' => $entity->getId(),
         ]);
 
         $qb->executeStatement();
@@ -115,12 +124,14 @@ class BitRepository extends Repository
     }
 
     /**
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function destroy(object $entity): void
     {
         if (!$entity instanceof Bit || is_null($entity->getId())) {
-            throw new \InvalidArgumentException('Entity must be instance of ' . Bit::class);
+            throw new InvalidArgumentException('Entity must be instance of ' . Bit::class);
         }
 
         try {

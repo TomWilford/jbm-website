@@ -12,7 +12,6 @@ abstract class Repository implements RepositoryInterface
 {
     public function __construct(protected Connection $connection)
     {
-        //
     }
 
     /**
@@ -26,20 +25,22 @@ abstract class Repository implements RepositoryInterface
     /**
      * Fetch records from the database with optional criteria, limits, and sorting.
      *
-     * @param string $table The name of the table.
-     * @param array<string, mixed> $criteria Key-value pairs for WHERE conditions.
-     * @param int|null $limit Optional limit for the number of records.
-     * @param string|null $orderBy Column to sort by.
-     * @param string $orderDirection Sorting direction: ASC or DESC.
-     * @return array<array<string, mixed>> The result set as an array of associative arrays.
+     * @param string $table the name of the table
+     * @param array<string, mixed> $criteria key-value pairs for WHERE conditions
+     * @param int|null $limit optional limit for the number of records
+     * @param string|null $orderBy column to sort by
+     * @param string $orderDirection sorting direction: ASC or DESC
+     *
      * @throws Exception
+     *
+     * @return array<array<string, mixed>> the result set as an array of associative arrays
      */
     protected function fetch(
         string $table,
         array $criteria = [],
         ?int $limit = null,
         ?string $orderBy = null,
-        string $orderDirection = 'ASC'
+        string $orderDirection = 'ASC',
     ): array {
         $qb = $this->getQueryBuilder();
         $qb->select('*')->from($table);
@@ -61,6 +62,7 @@ abstract class Repository implements RepositoryInterface
 
     /**
      * @param array<mixed> $array
+     *
      * @return array<mixed>
      */
     public function arrayToObjects(array $array): array

@@ -2,6 +2,9 @@
 
 namespace App\Test\Traits;
 
+use RuntimeException;
+use Throwable;
+
 /**
  * A utility trait for managing database fixtures in tests.
  *
@@ -33,7 +36,9 @@ trait DatabaseTableTestTrait
     }
 
     /**
-     * @var class-string|string $className
+     * @var class-string|string
+     *
+     * @param string $className
      */
     protected function processFixture(string $className): void
     {
@@ -57,8 +62,8 @@ trait DatabaseTableTestTrait
             }
 
             $qb->executeStatement();
-        } catch (\Throwable $exception) {
-            throw new \RuntimeException(
+        } catch (Throwable $exception) {
+            throw new RuntimeException(
                 "Failed to insert record into {$table}: " . $exception->getMessage(),
                 0,
                 $exception

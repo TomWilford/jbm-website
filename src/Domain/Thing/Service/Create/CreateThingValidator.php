@@ -21,13 +21,14 @@ readonly class CreateThingValidator extends Validator
      *     active_from: string,
      *     active_to: string
      * }|array<string, mixed> $data
+     *
      * @throws ValidationException
      */
     public function validate(array $data): void
     {
         $this->v::key('name', $this->v::stringType()->length(1, 21))
             ->key('short_description', $this->v::stringType()->length(1, 45))
-            ->key('description', $this->v::stringType()->length(1, 255))
+            ->key('description', $this->v::stringType()->length(1, 5120))
             ->key('featured', $this->v::boolVal()->notEmpty())
             ->key('url', $this->v::optional($this->v::url()))
             ->key('fault_level', $this->v::in(FaultLevel::values()))

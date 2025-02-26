@@ -21,9 +21,8 @@ readonly class Bit implements JsonSerializable
         private ?string $description = null,
         private ?string $returns = null,
         private ?int $createdAt = null,
-        private ?int $updatedAt = null
+        private ?int $updatedAt = null,
     ) {
-        //
     }
 
     public function getId(): ?int
@@ -88,7 +87,7 @@ readonly class Bit implements JsonSerializable
         mixed $description = Unchanged::VALUE,
         mixed $returns = Unchanged::VALUE,
         mixed $createdAt = Unchanged::VALUE,
-        mixed $updatedAt = Unchanged::VALUE
+        mixed $updatedAt = Unchanged::VALUE,
     ): self {
         return new self(
             $this->resolveValue($id, $this->id),

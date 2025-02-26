@@ -16,6 +16,7 @@ use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 #[UsesClass(CreateAction::class)]
 class CreateActionTest extends TestCase
@@ -30,7 +31,7 @@ class CreateActionTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit description',
-            'returns' => 'string(12) "Hello World!"'
+            'returns' => 'string(12) "Hello World!"',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -47,11 +48,11 @@ class CreateActionTest extends TestCase
     public function testInvalidData(): void
     {
         $formData = [
-            'name' => '', //Invalid: Empty string
+            'name' => '', // Invalid: Empty string
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit description',
-            'returns' => 'string(12) "Hello World!"'
+            'returns' => 'string(12) "Hello World!"',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -71,7 +72,7 @@ class CreateActionTest extends TestCase
 
         $mockCreator = $this->createMock(BitCreator::class);
         $mockCreator->method('createFromArray')
-            ->willThrowException(new \RuntimeException());
+            ->willThrowException(new RuntimeException());
 
         $mockRenderer = $this->createMock(JsonRenderer::class);
         $mockRenderer->expects($this->once())
@@ -79,11 +80,12 @@ class CreateActionTest extends TestCase
             ->willReturnCallback(function (
                 ResponseInterface $response,
                 array $data,
-                HttpStatus $status
+                HttpStatus $status,
             ) {
                 // Assert the response data and status
                 $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
                 $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
+
                 return $response;
             });
 
@@ -94,7 +96,7 @@ class CreateActionTest extends TestCase
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => 'PHP',
             'description' => 'Test bit description',
-            'returns' => 'string(12) "Hello World!"'
+            'returns' => 'string(12) "Hello World!"',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 

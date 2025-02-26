@@ -25,7 +25,6 @@ final readonly class ExceptionMiddleware implements MiddlewareInterface
         private ?LoggerInterface $logger = null,
         private bool $displayErrorDetails = false,
     ) {
-        //
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -102,7 +101,7 @@ final readonly class ExceptionMiddleware implements MiddlewareInterface
 
         try {
             return $this->twigRenderer->twig($response, 'error.twig', [
-                'message' => $message
+                'message' => $message,
             ]);
         } catch (Throwable $exception) {
             $response->getBody()->write($message);

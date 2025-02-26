@@ -10,12 +10,12 @@ use App\Domain\Bit\Repository\BitRepository;
 use App\Infrastructure\Enum\Unchanged;
 use App\Infrastructure\Service\Updater\UpdaterInterface;
 use Doctrine\DBAL\Exception;
+use InvalidArgumentException;
 
 class BitUpdater implements UpdaterInterface
 {
     public function __construct(protected BitRepository $repository)
     {
-        //
     }
 
     /**
@@ -26,12 +26,14 @@ class BitUpdater implements UpdaterInterface
      *     description: string,
      *     returns: string,
      * }|array<string, mixed> $data
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function updateFromArray(array $data, object $entity): Bit
     {
         if (!$entity instanceof Bit) {
-            throw new \InvalidArgumentException('Entity must be instance of ' . Bit::class);
+            throw new InvalidArgumentException('Entity must be instance of ' . Bit::class);
         }
         $bit = $entity->cloneWith(
             name: ($data['name'] === '') ? Unchanged::VALUE : $data['name'],

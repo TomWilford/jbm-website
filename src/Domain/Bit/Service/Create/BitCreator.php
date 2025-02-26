@@ -14,7 +14,6 @@ readonly class BitCreator implements CreatorInterface
 {
     public function __construct(protected BitRepository $repository)
     {
-        //
     }
 
     /**
@@ -25,6 +24,7 @@ readonly class BitCreator implements CreatorInterface
      *     description: string,
      *     returns: string
      * }|array<string, mixed> $data
+     *
      * @throws Exception
      */
     public function createFromArray(array $data): Bit

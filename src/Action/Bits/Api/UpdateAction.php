@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Exceptions\ValidationException;
+use Throwable;
 
 final readonly class UpdateAction
 {
@@ -21,18 +22,19 @@ final readonly class UpdateAction
         private JsonRenderer $renderer,
         private BitRepository $bits,
         private UpdateBitValidator $validator,
-        private BitUpdater $updater
+        private BitUpdater $updater,
     ) {
-        //
     }
 
     /**
      * @param array{id: string} $arguments
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        array $arguments
+        array $arguments,
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
@@ -46,7 +48,7 @@ final readonly class UpdateAction
             $status = HttpStatus::BAD_REQUEST;
             /** @var NestedValidationException $exception */
             $data = [$exception->getMessages()];
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $status = HttpStatus::INTERNAL_SERVER_ERROR;
             $data = ['An unknown error occurred. Sorry about that.'];
             error_log($exception->getMessage());

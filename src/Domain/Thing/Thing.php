@@ -24,9 +24,8 @@ readonly class Thing implements JsonSerializable
         private ?int $activeTo = null,
         private ?string $url = null,
         private ?int $createdAt = null,
-        private ?int $updatedAt = null
+        private ?int $updatedAt = null,
     ) {
-        //
     }
 
     public function getId(): ?int
@@ -127,7 +126,7 @@ readonly class Thing implements JsonSerializable
         mixed $activeTo = Unchanged::VALUE,
         mixed $url = Unchanged::VALUE,
         mixed $createdAt = Unchanged::VALUE,
-        mixed $updatedAt = Unchanged::VALUE
+        mixed $updatedAt = Unchanged::VALUE,
     ): self {
         return new self(
             $this->resolveValue($id, $this->id),

@@ -11,8 +11,10 @@ use App\Domain\Bit\Service\Update\BitUpdater;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 #[UsesClass(BitUpdater::class)]
 class BitUpdaterTest extends TestCase
@@ -75,7 +77,7 @@ class BitUpdaterTest extends TestCase
             'code' => '',
             'language' => '',
             'description' => '',
-            'returns' => ''
+            'returns' => '',
         ];
 
         $bitUpdater = new BitUpdater($repository);
@@ -138,9 +140,9 @@ class BitUpdaterTest extends TestCase
             'returns' => 'null',
         ];
 
-        $invalidClass = new \stdClass();
+        $invalidClass = new stdClass();
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $result = $bitUpdater->updateFromArray($data, $invalidClass);
     }
 }
