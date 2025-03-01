@@ -14,7 +14,7 @@
             {% for bit in bits %}
                 <li class="mb-2">
                     <strong>{{ bit.name }} <span class="text-s">[{{ bit.language.name }}]</span></strong>
-                    <a href="{{ url_for('bits.show', {id: bit.id}) }}">View</a>
+                    <a href="{{ url_for('bits.show', {sqid: bit.sqid}) }}">View</a>
                 </li>
             {% endfor %}
         </ul>

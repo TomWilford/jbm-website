@@ -30,7 +30,7 @@ final readonly class ShowAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $data = $this->things->ofId((int)$arguments['id']);
+            $data = $this->things->ofId((int)$arguments['sqid']);
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

@@ -5,6 +5,8 @@ namespace App\Test\Traits;
 use DI\ContainerBuilder;
 use Doctrine\DBAL\Connection;
 use Slim\App;
+use Sqids\Sqids;
+use TomWilford\SlimSqids\GlobalSqidConfiguration;
 use UnexpectedValueException;
 
 trait AppTestTrait
@@ -29,6 +31,12 @@ trait AppTestTrait
         $container = (new ContainerBuilder())
             ->addDefinitions(__DIR__ . '/../../config/container.php')
             ->build();
+
+        try {
+            GlobalSqidConfiguration::get();
+        } catch (\RuntimeException $exception) {
+            GlobalSqidConfiguration::set(new Sqids());
+        }
 
         $this->app = $container->get(App::class);
 

@@ -25,7 +25,7 @@ class ShowActionTest extends TestCase
 
     public function testAction(): void
     {
-        $request = $this->createRequest('GET', '/api/bits/1')
+        $request = $this->createRequest('GET', '/api/bits/Uk')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'));
         $response = $this->app->handle($request);
 

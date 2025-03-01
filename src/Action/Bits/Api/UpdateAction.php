@@ -38,7 +38,7 @@ final readonly class UpdateAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->bits->ofId((int)$arguments['id']);
+            $thing = $this->bits->ofId((int)$arguments['sqid']);
             $this->validator->validate((array)$request->getParsedBody());
             $data = $this->updater->updateFromArray((array)$request->getParsedBody(), $thing);
         } catch (DomainRecordNotFoundException $exception) {

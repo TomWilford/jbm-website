@@ -37,7 +37,7 @@ final readonly class ShowAction
     ): ResponseInterface {
         try {
             return $this->renderer->twig($response, 'things/show.twig', [
-                'thing' => $this->things->ofId((int)$arguments['id']),
+                'thing' => $this->things->ofId((int)$arguments['sqid']),
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

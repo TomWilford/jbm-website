@@ -32,7 +32,7 @@ final readonly class DeleteAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->things->ofId((int)$arguments['id']);
+            $thing = $this->things->ofId((int)$arguments['sqid']);
             $this->things->destroy($thing);
             $data = ['Thing deleted successfully.'];
         } catch (DomainRecordNotFoundException $exception) {

@@ -30,7 +30,7 @@ final readonly class DeleteAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $bit = $this->bits->ofId((int)$arguments['id']);
+            $bit = $this->bits->ofId((int)$arguments['sqid']);
             $this->bits->destroy($bit);
             $data = ['Bit deleted successfully.'];
         } catch (DomainRecordNotFoundException $exception) {

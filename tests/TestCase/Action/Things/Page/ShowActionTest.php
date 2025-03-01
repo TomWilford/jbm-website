@@ -19,7 +19,7 @@ class ShowActionTest extends TestCase
 
     public function testAction(): void
     {
-        $request = $this->createRequest('GET', '/things/1');
+        $request = $this->createRequest('GET', '/things/Uk');
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());

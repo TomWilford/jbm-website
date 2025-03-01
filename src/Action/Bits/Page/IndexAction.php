@@ -23,9 +23,11 @@ final readonly class IndexAction
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      *
+     * @return ResponseInterface
+     * @throws Exception
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError|Exception
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {

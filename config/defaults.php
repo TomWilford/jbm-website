@@ -3,6 +3,8 @@
 // Application default settings
 
 // Error reporting
+use Sqids\Sqids;
+
 error_reporting(0);
 ini_set('display_errors', '0');
 ini_set('display_startup_errors', '0');
@@ -80,5 +82,12 @@ $settings['api'] = [
     'relaxed' => ['localhost'],
 ];
 // $settings['api']['users']['username'] = 'password';
+
+// Sqids
+$settings['sqids'] = [
+    'alphabet' => Sqids::DEFAULT_ALPHABET,
+    'minLength' => Sqids::DEFAULT_MIN_LENGTH,
+    'blockList' => Sqids::DEFAULT_BLOCKLIST,
+];
 
 return $settings;

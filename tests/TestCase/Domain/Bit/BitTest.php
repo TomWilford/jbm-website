@@ -8,10 +8,21 @@ use App\Domain\Bit\Bit;
 use App\Domain\Bit\Enum\Language;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use Sqids\Sqids;
+use TomWilford\SlimSqids\GlobalSqidConfiguration;
 
 #[UsesClass(Bit::class)]
 class BitTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        try {
+            GlobalSqidConfiguration::get();
+        } catch (\RuntimeException $exception) {
+            GlobalSqidConfiguration::set(new Sqids());
+        }
+    }
+
     public function testCanInstantiateThing(): void
     {
         $bit = new Bit(
@@ -26,6 +37,7 @@ class BitTest extends TestCase
         );
 
         $this->assertSame(1, $bit->getId());
+        $this->assertSame('Uk', $bit->getSqid());
         $this->assertSame('Test Bit', $bit->getName());
         $this->assertSame("var_dump(sprintf('%s %s!', 'Hello', 'World'));", $bit->getCode());
         $this->assertSame(Language::PHP, $bit->getLanguage());
@@ -49,7 +61,7 @@ class BitTest extends TestCase
         );
 
         $expected = [
-            'id' => 1,
+            'id' => 'Uk',
             'name' => 'Test Bit',
             'code' => "var_dump(sprintf('%s %s!', 'Hello', 'World'));",
             'language' => Language::PHP->name,

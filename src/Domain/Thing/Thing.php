@@ -8,23 +8,27 @@ use App\Domain\Thing\Enum\FaultLevel;
 use App\Infrastructure\Enum\Unchanged;
 use App\Infrastructure\Service\Updater\ResolveValueTrait;
 use JsonSerializable;
+use TomWilford\SlimSqids\HasSqidablePropertyTrait;
+use TomWilford\SlimSqids\SqidableProperty;
 
-readonly class Thing implements JsonSerializable
+class Thing implements JsonSerializable
 {
     use ResolveValueTrait;
+    use HasSqidablePropertyTrait;
 
     public function __construct(
-        private ?int $id,
-        private string $name,
-        private string $shortDescription,
-        private string $description,
-        private bool $featured,
-        private FaultLevel $faultLevel,
-        private int $activeFrom,
-        private ?int $activeTo = null,
-        private ?string $url = null,
-        private ?int $createdAt = null,
-        private ?int $updatedAt = null,
+        #[SqidableProperty]
+        private readonly ?int $id,
+        private readonly string $name,
+        private readonly string $shortDescription,
+        private readonly string $description,
+        private readonly bool $featured,
+        private readonly FaultLevel $faultLevel,
+        private readonly int $activeFrom,
+        private readonly ?int $activeTo = null,
+        private readonly ?string $url = null,
+        private readonly ?int $createdAt = null,
+        private readonly ?int $updatedAt = null,
     ) {
     }
 
@@ -101,7 +105,7 @@ readonly class Thing implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
-            'id' => $this->id,
+            'id' => $this->getSqid(),
             'name' => $this->name,
             'short_description' => $this->shortDescription,
             'description' => $this->description,

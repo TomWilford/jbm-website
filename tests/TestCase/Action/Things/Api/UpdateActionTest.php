@@ -60,14 +60,14 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = $this->createRequest('PATCH', '/api/things/' . $thing->getId())
+        $request = $this->createRequest('PATCH', '/api/things/' . $thing->getSqid())
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'))
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertResponseContains((string)$thing->getId(), $response);
+        $this->assertResponseContains((string)$thing->getSqid(), $response);
         $this->assertResponseContains('New Name', $response);
         $this->assertResponseContains('New short description', $response);
         $this->assertResponseContains('New long description', $response);
@@ -115,7 +115,7 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = $this->createRequest('PATCH', '/api/things/1')
+        $request = $this->createRequest('PATCH', '/api/things/Uk')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'))
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
@@ -164,7 +164,7 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = (new Psr17Factory())->createServerRequest('PUT', '/api/things/1')
+        $request = (new Psr17Factory())->createServerRequest('PUT', '/api/things/Uk')
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
 

@@ -19,9 +19,10 @@ final readonly class ShowAction
     }
 
     /**
-     * @param array{id: string} $arguments
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
+     * @param array<string, string> $arguments
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,
@@ -30,7 +31,7 @@ final readonly class ShowAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $data = $this->bits->ofId((int)$arguments['id']);
+            $data = $this->bits->ofId((int)$arguments['sqid']);
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

@@ -18,6 +18,7 @@
         "slim/slim": "^4",
         "slim/twig-view": "^3.4",
         "symfony/console": "^7.2",
+        "tomwilford/slim-sqids": "^0.0.3",
         "tuupola/slim-basic-auth": "^3.4"
     },
     "require-dev": {

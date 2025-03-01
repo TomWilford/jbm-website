@@ -27,6 +27,7 @@ use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
+use Sqids\Sqids;
 
 return [
     // Application settings
@@ -117,4 +118,13 @@ return [
             (bool)$settings['display_error_details'],
         );
     },
+
+    Sqids::class => function (ContainerInterface $container) {
+        return new Sqids(
+            $container->get('settings')['sqids']['alphabet'],
+            $container->get('settings')['sqids']['minLength'],
+            $container->get('settings')['sqids']['blockList'],
+        );
+    },
+
 ];

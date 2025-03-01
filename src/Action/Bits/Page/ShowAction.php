@@ -37,7 +37,7 @@ final readonly class ShowAction
     ): ResponseInterface {
         try {
             return $this->renderer->twig($response, 'bits/show.twig', [
-                'bit' => $this->bits->ofId((int)$arguments['id']),
+                'bit' => $this->bits->ofId((int)$arguments['sqid']),
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

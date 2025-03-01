@@ -52,14 +52,14 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = $this->createRequest('PATCH', '/api/bits/' . $bit->getId())
+        $request = $this->createRequest('PATCH', '/api/bits/' . $bit->getSqid())
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'))
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertResponseContains((string)$bit->getId(), $response);
+        $this->assertResponseContains((string)$bit->getSqid(), $response);
         $this->assertResponseContains('New Name', $response);
         $this->assertResponseContains('New Code', $response);
         $this->assertResponseContains('MIXED', $response);
@@ -98,7 +98,7 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = $this->createRequest('PATCH', '/api/bits/1')
+        $request = $this->createRequest('PATCH', '/api/bits/Uk')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'))
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
@@ -144,12 +144,12 @@ class UpdateActionTest extends TestCase
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
-        $request = (new Psr17Factory())->createServerRequest('PUT', '/api/bits/1')
+        $request = (new Psr17Factory())->createServerRequest('PUT', '/api/bits/Uk')
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
             ->withBody($body);
 
         $response = (new Psr17Factory())->createResponse();
 
-        $action($request, $response, ['id' => '1']);
+        $action($request, $response, ['sqid' => '1']);
     }
 }

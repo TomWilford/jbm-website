@@ -42,7 +42,7 @@ class DeleteActionTest extends TestCase
 
         $bit = $repository->store($bit);
 
-        $request = $this->createRequest('DELETE', '/api/bits/' . $bit->getId())
+        $request = $this->createRequest('DELETE', '/api/bits/' . $bit->getSqid())
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'));
         $response = $this->app->handle($request);
 

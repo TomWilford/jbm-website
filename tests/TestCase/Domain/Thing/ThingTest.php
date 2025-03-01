@@ -8,10 +8,21 @@ use App\Domain\Thing\Enum\FaultLevel;
 use App\Domain\Thing\Thing;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use Sqids\Sqids;
+use TomWilford\SlimSqids\GlobalSqidConfiguration;
 
 #[UsesClass(Thing::class)]
 class ThingTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        try {
+            GlobalSqidConfiguration::get();
+        } catch (\RuntimeException $exception) {
+            GlobalSqidConfiguration::set(new Sqids());
+        }
+    }
+
     public function testCanInstantiateThing(): void
     {
         $thing = new Thing(
@@ -29,6 +40,7 @@ class ThingTest extends TestCase
         );
 
         $this->assertSame(1, $thing->getId());
+        $this->assertSame('Uk', $thing->getSqid());
         $this->assertSame('Test Thing', $thing->getName());
         $this->assertSame('Short description', $thing->getShortDescription());
         $this->assertSame('Detailed description', $thing->getDescription());
@@ -59,7 +71,7 @@ class ThingTest extends TestCase
         );
 
         $expected = [
-            'id' => 1,
+            'id' => 'Uk',
             'name' => 'Test Thing',
             'short_description' => 'Short description',
             'description' => 'Detailed description',

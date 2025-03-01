@@ -8,20 +8,24 @@ use App\Domain\Bit\Enum\Language;
 use App\Infrastructure\Enum\Unchanged;
 use App\Infrastructure\Service\Updater\ResolveValueTrait;
 use JsonSerializable;
+use TomWilford\SlimSqids\HasSqidablePropertyTrait;
+use TomWilford\SlimSqids\SqidableProperty;
 
-readonly class Bit implements JsonSerializable
+class Bit implements JsonSerializable
 {
     use ResolveValueTrait;
+    use HasSqidablePropertyTrait;
 
     public function __construct(
-        private ?int $id,
-        private string $name,
-        private string $code,
-        private Language $language,
-        private ?string $description = null,
-        private ?string $returns = null,
-        private ?int $createdAt = null,
-        private ?int $updatedAt = null,
+        #[SqidableProperty]
+        private readonly ?int $id,
+        private readonly string $name,
+        private readonly string $code,
+        private readonly Language $language,
+        private readonly ?string $description = null,
+        private readonly ?string $returns = null,
+        private readonly ?int $createdAt = null,
+        private readonly ?int $updatedAt = null,
     ) {
     }
 
@@ -68,7 +72,7 @@ readonly class Bit implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
-            'id' => $this->id,
+            'id' => $this->getSqid(),
             'name' => $this->name,
             'code' => $this->code,
             'language' => $this->language->name,

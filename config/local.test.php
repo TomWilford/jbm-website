@@ -4,9 +4,12 @@
 
 use App\Test\Fixtures\BitFixture;
 use App\Test\Fixtures\ThingFixture;
+use Sqids\Sqids;
 
 return function (array $settings): array {
     $settings['error']['display_error_details'] = true;
+
+    $settings['twig']['cache'] = false;
 
     // Database
     $settings['db'] = [
@@ -35,6 +38,12 @@ return function (array $settings): array {
     $settings['fixtures'] = [
         ThingFixture::class,
         BitFixture::class,
+    ];
+
+    $settings['sqids'] = [
+        'alphabet' => Sqids::DEFAULT_ALPHABET,
+        'minLength' => Sqids::DEFAULT_MIN_LENGTH,
+        'blockList' => Sqids::DEFAULT_BLOCKLIST,
     ];
 
     return $settings;
