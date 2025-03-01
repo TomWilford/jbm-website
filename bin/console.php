@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\QueryCommand;
 use App\Console\SeedCommand;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
@@ -25,6 +26,7 @@ try {
 
     // Register your console commands here
     $application->add($container->get(SeedCommand::class));
+    $application->add($container->get(QueryCommand::class));
 
     exit($application->run());
 } catch (Throwable $exception) {
