@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Console;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Result;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,6 +15,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class QueryCommand extends Command
 {
+    private string $query;
+
     public function __construct(private readonly Connection $connection)
     {
         parent::__construct();
@@ -30,20 +34,38 @@ class QueryCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $query = $input->getArgument('query');
+        $this->query = $input->getArgument('query');
 
         $io = new SymfonyStyle($input, $output);
-        $io->title('Running query: ' . $query);
+        $io->title('Running query: ' . $this->query);
 
-        $result = self::SUCCESS;
+        $commandStatus = self::SUCCESS;
         try {
-            $this->connection->executeQuery($query);
-            $io->success('Query executed successfully');
+            $result = $this->connection->executeQuery($this->query);
+            $this->handleOutput($result, $io);
         } catch (\Throwable $e) {
-            $result = self::FAILURE;
+            $commandStatus = self::FAILURE;
             $io->error($e->getMessage());
         } finally {
-            return $result;
+            return $commandStatus;
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function handleOutput(Result $result, SymfonyStyle $io): void
+    {
+        switch (true) {
+            case str_starts_with(strtolower($this->query), 'select'):
+                $output = $result->fetchAllAssociative();
+                $columns = array_keys($output[0]);
+                $io->section('Results');
+                $io->table($columns, $output);
+                break;
+            default:
+                $io->success($result->rowCount() . ' Rows Affected');
+                break;
         }
     }
 }
