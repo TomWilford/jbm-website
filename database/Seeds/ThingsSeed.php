@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Database\Seeds;
 
-use App\Domain\Thing\Enum\FaultLevel;
-use App\Domain\Thing\Repository\ThingRepository;
-use App\Domain\Thing\Thing;
-use App\Infrastructure\Persistence\RepositoryInterface;
+use App\Module\Thing\Data\Thing;
+use App\Module\Thing\Enum\FaultLevel;
+use App\Module\Thing\Infrastructure\ThingRepository;
 
 readonly class ThingsSeed implements SeedInterface
 {
