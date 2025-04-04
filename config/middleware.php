@@ -1,6 +1,6 @@
 <?php
 
-use App\Middleware\ExceptionMiddleware;
+use App\Application\Middleware\ExceptionMiddleware;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
 use Slim\Views\Twig;

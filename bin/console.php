@@ -1,7 +1,7 @@
 <?php
 
-use App\Console\QueryCommand;
-use App\Console\SeedCommand;
+use App\Application\Console\QueryCommand;
+use App\Application\Console\SeedCommand;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;

@@ -1,13 +1,13 @@
 <?php
 
-use App\Console\SeedCommand;
+use App\Application\Console\SeedCommand;
+use App\Application\Middleware\ExceptionMiddleware;
+use App\Application\Renderer\JsonRenderer;
+use App\Application\Renderer\TwigRenderer;
 use App\Database\Seeds\BitsSeed;
 use App\Database\Seeds\ThingsSeed;
-use App\Domain\Bit\Repository\BitRepository;
-use App\Domain\Thing\Repository\ThingRepository;
-use App\Middleware\ExceptionMiddleware;
-use App\Renderer\JsonRenderer;
-use App\Renderer\TwigRenderer;
+use App\Module\Bit\Infrastructure\BitRepository;
+use App\Module\Thing\Infrastructure\ThingRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\DsnParser;
