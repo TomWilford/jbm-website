@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 // Phpunit test environment
 
+use App\Test\Fixtures\AlbumFixture;
 use App\Test\Fixtures\BitFixture;
 use App\Test\Fixtures\ThingFixture;
 use Sqids\Sqids;
@@ -38,6 +41,7 @@ return function (array $settings): array {
     $settings['fixtures'] = [
         ThingFixture::class,
         BitFixture::class,
+        AlbumFixture::class,
     ];
 
     $settings['sqids'] = [

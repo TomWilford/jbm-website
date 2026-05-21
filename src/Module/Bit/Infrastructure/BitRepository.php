@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Module\Bit\Infrastructure;
 
-use App\Domain\Exception\DomainRecordNotFoundException;
+use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Infrastructure\Persistence\Repository;
-use App\Module\Bit\Data\Bit;
-use App\Module\Bit\Enum\Language;
+use App\Module\Bit\Domain\Bit;
+use App\Module\Bit\Domain\Language;
 use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
 use InvalidArgumentException;

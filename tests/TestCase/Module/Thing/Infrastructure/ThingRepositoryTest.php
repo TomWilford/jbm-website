@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Module\Thing\Infrastructure;
 
-use App\Domain\Exception\DomainRecordNotFoundException;
-use App\Module\Thing\Data\Thing;
-use App\Module\Thing\Enum\FaultLevel;
+use App\Infrastructure\Exception\DomainRecordNotFoundException;
+use App\Module\Thing\Domain\FaultLevel;
+use App\Module\Thing\Domain\Thing;
 use App\Module\Thing\Infrastructure\ThingRepository;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use InvalidArgumentException;
-use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-#[UsesClass(ThingRepository::class)]
+#[CoversClass(ThingRepository::class)]
 class ThingRepositoryTest extends TestCase
 {
     use AppTestTrait;

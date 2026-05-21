@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Test\Traits;
 
 use Psr\Http\Message\ResponseInterface;
@@ -25,7 +27,7 @@ trait HttpJsonTestTrait
     protected function createJsonRequest(
         string $method,
         string|UriInterface $uri,
-        array $data = null,
+        ?array $data = null,
     ): ServerRequestInterface {
         $request = $this->createRequest($method, $uri);
 

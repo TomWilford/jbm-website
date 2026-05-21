@@ -62,7 +62,6 @@ abstract class Repository implements RepositoryInterface
 
     /**
      * @param array<mixed> $array
-     *
      * @return array<mixed>
      */
     public function arrayToObjects(array $array): array

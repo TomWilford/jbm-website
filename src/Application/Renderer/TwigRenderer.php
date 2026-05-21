@@ -21,10 +21,11 @@ readonly class TwigRenderer
      * @param string $template
      * @param mixed|null $data
      *
-     * @return ResponseInterface
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
+     * @return ResponseInterface
      */
     public function twig(
         ResponseInterface $response,

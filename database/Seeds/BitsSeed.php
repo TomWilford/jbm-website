@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Database\Seeds;
 
-use App\Module\Bit\Data\Bit;
-use App\Module\Bit\Enum\Language;
+use App\Module\Bit\Domain\Bit;
+use App\Module\Bit\Domain\Language;
 use App\Module\Bit\Infrastructure\BitRepository;
 
 class BitsSeed implements SeedInterface

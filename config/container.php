@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Application\Console\SeedCommand;
 use App\Application\Middleware\ExceptionMiddleware;
 use App\Application\Renderer\JsonRenderer;
@@ -126,5 +128,4 @@ return [
             $container->get('settings')['sqids']['blockList'],
         );
     },
-
 ];

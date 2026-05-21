@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Application\Middleware\ExceptionMiddleware;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\App;

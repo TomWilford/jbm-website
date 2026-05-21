@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Module\Thing\Infrastructure;
 
-use App\Domain\Exception\DomainRecordNotFoundException;
+use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Infrastructure\Persistence\Repository;
-use App\Module\Thing\Data\Thing;
-use App\Module\Thing\Enum\FaultLevel;
+use App\Module\Thing\Domain\FaultLevel;
+use App\Module\Thing\Domain\Thing;
+use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
 use InvalidArgumentException;
 
@@ -46,9 +47,9 @@ class ThingRepository extends Repository
                 'active_from' => $entity->getActiveFrom(),
                 'active_to' => $entity->getActiveTo(),
                 'url' => $entity->getUrl(),
-                'created_at' => (new \DateTimeImmutable())->getTimestamp(),
-                'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
-        ]);
+                'created_at' => (new DateTimeImmutable())->getTimestamp(),
+                'updated_at' => (new DateTimeImmutable())->getTimestamp(),
+            ]);
 
         $qb->executeStatement();
 
@@ -57,8 +58,10 @@ class ThingRepository extends Repository
         return $this->ofId($id);
     }
 
-    /** @return Thing[]
+    /**
      * @throws Exception
+     *
+     * /** @return Thing[]
      */
     public function all(): iterable
     {
@@ -68,6 +71,8 @@ class ThingRepository extends Repository
     }
 
     /**
+     * @param int $id
+     *
      * @throws DomainRecordNotFoundException
      * @throws Exception
      */
@@ -83,6 +88,8 @@ class ThingRepository extends Repository
     }
 
     /**
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function update(object $entity): Thing
@@ -117,7 +124,7 @@ class ThingRepository extends Repository
             'active_from' => $entity->getActiveFrom(),
             'active_to' => $entity->getActiveTo(),
             'url' => $entity->getUrl(),
-            'updated_at' => (new \DateTimeImmutable())->getTimestamp(),
+            'updated_at' => (new DateTimeImmutable())->getTimestamp(),
             'id' => $entity->getId(),
         ]);
 
@@ -127,6 +134,8 @@ class ThingRepository extends Repository
     }
 
     /**
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function destroy(object $entity): void
@@ -150,8 +159,9 @@ class ThingRepository extends Repository
         $qb->executeStatement();
     }
 
-    /** @return Thing[]
+    /**
      * @throws Exception
+     * @return Thing[]
      */
     public function recent(): iterable
     {

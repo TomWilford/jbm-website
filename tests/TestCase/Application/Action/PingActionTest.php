@@ -7,10 +7,10 @@ namespace App\Test\TestCase\Application\Action;
 use App\Application\Action\PingAction;
 use App\Test\Traits\AppTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
-use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[UsesClass(PingAction::class)]
+#[CoversClass(PingAction::class)]
 class PingActionTest extends TestCase
 {
     use AppTestTrait;
