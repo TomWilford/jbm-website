@@ -62,7 +62,6 @@ class IndexBitActionTest extends TestCase
                 array $data,
                 HttpStatus $status,
             ) {
-                // Assert the response data and status
                 $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
                 $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
 
@@ -91,7 +90,6 @@ class IndexBitActionTest extends TestCase
                 array $data,
                 HttpStatus $status,
             ) {
-                // Assert the response data and status
                 $this->assertSame([], $data);
                 $this->assertSame(HttpStatus::NO_CONTENT, $status);
 

@@ -8,6 +8,8 @@ use App\Application\Action\HomeAction;
 use App\Application\Action\PingAction;
 use App\Module\Album\Application\Action\Api\CreateAlbumAction;
 use App\Module\Album\Application\Action\Api\DeleteAlbumAction;
+use App\Module\Album\Application\Action\Api\IndexAlbumAction;
+use App\Module\Album\Application\Action\Api\ShowAlbumAction;
 use App\Module\Bit\Application\Action\Api\CreateBitAction;
 use App\Module\Bit\Application\Action\Api\DeleteBitAction;
 use App\Module\Bit\Application\Action\Api\IndexBitAction;
@@ -52,6 +54,8 @@ return function (App $app) {
 
     // Albums
     // - API
+    $app->get('/api/albums', IndexAlbumAction::class)->setName('api.albums.index');
+    $app->get('/api/albums/{sqid}', ShowAlbumAction::class)->setName('api.albums.show');
     $app->post('/api/albums', CreateAlbumAction::class)->setName('api.albums.create');
     $app->delete('/api/albums/{sqid}', DeleteAlbumAction::class)->setName('api.album.delete');
 };

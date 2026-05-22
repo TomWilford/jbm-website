@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Module\Thing\Application\Action\Api;
+namespace App\Test\TestCase\Module\Album\Application\Action\Api;
 
 use App\Application\Renderer\JsonRenderer;
 use App\Common\Domain\HttpStatus;
-use App\Module\Thing\Application\Action\Api\IndexThingAction;
-use App\Module\Thing\Infrastructure\ThingRepository;
+use App\Module\Album\Application\Action\Api\IndexAlbumAction;
+use App\Module\Album\Infrastructure\AlbumRepository;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
@@ -17,21 +17,21 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
-#[CoversClass(IndexThingAction::class)]
-class IndexThingActionTest extends TestCase
+#[CoversClass(IndexAlbumAction::class)]
+class IndexAlbumActionTest extends TestCase
 {
     use AppTestTrait;
     use DatabaseTestTrait;
 
     public function testAction(): void
     {
-        $request = $this->createRequest('GET', '/api/things')
+        $request = $this->createRequest('GET', '/api/albums')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'));
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertResponseContains('Thing 1', $response);
-        $this->assertResponseContains('Thing 99', $response);
+        $this->assertResponseContains('Album 1', $response);
+        $this->assertResponseContains('Album 99', $response);
     }
 
     public function testRouteNotFound(): void
@@ -45,7 +45,7 @@ class IndexThingActionTest extends TestCase
 
     public function testInvalidCredentials(): void
     {
-        $request = $this->createRequest('GET', '/api/test')
+        $request = $this->createRequest('GET', '/api/album')
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:nope'));
         $response = $this->app->handle($request);
 
@@ -68,10 +68,10 @@ class IndexThingActionTest extends TestCase
                 return $response;
             });
 
-        $mockRepository = $this->createMock(ThingRepository::class);
+        $mockRepository = $this->createMock(AlbumRepository::class);
         $mockRepository->method('all')->willThrowException(new RuntimeException());
 
-        $action = new IndexThingAction($mockRenderer, $mockRepository);
+        $action = new IndexAlbumAction($mockRenderer, $mockRepository);
 
         $request = (new Psr17Factory())->createServerRequest('GET', '/api/things');
 
@@ -96,10 +96,10 @@ class IndexThingActionTest extends TestCase
                 return $response;
             });
 
-        $mockRepository = $this->createMock(ThingRepository::class);
+        $mockRepository = $this->createMock(AlbumRepository::class);
         $mockRepository->method('all')->willReturn([]);
 
-        $action = new IndexThingAction($mockRenderer, $mockRepository);
+        $action = new IndexAlbumAction($mockRenderer, $mockRepository);
 
         $request = (new Psr17Factory())->createServerRequest('GET', '/api/things');
 
