@@ -94,7 +94,7 @@ class AlbumRepository extends Repository
 
         $qb->executeStatement();
 
-        return $this->ofId((int) $entity->getId());
+        return $this->ofId((int)$entity->getId());
     }
 
     public function destroy(object $entity): void
@@ -103,7 +103,7 @@ class AlbumRepository extends Repository
             throw new InvalidArgumentException('Entity must be an instance of ' . Album::class);
         }
 
-        $this->ofId((int) $entity->getId());
+        $this->ofId((int)$entity->getId());
 
         $qb = $this->getQueryBuilder();
         $qb->delete('albums')

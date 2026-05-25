@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Test\Fixtures;
 
-class ThingFixture implements FixtureInterface
+class ThingFixture extends BaseFixture
 {
-    private string $table = 'things';
+    protected string $table = 'things';
 
     /**
      * @var array{array{
@@ -23,7 +23,7 @@ class ThingFixture implements FixtureInterface
      *      updated_at: int
      *  }} $records
      */
-    private array $records = [
+    protected array $records = [
         [
             'id' => 1,
             'name' => 'Thing 1',
@@ -51,17 +51,4 @@ class ThingFixture implements FixtureInterface
             'updated_at' => 1471298400,
         ],
     ];
-
-    public function getTable(): string
-    {
-        return $this->table;
-    }
-
-    /**
-     * @return array{array{string:mixed}}
-     */
-    public function getRecords(): array
-    {
-        return $this->records;
-    }
 }

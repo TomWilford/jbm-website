@@ -6,9 +6,13 @@ use App\Application\Console\SeedCommand;
 use App\Application\Middleware\ExceptionMiddleware;
 use App\Application\Renderer\JsonRenderer;
 use App\Application\Renderer\TwigRenderer;
+use App\Database\Seeds\AlbumsSeed;
 use App\Database\Seeds\BitsSeed;
+use App\Database\Seeds\SnapSeed;
 use App\Database\Seeds\ThingsSeed;
+use App\Module\Album\Infrastructure\AlbumRepository;
 use App\Module\Bit\Infrastructure\BitRepository;
+use App\Module\Snap\Infrastructure\SnapRepository;
 use App\Module\Thing\Infrastructure\ThingRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
@@ -93,6 +97,8 @@ return [
         return new SeedCommand([
             new ThingsSeed($container->get(ThingRepository::class)),
             new BitsSeed($container->get(BitRepository::class)),
+            new AlbumsSeed($container->get(AlbumRepository::class)),
+            new SnapSeed($container->get(SnapRepository::class)),
         ]);
     },
 

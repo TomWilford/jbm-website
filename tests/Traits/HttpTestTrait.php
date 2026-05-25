@@ -54,7 +54,7 @@ trait HttpTestTrait
     protected function createFormRequest(
         string $method,
         UriInterface|string $uri,
-        ?array $data = null
+        ?array $data = null,
     ): ServerRequestInterface {
         $request = $this->createRequest($method, $uri);
 

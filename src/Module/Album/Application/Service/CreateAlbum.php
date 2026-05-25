@@ -21,6 +21,7 @@ readonly class CreateAlbum implements CreatorInterface
 
     /**
      * @param array<string, mixed> $data
+     *
      * @throws ValidationException
      */
     public function createFromArray(array $data): Album

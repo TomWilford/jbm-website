@@ -15,6 +15,8 @@ use InvalidArgumentException;
 class ThingRepository extends Repository
 {
     /**
+     * @param object $entity
+     *
      * @throws Exception
      */
     public function store(object $entity): Thing
@@ -161,6 +163,7 @@ class ThingRepository extends Repository
 
     /**
      * @throws Exception
+     *
      * @return Thing[]
      */
     public function recent(): iterable

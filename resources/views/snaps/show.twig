@@ -1,0 +1,10 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}{{ album.name }}: {{ snap.sqid }} | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <img src="{{ url_for('snaps.file', { 'filename' : snap.sqid ~ '.' ~ snap.mimeType.ext }) }}"
+         alt="{{ album.name }}: {{ snap.sqid }} "
+         class="snap"
+    >
+{% endblock %}

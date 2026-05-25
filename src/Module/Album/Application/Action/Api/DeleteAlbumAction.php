@@ -21,7 +21,11 @@ final class DeleteAlbumAction
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      * @param array{sqid: string} $arguments
+     *
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,

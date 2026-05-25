@@ -83,7 +83,7 @@ class DeleteAlbumActionTest extends TestCase
 
         $action = new DeleteAlbumAction($mockRenderer, $mockRepository);
 
-        $request = (new Psr17Factory())->createServerRequest('DELETE', '/api/album/23456');
+        $request = (new Psr17Factory())->createServerRequest('DELETE', '/api/albums/23456');
 
         $response = (new Psr17Factory())->createResponse();
 

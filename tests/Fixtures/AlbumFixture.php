@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Test\Fixtures;
 
-class AlbumFixture implements FixtureInterface
+class AlbumFixture extends BaseFixture
 {
-    private string $table = 'albums';
-    private array $records = [
+    protected string $table = 'albums';
+    protected array $records = [
         [
             'id' => 1,
             'name' => 'Album 1',
             'camera' => 'yashica635',
             'location' => 'Tokyo',
             'date' => '2019-01-01',
-            'created_at' => '1471298400',
-            'updated_at' => '1471298400',
+            'created_at' => 1471298400,
+            'updated_at' => 1471298400,
         ],
         [
             'id' => 99,
@@ -23,21 +23,8 @@ class AlbumFixture implements FixtureInterface
             'camera' => 'olympus35RC',
             'location' => 'Leeds',
             'date' => '2023-01-01',
-            'created_at' => '1471298400',
-            'updated_at' => '1471298400',
+            'created_at' => 1471298400,
+            'updated_at' => 1471298400,
         ],
     ];
-
-    public function getTable(): string
-    {
-        return $this->table;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getRecords(): array
-    {
-        return $this->records;
-    }
 }

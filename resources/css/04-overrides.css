@@ -153,6 +153,10 @@ pre {
     border-radius: 0.236rem;
 }
 
+.snap {
+    padding-bottom: 6.854rem;
+}
+
 footer {
     position: absolute;
     left: 0;

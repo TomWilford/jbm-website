@@ -15,15 +15,20 @@ use App\Module\Bit\Application\Action\Api\DeleteBitAction;
 use App\Module\Bit\Application\Action\Api\IndexBitAction;
 use App\Module\Bit\Application\Action\Api\ShowBitAction;
 use App\Module\Bit\Application\Action\Api\UpdateBitAction;
-use App\Module\Bit\Application\Action\Page\IndexBitPageAction;
-use App\Module\Bit\Application\Action\Page\ShowBitPageAction;
+use App\Module\Bit\Application\Action\Web\IndexBitPageAction;
+use App\Module\Bit\Application\Action\Web\ShowBitPageAction;
+use App\Module\Snap\Application\Action\Api\CreateSnapAction;
+use App\Module\Snap\Application\Action\Api\DeleteSnapAction;
+use App\Module\Snap\Application\Action\Api\ShowSnapAction;
+use App\Module\Snap\Application\Action\Web\ShowSnapFileAction;
+use App\Module\Snap\Application\Action\Web\ShowSnapPageAction;
 use App\Module\Thing\Application\Action\Api\CreateThingAction;
 use App\Module\Thing\Application\Action\Api\DeleteThingAction;
 use App\Module\Thing\Application\Action\Api\IndexThingAction;
 use App\Module\Thing\Application\Action\Api\ShowThingAction;
 use App\Module\Thing\Application\Action\Api\UpdateThingAction;
-use App\Module\Thing\Application\Action\Page\IndexThingPageAction;
-use App\Module\Thing\Application\Action\Page\ShowThingPageAction;
+use App\Module\Thing\Application\Action\Web\IndexThingPageAction;
+use App\Module\Thing\Application\Action\Web\ShowThingPageAction;
 use Slim\App;
 
 return function (App $app) {
@@ -31,10 +36,10 @@ return function (App $app) {
     $app->get('/ping', PingAction::class);
 
     // Things
-    // - Page
+    // // Page
     $app->get('/things', IndexThingPageAction::class)->setName('things.index');
     $app->get('/things/{sqid}', ShowThingPageAction::class)->setName('things.show');
-    // - API
+    // // API
     $app->get('/api/things', IndexThingAction::class)->setName('api.things.index');
     $app->get('/api/things/{sqid}', ShowThingAction::class)->setName('api.things.show');
     $app->post('/api/things', CreateThingAction::class)->setName('api.things.create');
@@ -42,10 +47,10 @@ return function (App $app) {
     $app->delete('/api/things/{sqid}', DeleteThingAction::class)->setName('api.things.delete');
 
     // Bits
-    // - Page
+    // // Page
     $app->get('/bits', IndexBitPageAction::class)->setName('bits.index');
     $app->get('/bits/{sqid}', ShowBitPageAction::class)->setName('bits.show');
-    // - API
+    // // API
     $app->get('/api/bits', IndexBitAction::class)->setName('api.bits.index');
     $app->get('/api/bits/{sqid}', ShowBitAction::class)->setName('api.bits.show');
     $app->post('/api/bits', CreateBitAction::class)->setName('api.bits.create');
@@ -53,9 +58,18 @@ return function (App $app) {
     $app->delete('/api/bits/{sqid}', DeleteBitAction::class)->setName('api.bits.delete');
 
     // Albums
-    // - API
+    // // API
     $app->get('/api/albums', IndexAlbumAction::class)->setName('api.albums.index');
     $app->get('/api/albums/{sqid}', ShowAlbumAction::class)->setName('api.albums.show');
     $app->post('/api/albums', CreateAlbumAction::class)->setName('api.albums.create');
     $app->delete('/api/albums/{sqid}', DeleteAlbumAction::class)->setName('api.album.delete');
+
+    // Snaps
+    // // Page
+    $app->get('/snaps/{filename:[0-9A-z]+\.[a-z]{3,4}}', ShowSnapFileAction::class)->setName('snaps.file');
+    $app->get('/snaps/{sqid}', ShowSnapPageAction::class)->setName('snaps.show');
+    // // API
+    $app->get('/api/snaps/{sqid}', ShowSnapAction::class)->setName('api.snaps.show');
+    $app->post('/api/snaps', CreateSnapAction::class)->setName('api.snaps.create');
+    $app->delete('/api/snaps/{sqid}', DeleteSnapAction::class)->setName('api.snaps.delete');
 };

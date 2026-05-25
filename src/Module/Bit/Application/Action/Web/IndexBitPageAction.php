@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Thing\Application\Action\Page;
+namespace App\Module\Bit\Application\Action\Web;
 
 use App\Application\Renderer\TwigRenderer;
-use App\Module\Thing\Infrastructure\ThingRepository;
+use App\Module\Bit\Infrastructure\BitRepository;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,9 +13,9 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final readonly class IndexThingPageAction
+final readonly class IndexBitPageAction
 {
-    public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
+    public function __construct(private TwigRenderer $renderer, private BitRepository $bits)
     {
     }
 
@@ -23,14 +23,17 @@ final readonly class IndexThingPageAction
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      *
+     * @throws Exception
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError|Exception
+     *
+     * @return ResponseInterface
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        return $this->renderer->twig($response, 'things/index.twig', [
-            'things' => $this->things->all(),
+        return $this->renderer->twig($response, 'bits/index.twig', [
+            'bits' => $this->bits->all(),
         ]);
     }
 }

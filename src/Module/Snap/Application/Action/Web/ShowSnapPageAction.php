@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Bit\Application\Action\Page;
+namespace App\Module\Snap\Application\Action\Web;
 
 use App\Application\Renderer\TwigRenderer;
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
-use App\Module\Bit\Infrastructure\BitRepository;
+use App\Module\Album\Infrastructure\AlbumRepository;
+use App\Module\Snap\Infrastructure\SnapRepository;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,10 +16,13 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final readonly class ShowBitPageAction
+class ShowSnapPageAction
 {
-    public function __construct(private TwigRenderer $renderer, private BitRepository $bits)
-    {
+    public function __construct(
+        private readonly TwigRenderer $renderer,
+        private readonly SnapRepository $snaps,
+        private readonly AlbumRepository $albums,
+    ) {
     }
 
     /**
@@ -26,9 +30,12 @@ final readonly class ShowBitPageAction
      * @param ResponseInterface $response
      * @param mixed $arguments
      *
+     * @throws Exception
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError|Exception
+     *
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,
@@ -36,8 +43,12 @@ final readonly class ShowBitPageAction
         mixed $arguments = [],
     ): ResponseInterface {
         try {
-            return $this->renderer->twig($response, 'bits/show.twig', [
-                'bit' => $this->bits->ofId((int)$arguments['sqid']),
+            $snap = $this->snaps->ofId((int)$arguments['sqid']);
+            $album = $this->albums->ofId($snap->getAlbumId());
+
+            return $this->renderer->twig($response, 'snaps/show.twig', [
+                'snap' => $snap,
+                'album' => $album,
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

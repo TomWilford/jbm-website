@@ -28,6 +28,8 @@ final readonly class UpdateBitAction
 
     /**
      * @param array{sqid: string} $arguments
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      */
     public function __invoke(
         ServerRequestInterface $request,

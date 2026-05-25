@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a228480e5630b00d76286034ef0b8bd",
+    "content-hash": "20a242b34b2722962d51e197d72f1d6f",
     "packages": [
         {
             "name": "doctrine/dbal",
@@ -837,6 +837,52 @@
                 }
             ],
             "time": "2023-11-08T09:30:43+00:00"
+        },
+        {
+            "name": "php-common-enums/mime-type",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-common-enums/mime-type.git",
+                "reference": "233596cd8b46781d30bb48a97f6afdfe4191dfd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-common-enums/mime-type/zipball/233596cd8b46781d30bb48a97f6afdfe4191dfd0",
+                "reference": "233596cd8b46781d30bb48a97f6afdfe4191dfd0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 | ^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCommonEnums\\MimeType\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP Common Enums",
+                    "homepage": "https://github.com/php-common-enums"
+                }
+            ],
+            "description": "Provides a backed enum for MIME types",
+            "keywords": [
+                "enum"
+            ],
+            "support": {
+                "issues": "https://github.com/php-common-enums/mime-type/issues",
+                "source": "https://github.com/php-common-enums/mime-type/tree/v1.0.0"
+            },
+            "time": "2022-06-02T19:58:16+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -6755,8 +6801,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.*",
-        "ext-json": "*"
+        "php": "^8.2",
+        "ext-json": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

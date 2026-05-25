@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Thing\Application\Action\Page;
+namespace App\Module\Bit\Application\Action\Web;
 
 use App\Application\Renderer\TwigRenderer;
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
-use App\Module\Thing\Infrastructure\ThingRepository;
+use App\Module\Bit\Infrastructure\BitRepository;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,9 +15,9 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final readonly class ShowThingPageAction
+final readonly class ShowBitPageAction
 {
-    public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
+    public function __construct(private TwigRenderer $renderer, private BitRepository $bits)
     {
     }
 
@@ -26,12 +26,9 @@ final readonly class ShowThingPageAction
      * @param ResponseInterface $response
      * @param mixed $arguments
      *
-     * @throws Exception
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     *
-     * @return ResponseInterface
+     * @throws LoaderError|Exception
      */
     public function __invoke(
         ServerRequestInterface $request,
@@ -39,8 +36,8 @@ final readonly class ShowThingPageAction
         mixed $arguments = [],
     ): ResponseInterface {
         try {
-            return $this->renderer->twig($response, 'things/show.twig', [
-                'thing' => $this->things->ofId((int)$arguments['sqid']),
+            return $this->renderer->twig($response, 'bits/show.twig', [
+                'bit' => $this->bits->ofId((int)$arguments['sqid']),
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

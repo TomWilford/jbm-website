@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 use App\Test\Fixtures\AlbumFixture;
 use App\Test\Fixtures\BitFixture;
+use App\Test\Fixtures\SnapFixture;
 use App\Test\Fixtures\ThingFixture;
 use Sqids\Sqids;
 
@@ -42,6 +43,7 @@ return function (array $settings): array {
         ThingFixture::class,
         BitFixture::class,
         AlbumFixture::class,
+        SnapFixture::class,
     ];
 
     $settings['sqids'] = [
