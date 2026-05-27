@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Thing\Application\Action\Web;
+namespace App\Module\Album\Application\Action\Web;
 
 use App\Application\Renderer\TwigRenderer;
-use App\Module\Thing\Infrastructure\ThingRepository;
+use App\Module\Album\Infrastructure\AlbumRepository;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,9 +13,9 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final readonly class IndexThingPageAction
+final readonly class IndexAlbumPageAction
 {
-    public function __construct(private TwigRenderer $renderer, private ThingRepository $things)
+    public function __construct(private TwigRenderer $renderer, private AlbumRepository $albums)
     {
     }
 
@@ -32,8 +32,8 @@ final readonly class IndexThingPageAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        return $this->renderer->twig($response, 'things/index.twig', [
-            'things' => $this->things->all(),
+        return $this->renderer->twig($response, 'albums/index.twig', [
+            'albums' => $this->albums->all(),
         ]);
     }
 }

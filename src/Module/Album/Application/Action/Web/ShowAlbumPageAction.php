@@ -1,0 +1,57 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Module\Album\Application\Action\Web;
+
+use App\Application\Renderer\TwigRenderer;
+use App\Infrastructure\Exception\DomainRecordNotFoundException;
+use App\Module\Album\Infrastructure\AlbumRepository;
+use App\Module\Snap\Infrastructure\SnapRepository;
+use Doctrine\DBAL\Exception;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpNotFoundException;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+
+class ShowAlbumPageAction
+{
+    public function __construct(
+        private readonly TwigRenderer $renderer,
+        private readonly AlbumRepository $albums,
+        private readonly SnapRepository $snaps,
+    ) {
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param mixed $arguments
+     *
+     * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     *
+     * @return ResponseInterface
+     */
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        mixed $arguments = [],
+    ): ResponseInterface {
+        try {
+            $album = $this->albums->ofId((int)$arguments['sqid']);
+            $snaps = $this->snaps->ofAlbumId((int)$album->getId());
+
+            return $this->renderer->twig($response, 'albums/show.twig', [
+                'album' => $album,
+                'snaps' => $snaps,
+            ]);
+        } catch (DomainRecordNotFoundException) {
+            throw new HttpNotFoundException($request);
+        }
+    }
+}

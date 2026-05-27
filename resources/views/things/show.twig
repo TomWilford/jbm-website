@@ -7,42 +7,42 @@
         <h2 class="text-m">{{ thing.name }}</h2>
         <div class="things-details">
             <table>
-                <thead>
-                    <tr>
-                        <th>
-                            From
-                        </th>
-                        <th>
-                            To
-                        </th>
-                        <th>
-                            URL
-                        </th>
-                        <th>
-                            Fault Level
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            {{ (thing.activeFrom) |date('Y-m-d') }}
-                        </td>
-                        <td>
-                            {{ thing.activeTo ? activeTo.to |date('Y-m-d') : 'Present' }}
-                        </td>
-                        <td>
-                            {% if thing.url %}
-                                <a href="{{ thing.url }}">{{ thing.urlHost }}</a>
-                            {% else %}
-                                <span class="material-symbols-outlined text-m">link_off</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {{ thing.faultLevel.name |capitalize }} My Fault
-                        </td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <th>
+                        From
+                    </th>
+                    <td>
+                        {{ (thing.activeFrom) |date('Y-m-d') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        To
+                    </th>
+                    <td>
+                        {{ thing.activeTo ? activeTo.to |date('Y-m-d') : 'Present' }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        URL
+                    </th>
+                    <td>
+                        {% if thing.url %}
+                            <a href="{{ thing.url }}">{{ thing.urlHost }}</a>
+                        {% else %}
+                            <span class="material-symbols-outlined text-m">link_off</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Fault Level
+                    </th>
+                    <td>
+                        {{ thing.faultLevel.name |capitalize }} My Fault
+                    </td>
+                </tr>
             </table>
         </div>
         <p>{{ thing.description }}</p>

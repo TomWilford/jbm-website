@@ -13,10 +13,10 @@ use App\Test\Traits\DatabaseTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Stream;
-use Nyholm\Psr7\UploadedFile;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use RuntimeException;
 
 #[CoversClass(CreateSnapAction::class)]
@@ -25,31 +25,30 @@ class CreateSnapActionTest extends TestCase
     use AppTestTrait;
     use DatabaseTestTrait;
 
-    /**
-     * Helper to load the real physical asset fixture into a PSR-7 standard wrapper.
-     */
-    private function createUploadedFileFixture(): UploadedFile
-    {
+    private function createMockUploadedFile(
+        int $size = 51200,
+        int $error = UPLOAD_ERR_OK,
+        string $clientFilename = 'test.webp',
+        string $mediaType = 'image/webp',
+    ): UploadedFileInterface {
         $filePath = dirname(__DIR__, 6) . '/Fixtures/assets/snap-01.webp';
-        $stream = new Stream(fopen($filePath, 'r'));
-        $size = filesize($filePath) ?: 0;
 
-        return new UploadedFile(
-            $stream,
+        return (new Psr17Factory())->createUploadedFile(
+            new Stream(fopen($filePath, 'r+')),
             $size,
-            UPLOAD_ERR_OK,
-            'snap-01.webp',
-            'image/webp'
+            $error,
+            $clientFilename,
+            $mediaType
         );
     }
 
     public function testAction(): void
     {
         $parsedBody = [
-            'album_id' => 1,
+            'album_sqid' => 'Uk',
         ];
         $uploadedFiles = [
-            'image' => $this->createUploadedFileFixture()
+            'image' => $this->createMockUploadedFile(),
         ];
 
         $request = $this->createRequest('POST', '/api/snaps')
@@ -69,7 +68,7 @@ class CreateSnapActionTest extends TestCase
             'album_id' => '',
         ];
         $uploadedFiles = [
-            'image' => $this->createUploadedFileFixture()
+            'image' => $this->createMockUploadedFile(),
         ];
 
         $request = $this->createRequest('POST', '/api/snaps')
@@ -94,7 +93,7 @@ class CreateSnapActionTest extends TestCase
             ->willReturnCallback(function (
                 ResponseInterface $response,
                 array $data,
-                HttpStatus $status
+                HttpStatus $status,
             ) {
                 $this->assertSame(['An unknown error occurred. Sorry about that.'], $data);
                 $this->assertSame(HttpStatus::INTERNAL_SERVER_ERROR, $status);
@@ -105,8 +104,8 @@ class CreateSnapActionTest extends TestCase
         $action = new CreateSnapAction($mockRenderer, $mockCreator);
 
         $request = (new Psr17Factory())->createServerRequest('POST', '/api/snaps')
-            ->withParsedBody(['album_id' => 1])
-            ->withUploadedFiles(['image' => $this->createUploadedFileFixture()]);
+            ->withParsedBody(['album_id' => 'Uk'])
+            ->withUploadedFiles(['image' => $this->createMockUploadedFile()]);
 
         $response = (new Psr17Factory())->createResponse();
 

@@ -10,6 +10,8 @@ use App\Module\Album\Application\Action\Api\CreateAlbumAction;
 use App\Module\Album\Application\Action\Api\DeleteAlbumAction;
 use App\Module\Album\Application\Action\Api\IndexAlbumAction;
 use App\Module\Album\Application\Action\Api\ShowAlbumAction;
+use App\Module\Album\Application\Action\Web\IndexAlbumPageAction;
+use App\Module\Album\Application\Action\Web\ShowAlbumPageAction;
 use App\Module\Bit\Application\Action\Api\CreateBitAction;
 use App\Module\Bit\Application\Action\Api\DeleteBitAction;
 use App\Module\Bit\Application\Action\Api\IndexBitAction;
@@ -36,7 +38,7 @@ return function (App $app) {
     $app->get('/ping', PingAction::class);
 
     // Things
-    // // Page
+    // // Web
     $app->get('/things', IndexThingPageAction::class)->setName('things.index');
     $app->get('/things/{sqid}', ShowThingPageAction::class)->setName('things.show');
     // // API
@@ -47,7 +49,7 @@ return function (App $app) {
     $app->delete('/api/things/{sqid}', DeleteThingAction::class)->setName('api.things.delete');
 
     // Bits
-    // // Page
+    // // Web
     $app->get('/bits', IndexBitPageAction::class)->setName('bits.index');
     $app->get('/bits/{sqid}', ShowBitPageAction::class)->setName('bits.show');
     // // API
@@ -58,6 +60,9 @@ return function (App $app) {
     $app->delete('/api/bits/{sqid}', DeleteBitAction::class)->setName('api.bits.delete');
 
     // Albums
+    // // Web
+    $app->get('/albums', IndexAlbumPageAction::class)->setName('albums.index');
+    $app->get('/albums/{sqid}', ShowAlbumPageAction::class)->setName('albums.show');
     // // API
     $app->get('/api/albums', IndexAlbumAction::class)->setName('api.albums.index');
     $app->get('/api/albums/{sqid}', ShowAlbumAction::class)->setName('api.albums.show');
@@ -65,7 +70,7 @@ return function (App $app) {
     $app->delete('/api/albums/{sqid}', DeleteAlbumAction::class)->setName('api.album.delete');
 
     // Snaps
-    // // Page
+    // // Web
     $app->get('/snaps/{filename:[0-9A-z]+\.[a-z]{3,4}}', ShowSnapFileAction::class)->setName('snaps.file');
     $app->get('/snaps/{sqid}', ShowSnapPageAction::class)->setName('snaps.show');
     // // API

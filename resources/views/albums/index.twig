@@ -1,0 +1,23 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}Snaps | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        {% include 'components/subtitle.twig' with {'subtitle': 'All Snaps'} %}
+        <p class="mb-3">
+            These <em>snaps</em> were all taken by me on various cameras to various degrees of success. Some have been
+            uploaded because I think they look good. Some have been uploaded because they are nice memories. Some don't
+            look great, but, I couldn't not upload them; sorry about that.
+        </p>
+        <ul class="link-list">
+            {% for album in albums %}
+                <li class="mb-2">
+                    <strong>{{ album.name }}</strong>
+                    <a href="{{ url_for('albums.show', {sqid: album.sqid}) }}">View</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <hr class="my-5">
+{% endblock %}

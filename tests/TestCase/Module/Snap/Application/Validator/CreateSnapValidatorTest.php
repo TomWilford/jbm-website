@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Module\Snap\Application\Validator;
 
 use App\Module\Snap\Application\Validator\CreateSnapValidator;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Nyholm\Psr7\Stream;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
@@ -21,16 +23,18 @@ class CreateSnapValidatorTest extends TestCase
     }
 
     private function createMockUploadedFile(
-        string $mediaType = 'image/webp',
-        int $error = UPLOAD_ERR_OK,
         int $size = 51200,
+        int $error = UPLOAD_ERR_OK,
+        string $clientFilename = 'test.webp',
+        string $mediaType = 'image/webp',
     ): UploadedFileInterface {
-        $mock = $this->createMock(UploadedFileInterface::class);
-        $mock->method('getClientMediaType')->willReturn($mediaType);
-        $mock->method('getError')->willReturn($error);
-        $mock->method('getSize')->willReturn($size);
-
-        return $mock;
+        return (new Psr17Factory())->createUploadedFile(
+            new Stream(fopen('php://temp', 'r+')),
+            $size,
+            $error,
+            $clientFilename,
+            $mediaType
+        );
     }
 
     public function testValidateWithValidData(): void
@@ -38,8 +42,8 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile();
 
         $data = [
-            'album_id' => 12,
-            'file' => $mockFile,
+            'album_sqid' => 'Uk',
+            'image' => $mockFile,
         ];
 
         $this->expectNotToPerformAssertions();
@@ -51,8 +55,8 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile();
 
         $data = [
-            'album_id' => '',
-            'file' => $mockFile,
+            'album_sqid' => '',
+            'image' => $mockFile,
         ];
 
         $this->expectException(ValidationException::class);
@@ -61,11 +65,11 @@ class CreateSnapValidatorTest extends TestCase
 
     public function testValidateWithUnsupportedMimeType(): void
     {
-        $mockFile = $this->createMockUploadedFile('image/x-adobe-dng');
+        $mockFile = $this->createMockUploadedFile(mediaType: 'image/x-adobe-dng');
 
         $data = [
-            'album_id' => 12,
-            'file' => $mockFile,
+            'album_sqid' => 'Uk',
+            'image' => $mockFile,
         ];
 
         $this->expectException(ValidationException::class);
@@ -74,13 +78,11 @@ class CreateSnapValidatorTest extends TestCase
 
     public function testValidateWithMissingMediaType(): void
     {
-        $mockFile = $this->createMock(UploadedFileInterface::class);
-        $mockFile->method('getClientMediaType')->willReturn(null);
-        $mockFile->method('getError')->willReturn(UPLOAD_ERR_OK);
+        $mockFile = $this->createMockUploadedFile(mediaType: '');
 
         $data = [
-            'album_id' => 12,
-            'file' => $mockFile,
+            'album_sqid' => 'Uk',
+            'image' => $mockFile,
         ];
 
         $this->expectException(ValidationException::class);
@@ -90,11 +92,11 @@ class CreateSnapValidatorTest extends TestCase
     public function testValidateWithFileExceedingMaxSize(): void
     {
         $hugeSize = 12 * 1024 * 1024;
-        $mockFile = $this->createMockUploadedFile('image/webp', UPLOAD_ERR_OK, $hugeSize);
+        $mockFile = $this->createMockUploadedFile(size: $hugeSize, mediaType: '');
 
         $data = [
-            'album_id' => 12,
-            'file' => $mockFile,
+            'album_sqid' => 'Uk',
+            'image' => $mockFile,
         ];
 
         $this->expectException(ValidationException::class);
@@ -104,7 +106,7 @@ class CreateSnapValidatorTest extends TestCase
     public function testValidateWithMissingRequiredField(): void
     {
         $data = [
-            'file' => $this->createMockUploadedFile(),
+            'image' => $this->createMockUploadedFile(),
         ];
 
         $this->expectException(ValidationException::class);

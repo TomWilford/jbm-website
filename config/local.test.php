@@ -46,11 +46,9 @@ return function (array $settings): array {
         SnapFixture::class,
     ];
 
-    $settings['sqids'] = [
-        'alphabet' => Sqids::DEFAULT_ALPHABET,
-        'minLength' => Sqids::DEFAULT_MIN_LENGTH,
-        'blockList' => Sqids::DEFAULT_BLOCKLIST,
-    ];
+    $settings['sqids']['alphabet'] = Sqids::DEFAULT_ALPHABET;
+    $settings['sqids']['minLength'] = Sqids::DEFAULT_MIN_LENGTH;
+    $settings['sqids']['blockList'] = Sqids::DEFAULT_BLOCKLIST;
 
     return $settings;
 };
