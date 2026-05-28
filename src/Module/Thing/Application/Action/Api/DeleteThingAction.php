@@ -24,6 +24,7 @@ final readonly class DeleteThingAction
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @param array<string> $arguments
+     *
      * @return ResponseInterface
      */
     public function __invoke(

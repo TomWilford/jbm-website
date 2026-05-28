@@ -26,11 +26,12 @@ final readonly class ShowBitPageAction
      * @param ResponseInterface $response
      * @param array<string> $arguments
      *
-     * @return ResponseInterface
      * @throws Exception
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,

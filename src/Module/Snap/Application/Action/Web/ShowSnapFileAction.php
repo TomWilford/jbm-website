@@ -26,13 +26,14 @@ final class ShowSnapFileAction
      * @param ResponseInterface $response
      * @param array{filename: string} $arguments
      *
-     * @return ResponseInterface
      * @throws Exception
+     *
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        array $arguments = [],
+        array $arguments,
     ): ResponseInterface {
         try {
             $filename = (string)$arguments['filename'];
