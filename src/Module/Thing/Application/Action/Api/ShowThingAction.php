@@ -19,9 +19,11 @@ final readonly class ShowThingAction
     }
 
     /**
-     * @param array{sqid: string} $arguments
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
+     * @param array<string> $arguments
+     *
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,
@@ -30,7 +32,7 @@ final readonly class ShowThingAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $data = $this->things->ofId((int)$arguments['sqid']);
+            $data = $this->things->ofId((int)$request->getAttribute('id'));
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

@@ -19,6 +19,7 @@ class Snap implements JsonSerializable
     public function __construct(
         #[SqidableProperty]
         private readonly ?int $id,
+        #[SqidableProperty]
         private readonly int $albumId,
         private readonly string $image,
         private readonly MimeTypeEnum $mimeType,
@@ -60,7 +61,7 @@ class Snap implements JsonSerializable
     /**
      * @return array{
      *     id: ?string,
-     *     album_id: int,
+     *     album_sqid: string,
      *     mime_type: string,
      *     created_at: ?int,
      *     updated_at: ?int
@@ -70,7 +71,7 @@ class Snap implements JsonSerializable
     {
         return [
             'id' => $this->getSqid(),
-            'album_id' => $this->getAlbumId(),
+            'album_sqid' => $this->getAllSqids()['albumId'],
             'mime_type' => $this->getMimeType()->value,
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),

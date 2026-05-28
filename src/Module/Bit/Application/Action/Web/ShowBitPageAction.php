@@ -24,20 +24,22 @@ final readonly class ShowBitPageAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param mixed $arguments
+     * @param array<string> $arguments
      *
+     * @return ResponseInterface
+     * @throws Exception
+     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws LoaderError|Exception
      */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        mixed $arguments = [],
+        array $arguments = [],
     ): ResponseInterface {
         try {
             return $this->renderer->twig($response, 'bits/show.twig', [
-                'bit' => $this->bits->ofId((int)$arguments['sqid']),
+                'bit' => $this->bits->ofId((int)$request->getAttribute('id')),
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

@@ -24,7 +24,7 @@ final readonly class ShowThingPageAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param mixed $arguments
+     * @param array<string> $arguments
      *
      * @throws Exception
      * @throws LoaderError
@@ -36,11 +36,11 @@ final readonly class ShowThingPageAction
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        mixed $arguments = [],
+        array $arguments = [],
     ): ResponseInterface {
         try {
             return $this->renderer->twig($response, 'things/show.twig', [
-                'thing' => $this->things->ofId((int)$arguments['sqid']),
+                'thing' => $this->things->ofId((int)$request->getAttribute('id')),
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);

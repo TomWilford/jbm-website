@@ -16,7 +16,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class ShowAlbumPageAction
+final class ShowAlbumPageAction
 {
     public function __construct(
         private readonly TwigRenderer $renderer,
@@ -28,7 +28,7 @@ class ShowAlbumPageAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param mixed $arguments
+     * @param array<string> $arguments
      *
      * @throws Exception
      * @throws LoaderError
@@ -40,10 +40,10 @@ class ShowAlbumPageAction
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        mixed $arguments = [],
+        array $arguments = [],
     ): ResponseInterface {
         try {
-            $album = $this->albums->ofId((int)$arguments['sqid']);
+            $album = $this->albums->ofId((int)$request->getAttribute('id'));
             $snaps = $this->snaps->ofAlbumId((int)$album->getId());
 
             return $this->renderer->twig($response, 'albums/show.twig', [

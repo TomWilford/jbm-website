@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b063544ed2842db281b742524f26f078",
+    "content-hash": "57c9d9d4d37692a43d12af7065ad82e7",
     "packages": [
         {
             "name": "doctrine/dbal",
@@ -2697,16 +2697,16 @@
         },
         {
             "name": "tomwilford/slim-sqids",
-            "version": "v0.0.3",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomWilford/slim-sqids.git",
-                "reference": "494ae3ab5a8a4112a0a7c3baecf16c8d7f5fb3bb"
+                "reference": "7f3d2697e52a8a51a1b5c21e028c7123851d1031"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomWilford/slim-sqids/zipball/494ae3ab5a8a4112a0a7c3baecf16c8d7f5fb3bb",
-                "reference": "494ae3ab5a8a4112a0a7c3baecf16c8d7f5fb3bb",
+                "url": "https://api.github.com/repos/TomWilford/slim-sqids/zipball/7f3d2697e52a8a51a1b5c21e028c7123851d1031",
+                "reference": "7f3d2697e52a8a51a1b5c21e028c7123851d1031",
                 "shasum": ""
             },
             "require": {
@@ -2747,9 +2747,9 @@
             ],
             "support": {
                 "issues": "https://github.com/TomWilford/slim-sqids/issues",
-                "source": "https://github.com/TomWilford/slim-sqids/tree/v0.0.3"
+                "source": "https://github.com/TomWilford/slim-sqids/tree/v1.0.0"
             },
-            "time": "2025-02-25T19:59:27+00:00"
+            "time": "2026-05-25T18:46:25+00:00"
         },
         {
             "name": "tuupola/callable-handler",

@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 
-class DeleteSnapAction
+final class DeleteSnapAction
 {
     public function __construct(private readonly JsonRenderer $renderer, private readonly SnapRepository $repository)
     {
@@ -21,7 +21,7 @@ class DeleteSnapAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param array{sqid: string} $arguments
+     * @param array<string> $arguments
      *
      * @return ResponseInterface
      */
@@ -32,7 +32,7 @@ class DeleteSnapAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->repository->ofId((int)$arguments['sqid']);
+            $thing = $this->repository->ofId((int)$request->getAttribute('id'));
             $this->repository->destroy($thing);
             $data = ['Album deleted successfully.'];
         } catch (DomainRecordNotFoundException $exception) {

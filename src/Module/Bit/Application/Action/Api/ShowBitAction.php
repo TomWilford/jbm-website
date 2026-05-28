@@ -32,7 +32,7 @@ final readonly class ShowBitAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $data = $this->bits->ofId((int)$arguments['sqid']);
+            $data = $this->bits->ofId((int)$request->getAttribute('id'));
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

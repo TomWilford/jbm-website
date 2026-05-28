@@ -7,12 +7,13 @@ namespace App\Module\Snap\Application\Action\Web;
 use App\Common\Domain\HttpStatus;
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Module\Snap\Infrastructure\SnapRepository;
+use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpNotFoundException;
 use Sqids\Sqids;
 
-class ShowSnapFileAction
+final class ShowSnapFileAction
 {
     public function __construct(
         private readonly SnapRepository $snaps,
@@ -20,10 +21,18 @@ class ShowSnapFileAction
     ) {
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array{filename: string} $arguments
+     *
+     * @return ResponseInterface
+     * @throws Exception
+     */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        mixed $arguments = [],
+        array $arguments = [],
     ): ResponseInterface {
         try {
             $filename = (string)$arguments['filename'];

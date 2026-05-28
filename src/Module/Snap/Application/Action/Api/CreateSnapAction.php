@@ -15,12 +15,18 @@ use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Exceptions\ValidationException;
 use Throwable;
 
-class CreateSnapAction
+final class CreateSnapAction
 {
     public function __construct(private readonly JsonRenderer $renderer, private readonly CreateSnap $creator)
     {
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return ResponseInterface
+     */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,

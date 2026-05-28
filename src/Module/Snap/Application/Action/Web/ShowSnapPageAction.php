@@ -16,7 +16,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class ShowSnapPageAction
+final class ShowSnapPageAction
 {
     public function __construct(
         private readonly TwigRenderer $renderer,
@@ -28,7 +28,7 @@ class ShowSnapPageAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param mixed $arguments
+     * @param array<string> $arguments
      *
      * @throws Exception
      * @throws LoaderError
@@ -40,10 +40,10 @@ class ShowSnapPageAction
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        mixed $arguments = [],
+        array $arguments = [],
     ): ResponseInterface {
         try {
-            $snap = $this->snaps->ofId((int)$arguments['sqid']);
+            $snap = $this->snaps->ofId((int)$request->getAttribute('id'));
             $album = $this->albums->ofId($snap->getAlbumId());
 
             return $this->renderer->twig($response, 'snaps/show.twig', [

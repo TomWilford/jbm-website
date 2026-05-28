@@ -21,9 +21,10 @@ final readonly class DeleteThingAction
     }
 
     /**
-     * @param array{sqid: string} $arguments
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
+     * @param array<string> $arguments
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,
@@ -32,7 +33,7 @@ final readonly class DeleteThingAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->things->ofId((int)$arguments['sqid']);
+            $thing = $this->things->ofId((int)$request->getAttribute('id'));
             $this->things->destroy($thing);
             $data = ['Thing deleted successfully.'];
         } catch (DomainRecordNotFoundException $exception) {

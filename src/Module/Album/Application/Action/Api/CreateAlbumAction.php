@@ -13,7 +13,7 @@ use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Exceptions\ValidationException;
 use Throwable;
 
-class CreateAlbumAction
+final class CreateAlbumAction
 {
     public function __construct(
         private readonly JsonRenderer $renderer,

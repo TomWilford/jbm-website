@@ -23,7 +23,7 @@ final class DeleteAlbumAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param array{sqid: string} $arguments
+     * @param array{string:string} $arguments
      *
      * @return ResponseInterface
      */
@@ -34,7 +34,7 @@ final class DeleteAlbumAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->albums->ofId((int)$arguments['sqid']);
+            $thing = $this->albums->ofId((int)$request->getAttribute('id'));
             $this->albums->destroy($thing);
             $data = ['Album deleted successfully.'];
         } catch (DomainRecordNotFoundException $exception) {

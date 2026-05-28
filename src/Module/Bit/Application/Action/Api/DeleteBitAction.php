@@ -19,7 +19,7 @@ final readonly class DeleteBitAction
     }
 
     /**
-     * @param array{sqid: string} $arguments
+     * @param array<string> $arguments
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      */
@@ -30,7 +30,7 @@ final readonly class DeleteBitAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $bit = $this->bits->ofId((int)$arguments['sqid']);
+            $bit = $this->bits->ofId((int)$request->getAttribute('id'));
             $this->bits->destroy($bit);
             $data = ['Bit deleted successfully.'];
         } catch (DomainRecordNotFoundException $exception) {

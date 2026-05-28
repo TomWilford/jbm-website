@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 
-class ShowSnapAction
+final class ShowSnapAction
 {
     public function __construct(private readonly JsonRenderer $renderer, private readonly SnapRepository $repository)
     {
@@ -21,7 +21,7 @@ class ShowSnapAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param array{sqid: string} $arguments
+     * @param array<string> $arguments
      *
      * @return ResponseInterface
      */
@@ -32,7 +32,7 @@ class ShowSnapAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $data = $this->repository->ofId((int)$arguments['sqid']);
+            $data = $this->repository->ofId((int)$request->getAttribute('id'));
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

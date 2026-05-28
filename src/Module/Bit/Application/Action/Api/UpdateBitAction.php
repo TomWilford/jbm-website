@@ -27,9 +27,11 @@ final readonly class UpdateBitAction
     }
 
     /**
-     * @param array{sqid: string} $arguments
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
+     * @param array<string> $arguments
+     *
+     * @return ResponseInterface
      */
     public function __invoke(
         ServerRequestInterface $request,
@@ -38,7 +40,7 @@ final readonly class UpdateBitAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $thing = $this->bits->ofId((int)$arguments['sqid']);
+            $thing = $this->bits->ofId((int)$request->getAttribute('id'));
             $this->validator->validate((array)$request->getParsedBody());
             $data = $this->updater->updateFromArray((array)$request->getParsedBody(), $thing);
         } catch (DomainRecordNotFoundException $exception) {

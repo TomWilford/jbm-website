@@ -21,7 +21,7 @@ final readonly class ShowAlbumAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @param array{sqid: string} $arguments
+     * @param array<string> $arguments
      *
      * @return ResponseInterface
      */
@@ -32,7 +32,7 @@ final readonly class ShowAlbumAction
     ): ResponseInterface {
         try {
             $status = HttpStatus::OK;
-            $data = $this->albums->ofId((int)$arguments['sqid']);
+            $data = $this->albums->ofId((int)$request->getAttribute('id'));
         } catch (DomainRecordNotFoundException $exception) {
             $status = HttpStatus::NOT_FOUND;
             $data = [$exception->getMessage()];

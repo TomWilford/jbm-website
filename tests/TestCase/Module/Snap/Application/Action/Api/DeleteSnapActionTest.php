@@ -33,16 +33,16 @@ class DeleteSnapActionTest extends TestCase
     {
         $repository = new SnapRepository($this->container?->get(Connection::class));
 
-        $album = new Snap(
+        $snap = new Snap(
             null,
             1,
             '/sdfssd/gfd/sdddf-dfdfdf',
             MimeTypeEnum::ImageWebp,
         );
 
-        $album = $repository->store($album);
+        $snap = $repository->store($snap);
 
-        $request = $this->createRequest('DELETE', '/api/snaps/' . $album->getSqid())
+        $request = $this->createRequest('DELETE', '/api/snaps/' . $snap->getSqid())
             ->withHeader('Authorization', 'Basic ' . base64_encode('test:test'));
         $response = $this->app->handle($request);
 
@@ -50,7 +50,7 @@ class DeleteSnapActionTest extends TestCase
         $this->assertResponseContains('Album deleted successfully', $response);
 
         $this->expectException(DomainRecordNotFoundException::class);
-        $repository->ofId($album->getId());
+        $repository->ofId($snap->getId());
     }
 
     public function testDeleteUnknownId(): void
