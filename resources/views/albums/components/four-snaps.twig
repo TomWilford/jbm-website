@@ -1,0 +1,10 @@
+<div class="grid snaps four">
+    {% for snap in row %}
+        <a href="{{ url_for('snaps.show', { 'sqid': snap.sqid }) }}" class="chocolat-image"
+           data-image-source="{{ url_for('snaps.file', { 'filename' : snap.sqid ~ '.' ~ snap.mimeType.ext }) }}">
+            <img src="{{ url_for('snaps.file', { 'filename' : snap.sqid ~ '.' ~ snap.mimeType.ext }) }}"
+                 alt="{{ album.name }}: {{ snap.sqid }}"
+            >
+        </a>
+    {% endfor %}
+</div>

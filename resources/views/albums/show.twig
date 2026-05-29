@@ -5,18 +5,17 @@
 {% block content %}
     <section>
         <h2 class="text-m">{{ album.name }}</h2>
-        {% include 'components/album-details.twig' with {'album': album } %}
+        {% include 'albums/components/album-details.twig' with {'album': album } %}
         {% for row in snaps|batch(4) %}
-            <div class="grid snaps chocolat-parent">
-                {% for snap in row %}
-                    <a href="{{ url_for('snaps.show', { 'sqid': snap.sqid }) }}" class="chocolat-image"
-                       data-image-source="{{ url_for('snaps.file', { 'filename' : snap.sqid ~ '.' ~ snap.mimeType.ext }) }}">
-                        <img src="{{ url_for('snaps.file', { 'filename' : snap.sqid ~ '.' ~ snap.mimeType.ext }) }}"
-                             alt="{{ album.name }}: {{ snap.sqid }}"
-                        >
-                    </a>
-                {% endfor %}
-            </div>
+            {% set mode = random([1, 2, 4]) %}
+
+            {% if mode == 1 %}
+                {% include 'albums/components/one-snap.twig' with {'row': row} %}
+            {% elseif mode == 2 %}
+                {% include 'albums/components/two-snaps.twig' with {'row': row} %}
+            {% elseif mode == 4 %}
+                {% include 'albums/components/four-snaps.twig' with {'row': row} %}
+            {% endif %}
         {% endfor %}
     </section>
     <hr class="my-5">
