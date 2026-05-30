@@ -161,3 +161,16 @@ footer {
     height: 2.5rem;
     text-align: center;
 }
+
+.grid.snaps {
+    margin-left: 0.5ch;
+}
+
+.grid.snaps > a {
+    display: flex;
+    align-items: center;
+}
+
+.grid.snaps > a > img {
+    margin-top: 0;
+}

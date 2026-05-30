@@ -20,7 +20,8 @@ return (new Config())
             'cast_spaces' => ['space' => 'none'],
             'concat_space' => ['spacing' => 'one'],
             'compact_nullable_type_declaration' => true,
-            'declare_equal_normalize' => ['space' => 'single'],
+            'declare_strict_types' => true,
+            'declare_equal_normalize' => ['space' => 'none'],
             'general_phpdoc_annotation_remove' => [
                 'annotations' => [
                     'author',
@@ -43,7 +44,6 @@ return (new Config())
                 'imports_order' => ['class', 'const', 'function'],
             ],
             'single_line_throw' => false,
-            'declare_strict_types' => false,
             'blank_line_between_import_groups' => true,
             'fully_qualified_strict_types' => true,
             'no_null_property_initialization' => false,
@@ -60,6 +60,7 @@ return (new Config())
             'class_definition' => [
                 'space_before_parenthesis' => true,
             ],
+            'no_unused_imports' => true,
         ]
     )
     ->setFinder(

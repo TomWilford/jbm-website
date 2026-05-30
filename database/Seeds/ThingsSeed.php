@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Database\Seeds;
 
-use App\Module\Thing\Data\Thing;
-use App\Module\Thing\Enum\FaultLevel;
+use App\Module\Thing\Domain\FaultLevel;
+use App\Module\Thing\Domain\Thing;
 use App\Module\Thing\Infrastructure\ThingRepository;
 
 readonly class ThingsSeed implements SeedInterface
 {
     public function __construct(private ThingRepository $repository)
     {
-        //
     }
 
     public function getName(): string

@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Module\Bit\Infrastructure;
 
-use App\Domain\Exception\DomainRecordNotFoundException;
-use App\Module\Bit\Data\Bit;
-use App\Module\Bit\Enum\Language;
+use App\Infrastructure\Exception\DomainRecordNotFoundException;
+use App\Module\Bit\Domain\Bit;
+use App\Module\Bit\Domain\Language;
 use App\Module\Bit\Infrastructure\BitRepository;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Doctrine\DBAL\Connection;
 use InvalidArgumentException;
-use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-#[UsesClass(BitRepository::class)]
+#[CoversClass(BitRepository::class)]
 class BitRepositoryTest extends TestCase
 {
     use AppTestTrait;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Test\Traits;
 
 use BadMethodCallException;
@@ -24,7 +26,7 @@ trait ContainerTestTrait
      *
      * @return void
      */
-    protected function setUpContainer(ContainerInterface $container = null): void
+    protected function setUpContainer(?ContainerInterface $container = null): void
     {
         if ($container instanceof ContainerInterface) {
             $this->container = $container;

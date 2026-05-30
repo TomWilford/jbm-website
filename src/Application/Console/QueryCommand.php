@@ -12,6 +12,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
 class QueryCommand extends Command
 {
@@ -43,7 +44,7 @@ class QueryCommand extends Command
         try {
             $result = $this->connection->executeQuery($this->query);
             $this->handleOutput($result, $io);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $commandStatus = self::FAILURE;
             $io->error($e->getMessage());
         } finally {
@@ -52,6 +53,9 @@ class QueryCommand extends Command
     }
 
     /**
+     * @param Result $result
+     * @param SymfonyStyle $io
+     *
      * @throws Exception
      */
     private function handleOutput(Result $result, SymfonyStyle $io): void

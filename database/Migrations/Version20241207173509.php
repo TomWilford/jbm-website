@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Doctrine\DBAL\Schema\Name\UnqualifiedName;
+use Doctrine\DBAL\Schema\PrimaryKeyConstraint;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
@@ -32,7 +34,11 @@ final class Version20241207173509 extends AbstractMigration
         $table->addColumn('active_to', Types::DATE_MUTABLE, ['notnull' => false]);
         $table->addColumn('created_at', Types::DATE_IMMUTABLE, ['notnull' => true]);
         $table->addColumn('updated_at', Types::DATE_MUTABLE, ['notnull' => true]);
-        $table->setPrimaryKey(['id']);
+        $table->addPrimaryKeyConstraint(
+            PrimaryKeyConstraint::editor()
+                ->setColumnNames(UnqualifiedName::unquoted('id'))
+                ->create()
+        );
     }
 
     public function down(Schema $schema): void

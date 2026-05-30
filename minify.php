@@ -4,22 +4,21 @@ include __DIR__ . '/vendor/autoload.php';
 
 $cssMinifier = new MatthiasMullie\Minify\CSS();
 
-$cssIterator = new DirectoryIterator(__DIR__ . '/resources/css/');
+$cssPath = __DIR__ . '/resources/css/*.css';
+$cssIterator = new GlobIterator($cssPath);
+
 foreach ($cssIterator as $file) {
-    if (!$file->isDot()) {
-        $cssMinifier->add($file->getRealPath());
-    }
+    $cssMinifier->add($file->getRealPath());
 }
 
 $cssMinifier->minify(__DIR__ . '/public/css/style.css');
 
 $jsMinifier = new MatthiasMullie\Minify\JS();
 
-$jsIterator = new DirectoryIterator(__DIR__ . '/resources/js/');
+$jsPath = __DIR__ . '/resources/js/*.js';
+$jsIterator = new GlobIterator($jsPath);
 foreach ($jsIterator as $file) {
-    if (!$file->isDot()) {
-        $jsMinifier->add($file->getRealPath());
-    }
+    $jsMinifier->add($file->getRealPath());
 }
 
 $jsMinifier->minify(__DIR__ . '/public/js/app.js');

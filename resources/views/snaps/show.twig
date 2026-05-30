@@ -1,0 +1,18 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}{{ album.name }}: {{ snap.sqid }} | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        <h2 class="text-m">{{ album.name }}</h2>
+        <img src="{{ url_for('snaps.file', { 'filename' : snap.sqid ~ '.' ~ snap.mimeType.ext }) }}"
+             alt="{{ album.name }}: {{ snap.sqid }} "
+             class="mb-3"
+        >
+        <div class="text-center mb-2">
+            <a href="{{ url_for('albums.show', { 'sqid' : album.sqid }) }}">Back</a>
+        </div>
+        {% include 'components/album-details.twig' with {'album': album } %}
+    </section>
+    <hr class="my-5">
+{% endblock %}

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Test\Fixtures;
 
-class BitFixture implements FixtureInterface
+class BitFixture extends BaseFixture
 {
-    private string $table = 'bits';
+    protected string $table = 'bits';
     /**
      * @var array{array{
      *     id: int,
@@ -18,7 +18,7 @@ class BitFixture implements FixtureInterface
      *     updated_at: int
      * }} $records
      */
-    private array $records = [
+    protected array $records = [
         [
             'id' => 1,
             'name' => 'Test Bit',
@@ -40,17 +40,4 @@ class BitFixture implements FixtureInterface
             'updated_at' => 1601000000,
         ],
     ];
-
-    public function getTable(): string
-    {
-        return $this->table;
-    }
-
-    /**
-     * @return array{array{string:mixed}}
-     */
-    public function getRecords(): array
-    {
-        return $this->records;
-    }
 }

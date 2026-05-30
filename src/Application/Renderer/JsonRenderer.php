@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Renderer;
 
-use App\Common\Enum\HttpStatus;
+use App\Common\Domain\HttpStatus;
 use Psr\Http\Message\ResponseInterface;
 
 class JsonRenderer

@@ -8,10 +8,10 @@ use App\Application\Action\HomeAction;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
 use Fig\Http\Message\StatusCodeInterface;
-use PHPUnit\Framework\Attributes\UsesClass;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[UsesClass(HomeAction::class)]
+#[CoversClass(HomeAction::class)]
 class HomeActionTest extends TestCase
 {
     use AppTestTrait;

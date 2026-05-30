@@ -4,8 +4,9 @@
     "license": "BSD-3-Clause",
     "type": "project",
     "require": {
-        "php": "8.*",
+        "php": "^8.3",
         "ext-json": "*",
+        "ext-pdo": "*",
         "doctrine/dbal": "^4",
         "doctrine/migrations": "^3",
         "fig/http-message-util": "^1.1",
@@ -13,13 +14,15 @@
         "monolog/monolog": "^3",
         "nyholm/psr7": "^1.8.1",
         "nyholm/psr7-server": "^1.1",
+        "php-common-enums/mime-type": "^1.0",
         "php-di/php-di": "^7",
         "respect/validation": "^2.4",
         "selective/basepath": "^2",
         "slim/slim": "^4",
         "slim/twig-view": "^3.4",
         "symfony/console": "^7",
-        "tomwilford/slim-sqids": "^0.0.3"
+        "tomwilford/slim-sqids": "^1",
+        "twig/twig": "3.27"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3",

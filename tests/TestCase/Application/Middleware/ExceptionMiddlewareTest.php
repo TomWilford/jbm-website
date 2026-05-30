@@ -10,11 +10,13 @@ use App\Application\Renderer\TwigRenderer;
 use App\Test\Traits\AppTestTrait;
 use Exception;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 
+#[CoversClass(ExceptionMiddleware::class)]
 class ExceptionMiddlewareTest extends TestCase
 {
     use AppTestTrait;

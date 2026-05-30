@@ -1,0 +1,20 @@
+{% extends 'components/base.twig' %}
+
+{% block title %}{{ album.name }} | Jolly Blue Man{% endblock %}
+
+{% block content %}
+    <section>
+        <h2 class="text-m">{{ album.name }}</h2>
+        {% include 'components/album-details.twig' with {'album': album} %}
+        {% for row in rows %}
+            {% if row.mode == 'one' %}
+                {% include 'albums/components/one-snap.twig' with {'snaps': row.snaps} %}
+            {% elseif row.mode == 'two' %}
+                {% include 'albums/components/two-snaps.twig' with {'snaps': row.snaps} %}
+            {% elseif row.mode == 'four' %}
+                {% include 'albums/components/four-snaps.twig' with {'snaps': row.snaps} %}
+            {% endif %}
+        {% endfor %}
+    </section>
+    <hr class="my-5">
+{% endblock %}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a228480e5630b00d76286034ef0b8bd",
+    "content-hash": "a74e0aa8e82bd75cf2cd9b35915e6d23",
     "packages": [
         {
             "name": "doctrine/dbal",
@@ -839,6 +839,52 @@
             "time": "2023-11-08T09:30:43+00:00"
         },
         {
+            "name": "php-common-enums/mime-type",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-common-enums/mime-type.git",
+                "reference": "233596cd8b46781d30bb48a97f6afdfe4191dfd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-common-enums/mime-type/zipball/233596cd8b46781d30bb48a97f6afdfe4191dfd0",
+                "reference": "233596cd8b46781d30bb48a97f6afdfe4191dfd0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 | ^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCommonEnums\\MimeType\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP Common Enums",
+                    "homepage": "https://github.com/php-common-enums"
+                }
+            ],
+            "description": "Provides a backed enum for MIME types",
+            "keywords": [
+                "enum"
+            ],
+            "support": {
+                "issues": "https://github.com/php-common-enums/mime-type/issues",
+                "source": "https://github.com/php-common-enums/mime-type/tree/v1.0.0"
+            },
+            "time": "2022-06-02T19:58:16+00:00"
+        },
+        {
             "name": "php-di/invoker",
             "version": "2.3.6",
             "source": {
@@ -1512,16 +1558,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "4.15.1",
+            "version": "4.15.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "887893516557506f254d950425ce7f5387a26970"
+                "reference": "e12cb05ca2a14e8f459d019e87a31dc915b80470"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/887893516557506f254d950425ce7f5387a26970",
-                "reference": "887893516557506f254d950425ce7f5387a26970",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/e12cb05ca2a14e8f459d019e87a31dc915b80470",
+                "reference": "e12cb05ca2a14e8f459d019e87a31dc915b80470",
                 "shasum": ""
             },
             "require": {
@@ -1624,7 +1670,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-21T12:23:44+00:00"
+            "time": "2026-05-22T08:00:12+00:00"
         },
         {
             "name": "slim/twig-view",
@@ -1748,16 +1794,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.4.11",
+            "version": "v7.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "ed0107e43ab452aa77ae99e005b95e56b556e075"
+                "reference": "85095d2573eaefaf35e40b9513a9bf09f72cd217"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/ed0107e43ab452aa77ae99e005b95e56b556e075",
-                "reference": "ed0107e43ab452aa77ae99e005b95e56b556e075",
+                "url": "https://api.github.com/repos/symfony/console/zipball/85095d2573eaefaf35e40b9513a9bf09f72cd217",
+                "reference": "85095d2573eaefaf35e40b9513a9bf09f72cd217",
                 "shasum": ""
             },
             "require": {
@@ -1822,7 +1868,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.4.11"
+                "source": "https://github.com/symfony/console/tree/v7.4.13"
             },
             "funding": [
                 {
@@ -1842,7 +1888,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-13T12:04:42+00:00"
+            "time": "2026-05-24T08:56:14+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2651,16 +2697,16 @@
         },
         {
             "name": "tomwilford/slim-sqids",
-            "version": "v0.0.3",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomWilford/slim-sqids.git",
-                "reference": "494ae3ab5a8a4112a0a7c3baecf16c8d7f5fb3bb"
+                "reference": "7f3d2697e52a8a51a1b5c21e028c7123851d1031"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomWilford/slim-sqids/zipball/494ae3ab5a8a4112a0a7c3baecf16c8d7f5fb3bb",
-                "reference": "494ae3ab5a8a4112a0a7c3baecf16c8d7f5fb3bb",
+                "url": "https://api.github.com/repos/TomWilford/slim-sqids/zipball/7f3d2697e52a8a51a1b5c21e028c7123851d1031",
+                "reference": "7f3d2697e52a8a51a1b5c21e028c7123851d1031",
                 "shasum": ""
             },
             "require": {
@@ -2701,9 +2747,9 @@
             ],
             "support": {
                 "issues": "https://github.com/TomWilford/slim-sqids/issues",
-                "source": "https://github.com/TomWilford/slim-sqids/tree/v0.0.3"
+                "source": "https://github.com/TomWilford/slim-sqids/tree/v1.0.0"
             },
-            "time": "2025-02-25T19:59:27+00:00"
+            "time": "2026-05-25T18:46:25+00:00"
         },
         {
             "name": "tuupola/callable-handler",
@@ -2836,16 +2882,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.20.0",
+            "version": "v3.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3468920399451a384bef53cf7996965f7cd40183"
+                "reference": "04ae1bfe9463c816cf72ca0abe7eae2c77a9a9ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3468920399451a384bef53cf7996965f7cd40183",
-                "reference": "3468920399451a384bef53cf7996965f7cd40183",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/04ae1bfe9463c816cf72ca0abe7eae2c77a9a9ed",
+                "reference": "04ae1bfe9463c816cf72ca0abe7eae2c77a9a9ed",
                 "shasum": ""
             },
             "require": {
@@ -2855,7 +2901,8 @@
                 "symfony/polyfill-mbstring": "^1.3"
             },
             "require-dev": {
-                "phpstan/phpstan": "^2.0",
+                "php-cs-fixer/shim": "^3.0@stable",
+                "phpstan/phpstan": "^2.0@stable",
                 "psr/container": "^1.0|^2.0",
                 "symfony/phpunit-bridge": "^5.4.9|^6.4|^7.0"
             },
@@ -2899,7 +2946,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.20.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.27.0"
             },
             "funding": [
                 {
@@ -2911,7 +2958,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-13T08:34:43+00:00"
+            "time": "2026-05-27T13:05:51+00:00"
         }
     ],
     "packages-dev": [
@@ -3380,23 +3427,23 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.95.1",
+            "version": "v3.95.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "a9727678fbd12997f1d9de8f4a37824ed9df1065"
+                "reference": "3d681493acc0e93283481b1c63c263737df78687"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/a9727678fbd12997f1d9de8f4a37824ed9df1065",
-                "reference": "a9727678fbd12997f1d9de8f4a37824ed9df1065",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/3d681493acc0e93283481b1c63c263737df78687",
+                "reference": "3d681493acc0e93283481b1c63c263737df78687",
                 "shasum": ""
             },
             "require": {
                 "clue/ndjson-react": "^1.3",
                 "composer/semver": "^3.4",
                 "composer/xdebug-handler": "^3.0.5",
-                "ergebnis/agent-detector": "^1.1.1",
+                "ergebnis/agent-detector": "^1.2",
                 "ext-filter": "*",
                 "ext-hash": "*",
                 "ext-json": "*",
@@ -3413,16 +3460,16 @@
                 "symfony/filesystem": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0",
                 "symfony/finder": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0",
                 "symfony/options-resolver": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0",
-                "symfony/polyfill-mbstring": "^1.33",
-                "symfony/polyfill-php80": "^1.33",
-                "symfony/polyfill-php81": "^1.33",
-                "symfony/polyfill-php84": "^1.33",
+                "symfony/polyfill-mbstring": "^1.37",
+                "symfony/polyfill-php80": "^1.37",
+                "symfony/polyfill-php81": "^1.37",
+                "symfony/polyfill-php84": "^1.37",
                 "symfony/process": "^5.4.47 || ^6.4.24 || ^7.2 || ^8.0",
                 "symfony/stopwatch": "^5.4.45 || ^6.4.24 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "facile-it/paraunit": "^1.3.1 || ^2.8.0",
-                "infection/infection": "^0.32.6",
+                "facile-it/paraunit": "^1.3.1 || ^2.11.0",
+                "infection/infection": "^0.32.7",
                 "justinrainbow/json-schema": "^6.8.0",
                 "keradus/cli-executor": "^2.3",
                 "mikey179/vfsstream": "^1.6.12",
@@ -3430,9 +3477,9 @@
                 "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.8",
                 "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.8",
                 "phpunit/phpunit": "^9.6.34 || ^10.5.63 || ^11.5.55",
-                "symfony/polyfill-php85": "^1.33",
+                "symfony/polyfill-php85": "^1.37",
                 "symfony/var-dumper": "^5.4.48 || ^6.4.32 || ^7.4.4 || ^8.0.8",
-                "symfony/yaml": "^5.4.45 || ^6.4.30 || ^7.4.1 || ^8.0.8"
+                "symfony/yaml": "^5.4.45 || ^6.4.30 || ^7.4.1 || ^8.0.11"
             },
             "suggest": {
                 "ext-dom": "For handling output formats in XML",
@@ -3473,7 +3520,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.95.1"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.95.3"
             },
             "funding": [
                 {
@@ -3481,7 +3528,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-12T17:00:09+00:00"
+            "time": "2026-05-29T20:35:26+00:00"
         },
         {
             "name": "matthiasmullie/minify",
@@ -3844,11 +3891,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.54",
+            "version": "2.2.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8be50c3992107dc837b17da4d140fbbdf9a5c5bd",
-                "reference": "8be50c3992107dc837b17da4d140fbbdf9a5c5bd",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dea9c8f2d25cc849391042b71e429c1a4bf82660",
+                "reference": "dea9c8f2d25cc849391042b71e429c1a4bf82660",
                 "shasum": ""
             },
             "require": {
@@ -3870,6 +3917,17 @@
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
             "keywords": [
@@ -3893,7 +3951,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-29T13:31:09+00:00"
+            "time": "2026-05-28T14:44:12+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -6755,8 +6813,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "8.*",
-        "ext-json": "*"
+        "php": "^8.3",
+        "ext-json": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

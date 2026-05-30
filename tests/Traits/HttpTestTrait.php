@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Test\Traits;
 
 use Psr\Container\ContainerInterface;
@@ -49,8 +51,11 @@ trait HttpTestTrait
      *
      * @return ServerRequestInterface The request
      */
-    protected function createFormRequest(string $method, $uri, array $data = null): ServerRequestInterface
-    {
+    protected function createFormRequest(
+        string $method,
+        UriInterface|string $uri,
+        ?array $data = null,
+    ): ServerRequestInterface {
         $request = $this->createRequest($method, $uri);
 
         if ($data !== null) {
