@@ -42,7 +42,7 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile();
 
         $data = [
-            'album_sqid' => 'Uk',
+            'album_id' => 'Uk',
             'image' => $mockFile,
         ];
 
@@ -55,7 +55,7 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile();
 
         $data = [
-            'album_sqid' => '',
+            'album_id' => '',
             'image' => $mockFile,
         ];
 
@@ -68,7 +68,7 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile(mediaType: 'image/x-adobe-dng');
 
         $data = [
-            'album_sqid' => 'Uk',
+            'album_id' => 'Uk',
             'image' => $mockFile,
         ];
 
@@ -81,7 +81,7 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile(mediaType: '');
 
         $data = [
-            'album_sqid' => 'Uk',
+            'album_id' => 'Uk',
             'image' => $mockFile,
         ];
 
@@ -95,7 +95,7 @@ class CreateSnapValidatorTest extends TestCase
         $mockFile = $this->createMockUploadedFile(size: $hugeSize, mediaType: '');
 
         $data = [
-            'album_sqid' => 'Uk',
+            'album_id' => 'Uk',
             'image' => $mockFile,
         ];
 

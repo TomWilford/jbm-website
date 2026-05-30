@@ -26,7 +26,7 @@ readonly class CreateSnap implements CreatorInterface
 
     /**
      * @param array{
-     *     album_sqid: string,
+     *     album_id: string,
      *     image: UploadedFileInterface
      * }|array<string, mixed> $data
      *
@@ -38,7 +38,7 @@ readonly class CreateSnap implements CreatorInterface
     {
         $this->validator->validate($data);
 
-        $albumId = $this->sqids->decode($data['album_sqid']);
+        $albumId = $this->sqids->decode($data['album_id']);
 
         if (empty($albumId)) {
             throw new DomainRecordNotFoundException();

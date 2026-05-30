@@ -61,7 +61,7 @@ class Snap implements JsonSerializable
     /**
      * @return array{
      *     id: ?string,
-     *     album_sqid: string,
+     *     album_id: string,
      *     mime_type: string,
      *     created_at: ?int,
      *     updated_at: ?int
@@ -71,7 +71,7 @@ class Snap implements JsonSerializable
     {
         return [
             'id' => $this->getSqid(),
-            'album_sqid' => $this->getAllSqids()['albumId'],
+            'album_id' => $this->getAllSqids()['albumId'],
             'mime_type' => $this->getMimeType()->value,
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),

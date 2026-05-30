@@ -5,7 +5,7 @@
 {% block content %}
     <section>
         <h2 class="text-m">{{ album.name }}</h2>
-        {% include 'albums/components/album-details.twig' with {'album': album } %}
+        {% include 'components/album-details.twig' with {'album': album } %}
         {% for row in snaps|batch(4) %}
             {% set mode = random([1, 2, 4]) %}
 

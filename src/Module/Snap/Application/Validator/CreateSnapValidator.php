@@ -21,7 +21,7 @@ readonly class CreateSnapValidator extends Validator
      */
     public function validate(array $data): void
     {
-        $this->v::key('album_sqid', $this->v::stringType()->notEmpty())
+        $this->v::key('album_id', $this->v::stringType()->notEmpty())
             ->key('image', $this->v::uploaded()
                 ->size('0KB', '10MB')
                 ->callback(function (UploadedFileInterface $image): bool {

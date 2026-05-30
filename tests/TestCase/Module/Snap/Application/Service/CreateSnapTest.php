@@ -49,7 +49,7 @@ class CreateSnapTest extends TestCase
         $uploadedFile = $this->createMockUploadedFile();
 
         $data = [
-            'album_sqid' => 'Uk',
+            'album_id' => 'Uk',
             'image' => $uploadedFile,
         ];
 
@@ -87,7 +87,7 @@ class CreateSnapTest extends TestCase
         $creator = new CreateSnap($stubValidator, $repository, $sqids);
 
         $invalidData = [
-            'album_sqid' => '', // Fails validator rules
+            'album_id' => '', // Fails validator rules
             'image' => $this->createMockUploadedFile(),
         ];
 
@@ -105,7 +105,7 @@ class CreateSnapTest extends TestCase
         $creator = new CreateSnap($stubValidator, $repository, $sqids);
 
         $invalidData = [
-            'album_sqid' => 'beepboop',
+            'album_id' => 'beepboop',
             'image' => $this->createMockUploadedFile(),
         ];
 

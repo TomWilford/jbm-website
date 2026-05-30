@@ -45,7 +45,7 @@ class CreateSnapActionTest extends TestCase
     public function testAction(): void
     {
         $parsedBody = [
-            'album_sqid' => 'Uk',
+            'album_id' => 'Uk',
         ];
         $uploadedFiles = [
             'image' => $this->createMockUploadedFile(),
@@ -58,7 +58,7 @@ class CreateSnapActionTest extends TestCase
         $response = $this->app->handle($request);
 
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-        $this->assertResponseContains('"album_sqid":"Uk"', $response);
+        $this->assertResponseContains('"album_id":"Uk"', $response);
         $this->assertResponseContains('"mime_type":"image/webp"', $response);
     }
 
