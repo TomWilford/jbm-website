@@ -6,27 +6,49 @@ on:
       - 'v3.*'
 
 jobs:
-  web-deploy:
-    name: Deploy Website via FTPS
+  deploy:
+    name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get latest code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
+      - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.5'
+          php-version: '8.2'   # match your server's PHP version
+          tools: composer
 
-      - name: Install Dependencies
-        run: composer install --no-dev --optimize-autoloader
+      - name: Install Composer dependencies
+        run: |
+          composer install \
+            --no-dev \
+            --no-interaction \
+            --prefer-dist \
+            --optimize-autoloader
 
-      - name: Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftps
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known hosts
+        run: |
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='config/env.php' \
+            --exclude='tests/' \
+            --exclude='*.md' \
+            --exclude='var/' \
+            --exclude='logs/' \
+            --exclude='database/database.sqlite' \
+            --exclude='cgi-bin/' \
+            --exclude='bkp/' \
+            -e "ssh -p ${{ secrets.SSH_PORT }}" \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIR }}/
