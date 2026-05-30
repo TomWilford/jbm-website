@@ -1,44 +1,44 @@
-{% if row[0] %}
+{% if snaps[0] %}
     <div class="grid snaps one">
-        <a href="{{ url_for('snaps.show', { 'sqid': row[0].sqid }) }}" class="chocolat-image"
-           data-image-source="{{ url_for('snaps.file', { 'filename' : row[0].sqid ~ '.' ~ row[0].mimeType.ext }) }}">
-            <img src="{{ url_for('snaps.file', { 'filename' : row[0].sqid ~ '.' ~ row[0].mimeType.ext }) }}"
-                 alt="{{ album.name }}: {{ row[0].sqid }}"
+        <a href="{{ url_for('snaps.show', { 'sqid': snaps[0].sqid }) }}" class="chocolat-image"
+           data-image-source="{{ url_for('snaps.file', { 'filename' : snaps[0].sqid ~ '.' ~ snaps[0].mimeType.ext }) }}">
+            <img src="{{ url_for('snaps.file', { 'filename' : snaps[0].sqid ~ '.' ~ snaps[0].mimeType.ext }) }}"
+                 alt="{{ album.name }}: {{ snaps[0].sqid }}"
             >
         </a>
     </div>
 {% endif %}
-{% if row[1] and row[2] %}
+{% if snaps[1] and snaps[2] %}
     <div class="grid snaps one">
-        <a href="{{ url_for('snaps.show', { 'sqid': row[1].sqid }) }}" class="chocolat-image"
-           data-image-source="{{ url_for('snaps.file', { 'filename' : row[1].sqid ~ '.' ~ row[1].mimeType.ext }) }}">
-            <img src="{{ url_for('snaps.file', { 'filename' : row[1].sqid ~ '.' ~ row[1].mimeType.ext }) }}"
-                 alt="{{ album.name }}: {{ row[1].sqid }}"
+        <a href="{{ url_for('snaps.show', { 'sqid': snaps[1].sqid }) }}" class="chocolat-image"
+           data-image-source="{{ url_for('snaps.file', { 'filename' : snaps[1].sqid ~ '.' ~ snaps[1].mimeType.ext }) }}">
+            <img src="{{ url_for('snaps.file', { 'filename' : snaps[1].sqid ~ '.' ~ snaps[1].mimeType.ext }) }}"
+                 alt="{{ album.name }}: {{ snaps[1].sqid }}"
             >
         </a>
-        <a href="{{ url_for('snaps.show', { 'sqid': row[2].sqid }) }}" class="chocolat-image"
-           data-image-source="{{ url_for('snaps.file', { 'filename' : row[2].sqid ~ '.' ~ row[2].mimeType.ext }) }}">
-            <img src="{{ url_for('snaps.file', { 'filename' : row[2].sqid ~ '.' ~ row[2].mimeType.ext }) }}"
-                 alt="{{ album.name }}: {{ row[2].sqid }}"
+        <a href="{{ url_for('snaps.show', { 'sqid': snaps[2].sqid }) }}" class="chocolat-image"
+           data-image-source="{{ url_for('snaps.file', { 'filename' : snaps[2].sqid ~ '.' ~ snaps[2].mimeType.ext }) }}">
+            <img src="{{ url_for('snaps.file', { 'filename' : snaps[2].sqid ~ '.' ~ snaps[2].mimeType.ext }) }}"
+                 alt="{{ album.name }}: {{ snaps[2].sqid }}"
             >
         </a>
     </div>
-    {% if row[3] %}
+    {% if snaps[3] %}
         <div class="grid snaps">
-            <a href="{{ url_for('snaps.show', { 'sqid': row[3].sqid }) }}" class="chocolat-image"
-               data-image-source="{{ url_for('snaps.file', { 'filename' : row[3].sqid ~ '.' ~ row[3].mimeType.ext }) }}">
-                <img src="{{ url_for('snaps.file', { 'filename' : row[3].sqid ~ '.' ~ row[3].mimeType.ext }) }}"
-                     alt="{{ album.name }}: {{ row[3].sqid }}"
+            <a href="{{ url_for('snaps.show', { 'sqid': snaps[3].sqid }) }}" class="chocolat-image"
+               data-image-source="{{ url_for('snaps.file', { 'filename' : snaps[3].sqid ~ '.' ~ snaps[3].mimeType.ext }) }}">
+                <img src="{{ url_for('snaps.file', { 'filename' : snaps[3].sqid ~ '.' ~ snaps[3].mimeType.ext }) }}"
+                     alt="{{ album.name }}: {{ snaps[3].sqid }}"
                 >
             </a>
         </div>
     {% endif %}
-{% elseif row[1] %}
+{% elseif snaps[1] %}
     <div class="grid snaps one">
-        <a href="{{ url_for('snaps.show', { 'sqid': row[3].sqid }) }}" class="chocolat-image"
-           data-image-source="{{ url_for('snaps.file', { 'filename' : row[3].sqid ~ '.' ~ row[3].mimeType.ext }) }}">
-            <img src="{{ url_for('snaps.file', { 'filename' : row[3].sqid ~ '.' ~ row[3].mimeType.ext }) }}"
-                 alt="{{ album.name }}: {{ row[3].sqid }}"
+        <a href="{{ url_for('snaps.show', { 'sqid': snaps[3].sqid }) }}" class="chocolat-image"
+           data-image-source="{{ url_for('snaps.file', { 'filename' : snaps[3].sqid ~ '.' ~ snaps[3].mimeType.ext }) }}">
+            <img src="{{ url_for('snaps.file', { 'filename' : snaps[3].sqid ~ '.' ~ snaps[3].mimeType.ext }) }}"
+                 alt="{{ album.name }}: {{ snaps[3].sqid }}"
             >
         </a>
     </div>

@@ -7,6 +7,7 @@ namespace App\Module\Album\Application\Action\Web;
 use App\Application\Renderer\TwigRenderer;
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Module\Album\Infrastructure\AlbumRepository;
+use App\Module\Snap\Application\Service\SnapLayout;
 use App\Module\Snap\Infrastructure\SnapRepository;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ResponseInterface;
@@ -22,6 +23,7 @@ final class ShowAlbumPageAction
         private readonly TwigRenderer $renderer,
         private readonly AlbumRepository $albums,
         private readonly SnapRepository $snaps,
+        private readonly SnapLayout $snapLayout,
     ) {
     }
 
@@ -45,10 +47,12 @@ final class ShowAlbumPageAction
         try {
             $album = $this->albums->ofId((int)$request->getAttribute('id'));
             $snaps = $this->snaps->ofAlbumId((int)$album->getId());
+            $rows = $this->snapLayout->buildRows((array)$snaps);
 
             return $this->renderer->twig($response, 'albums/show.twig', [
                 'album' => $album,
                 'snaps' => $snaps,
+                'rows' => $rows,
             ]);
         } catch (DomainRecordNotFoundException) {
             throw new HttpNotFoundException($request);
