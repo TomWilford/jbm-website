@@ -6,7 +6,9 @@ namespace App\Test\TestCase\Module\Snap\Application\Service;
 
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Module\Snap\Application\Service\CreateSnap;
+use App\Module\Snap\Application\Service\ImageService;
 use App\Module\Snap\Application\Validator\CreateSnapValidator;
+use App\Module\Snap\Domain\Orientation;
 use App\Module\Snap\Domain\Snap;
 use App\Module\Snap\Infrastructure\SnapRepository;
 use App\Test\Traits\AppTestTrait;
@@ -57,7 +59,9 @@ class CreateSnapTest extends TestCase
         $repository = new SnapRepository($this->container?->get(Connection::class));
         $sqids = $this->createStub(Sqids::class);
         $sqids->method('decode')->willReturn([1]);
-        $creator = new CreateSnap($validator, $repository, $sqids);
+        $imageService = $this->createStub(ImageService::class);
+        $imageService->method('getOrientation')->willReturn(Orientation::PORTRAIT);
+        $creator = new CreateSnap($validator, $repository, $sqids, $imageService);
 
         $result = $creator->createFromArray($data);
 
@@ -68,6 +72,7 @@ class CreateSnapTest extends TestCase
         $this->assertGreaterThan(0, $result->getId());
         $this->assertSame(1, $result->getAlbumId());
         $this->assertSame(MimeTypeEnum::ImageWebp, $result->getMimeType());
+        $this->assertSame(Orientation::PORTRAIT, $result->getOrientation());
         $this->assertSame($expectedBinary, $result->getImage());
         $this->assertNotNull($result->getCreatedAt());
         $this->assertNotNull($result->getUpdatedAt());
@@ -84,7 +89,9 @@ class CreateSnapTest extends TestCase
         $repository = new SnapRepository($this->container?->get(Connection::class));
         $sqids = $this->createStub(Sqids::class);
         $sqids->method('decode')->willReturn([]);
-        $creator = new CreateSnap($stubValidator, $repository, $sqids);
+        $imageService = $this->createStub(ImageService::class);
+        $imageService->method('getOrientation')->willReturn(Orientation::PORTRAIT);
+        $creator = new CreateSnap($stubValidator, $repository, $sqids, $imageService);
 
         $invalidData = [
             'album_id' => '', // Fails validator rules
@@ -102,7 +109,9 @@ class CreateSnapTest extends TestCase
         $repository = new SnapRepository($this->container?->get(Connection::class));
         $sqids = $this->createStub(Sqids::class);
         $sqids->method('decode')->willReturn([]);
-        $creator = new CreateSnap($stubValidator, $repository, $sqids);
+        $imageService = $this->createStub(ImageService::class);
+        $imageService->method('getOrientation')->willReturn(Orientation::PORTRAIT);
+        $creator = new CreateSnap($stubValidator, $repository, $sqids, $imageService);
 
         $invalidData = [
             'album_id' => 'beepboop',

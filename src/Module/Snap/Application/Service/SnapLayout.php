@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Snap\Application\Service;
 
+use App\Module\Snap\Domain\Orientation;
 use App\Module\Snap\Domain\Snap;
 
 class SnapLayout
@@ -18,15 +19,13 @@ class SnapLayout
      */
     public function buildRows(array $snaps): array
     {
-        $oriented = $this->getSnapsWithOrientation($snaps);
-
         $rows = [];
-        $queue = $oriented;
+        $queue = $snaps;
 
         while (!empty($queue)) {
             $current = array_shift($queue);
 
-            $count = $this->findMatchesAhead($queue, $current['orientation']);
+            $count = $this->findMatchesAhead($queue, $current->getOrientation());
 
             if ($count >= 3) {
                 // Can fill a row of 4 = but randomly choose 2 or 4
@@ -55,58 +54,17 @@ class SnapLayout
     }
 
     /**
-     * @param array<Snap> $snaps
-     *
-     * @return array<array{
-     *         snap: Snap,
-     *         orientation: string
-     *     }
-     * >
-     */
-    private function getSnapsWithOrientation(array $snaps): array
-    {
-        return array_map(function ($snap) {
-            return [
-                'snap' => $snap,
-                'orientation' => $this->getImageOrientation($snap),
-            ];
-        }, $snaps);
-    }
-
-    private function getImageOrientation(Snap $snap): string
-    {
-        $imageData = $snap->getImage();
-        $info = @getimagesizefromstring($imageData);
-
-        if (!$info || $info[0] === 0 || $info[1] === 0) {
-            return 'square';
-        }
-
-        $ratio = $info[0] / $info[1];
-
-        return match (true) {
-            $ratio > 1.1 => 'landscape',
-            $ratio < 0.9 => 'portrait',
-            default => 'square',
-        };
-    }
-
-    /**
-     * @param array<array{
-     *          snap: Snap,
-     *          orientation: string
-     *      }
-     *  > $queue
-     * @param string $orientation
+     * @param array<Snap> $queue
+     * @param Orientation $orientation
      *
      * @return int
      */
-    private function findMatchesAhead(array $queue, string $orientation): int
+    private function findMatchesAhead(array $queue, Orientation $orientation): int
     {
         $result = [];
-        foreach ($queue as $item) {
-            if ($item['orientation'] === $orientation) {
-                $result[] = $item;
+        foreach ($queue as $snap) {
+            if ($snap->getOrientation() === $orientation) {
+                $result[] = $snap;
             } else {
                 break;
             }
@@ -116,10 +74,7 @@ class SnapLayout
     }
 
     /**
-     * @param array<array{
-     *      snap: Snap,
-     *      orientation: string
-     *  }> $items
+     * @param array<Snap> $group
      * @param string $mode
      *
      * @return array{
@@ -127,10 +82,10 @@ class SnapLayout
      *     mode: string
      * }
      */
-    private function makeRow(array $items, string $mode): array
+    private function makeRow(array $group, string $mode): array
     {
         return [
-            'snaps' => array_column($items, 'snap'),
+            'snaps' => $group,
             'mode' => $mode,
         ];
     }

@@ -6,6 +6,7 @@ namespace App\Module\Snap\Infrastructure;
 
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Infrastructure\Persistence\Repository;
+use App\Module\Snap\Domain\Orientation;
 use App\Module\Snap\Domain\Snap;
 use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
@@ -18,6 +19,8 @@ class SnapRepository extends Repository
      * @param object $entity
      *
      * @throws Exception
+     *
+     * @return Snap
      */
     public function store(object $entity): Snap
     {
@@ -33,13 +36,15 @@ class SnapRepository extends Repository
                 'album_id' => ':album_id',
                 'image' => ':image',
                 'mime_type' => ':mime_type',
+                'orientation' => ':orientation',
                 'created_at' => ':created_at',
                 'updated_at' => ':updated_at',
             ])
             ->setParameters([
                 'album_id' => $entity->getAlbumId(),
                 'image' => $entity->getImage(),
-                'mime_type' => $entity->getMimeType()->value, // Backed enum string value
+                'mime_type' => $entity->getMimeType()->value,
+                'orientation' => $entity->getOrientation()->value,
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);
@@ -116,11 +121,13 @@ class SnapRepository extends Repository
             ->set('image', ':image')
             ->set('mime_type', ':mime_type')
             ->set('updated_at', ':updated_at')
+            ->set('orientation', ':orientation')
             ->where('id = :id')
             ->setParameters([
                 'album_id' => $entity->getAlbumId(),
                 'image' => $entity->getImage(),
                 'mime_type' => $entity->getMimeType()->value,
+                'orientation' => $entity->getOrientation()->value,
                 'updated_at' => (new DateTimeImmutable())->getTimestamp(),
                 'id' => $entity->getId(),
             ]);
@@ -157,6 +164,7 @@ class SnapRepository extends Repository
      *     album_id: int,
      *     image: string,
      *     mime_type: string,
+     *     orientation: string,
      *     created_at: int,
      *     updated_at: int
      * }|array<string, mixed> $array
@@ -168,6 +176,7 @@ class SnapRepository extends Repository
             (int)$array['album_id'],
             $array['image'],
             MimeTypeEnum::from($array['mime_type']),
+            Orientation::from($array['orientation']),
             $array['created_at'] !== null ? (int)$array['created_at'] : null,
             $array['updated_at'] !== null ? (int)$array['updated_at'] : null
         );

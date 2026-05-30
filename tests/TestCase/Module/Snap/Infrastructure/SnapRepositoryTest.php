@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Module\Snap\Infrastructure;
 
 use App\Infrastructure\Exception\DomainRecordNotFoundException;
+use App\Module\Snap\Domain\Orientation;
 use App\Module\Snap\Domain\Snap;
 use App\Module\Snap\Infrastructure\SnapRepository;
 use App\Test\Traits\AppTestTrait;
@@ -50,7 +51,8 @@ class SnapRepositoryTest extends TestCase
             id: null,
             albumId: 5,
             image: $image,
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
 
         $repository = new SnapRepository($this->container?->get(Connection::class));
@@ -60,6 +62,7 @@ class SnapRepositoryTest extends TestCase
         $this->assertSame(100, $result->getId());
         $this->assertSame(5, $result->getAlbumId());
         $this->assertSame(MimeTypeEnum::ImageWebp, $result->getMimeType());
+        $this->assertSame(Orientation::PORTRAIT, $result->getOrientation());
         $this->assertSame($image, $result->getImage());
     }
 
@@ -81,7 +84,8 @@ class SnapRepositoryTest extends TestCase
             id: null,
             albumId: 42,
             image: $this->exampleImage->getContents(),
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
         $repository->store($snap);
 
@@ -101,7 +105,8 @@ class SnapRepositoryTest extends TestCase
             id: null,
             albumId: 1,
             image: $this->exampleImage->getContents(),
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
 
         $repository = new SnapRepository($this->container?->get(Connection::class));
@@ -121,7 +126,8 @@ class SnapRepositoryTest extends TestCase
             id: null,
             albumId: 1,
             image: $this->exampleImage->getContents(),
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
 
         $repository = new SnapRepository($this->container?->get(Connection::class));
@@ -141,7 +147,8 @@ class SnapRepositoryTest extends TestCase
             id: 99999999,
             albumId: 1,
             image: $this->exampleImage->getContents(),
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
         $repository = new SnapRepository($this->container?->get(Connection::class));
 
@@ -182,7 +189,8 @@ class SnapRepositoryTest extends TestCase
             id: null,
             albumId: 1,
             image: $this->exampleImage->getContents(),
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
         $repository = new SnapRepository($this->container?->get(Connection::class));
 

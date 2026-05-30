@@ -23,6 +23,7 @@ class Snap implements JsonSerializable
         private readonly int $albumId,
         private readonly string $image,
         private readonly MimeTypeEnum $mimeType,
+        private readonly Orientation $orientation,
         private readonly ?int $createdAt = null,
         private readonly ?int $updatedAt = null,
     ) {
@@ -58,11 +59,17 @@ class Snap implements JsonSerializable
         return $this->updatedAt;
     }
 
+    public function getOrientation(): Orientation
+    {
+        return $this->orientation;
+    }
+
     /**
      * @return array{
      *     id: ?string,
      *     album_id: string,
      *     mime_type: string,
+     *     orientation: string,
      *     created_at: ?int,
      *     updated_at: ?int
      * }
@@ -73,6 +80,7 @@ class Snap implements JsonSerializable
             'id' => $this->getSqid(),
             'album_id' => $this->getAllSqids()['albumId'],
             'mime_type' => $this->getMimeType()->value,
+            'orientation' => $this->getOrientation()->value,
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),
         ];
@@ -83,6 +91,7 @@ class Snap implements JsonSerializable
         Unchanged|int $albumId = Unchanged::VALUE,
         Unchanged|string $image = Unchanged::VALUE,
         Unchanged|MimeTypeEnum $mimeType = Unchanged::VALUE,
+        Unchanged|Orientation $orientation = Unchanged::VALUE,
         Unchanged|int|null $createdAt = Unchanged::VALUE,
         Unchanged|int|null $updatedAt = Unchanged::VALUE,
     ): self {
@@ -91,6 +100,7 @@ class Snap implements JsonSerializable
             $this->resolveValue($albumId, $this->albumId),
             $this->resolveValue($image, $this->image),
             $this->resolveValue($mimeType, $this->mimeType),
+            $this->resolveValue($orientation, $this->orientation),
             $this->resolveValue($createdAt, $this->createdAt),
             $this->resolveValue($updatedAt, $this->updatedAt),
         );

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Module\Snap\Application\Action\Web;
 
 use App\Module\Snap\Application\Action\Web\ShowSnapFileAction;
+use App\Module\Snap\Domain\Orientation;
 use App\Module\Snap\Domain\Snap;
 use App\Module\Snap\Infrastructure\SnapRepository;
 use App\Test\Traits\AppTestTrait;
@@ -40,7 +41,8 @@ class ShowSnapFileActionTest extends TestCase
             id: null,
             albumId: 1,
             image: $this->fixtureBinary,
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
         $savedSnap = $repository->store($snap);
 
@@ -63,7 +65,8 @@ class ShowSnapFileActionTest extends TestCase
             id: null,
             albumId: 1,
             image: $this->fixtureBinary,
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
         $savedSnap = $repository->store($snap);
 
@@ -83,7 +86,8 @@ class ShowSnapFileActionTest extends TestCase
             id: null,
             albumId: 1,
             image: $this->fixtureBinary,
-            mimeType: MimeTypeEnum::ImageWebp
+            mimeType: MimeTypeEnum::ImageWebp,
+            orientation: Orientation::PORTRAIT
         );
         $savedSnap = $repository->store($snap);
 

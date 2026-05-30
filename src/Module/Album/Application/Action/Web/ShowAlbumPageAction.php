@@ -51,7 +51,6 @@ final class ShowAlbumPageAction
 
             return $this->renderer->twig($response, 'albums/show.twig', [
                 'album' => $album,
-                'snaps' => $snaps,
                 'rows' => $rows,
             ]);
         } catch (DomainRecordNotFoundException) {

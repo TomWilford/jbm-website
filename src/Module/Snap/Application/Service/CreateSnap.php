@@ -21,6 +21,7 @@ readonly class CreateSnap implements CreatorInterface
         private CreateSnapValidator $validator,
         private SnapRepository $repository,
         private Sqids $sqids,
+        private ImageService $imageService,
     ) {
     }
 
@@ -53,11 +54,14 @@ readonly class CreateSnap implements CreatorInterface
         $mediaType = (string)$image->getClientMediaType();
         $mimeTypeEnum = MimeTypeEnum::from($mediaType);
 
+        $orientation = $this->imageService->getOrientation($binaryString);
+
         $snap = new Snap(
             id: null,
             albumId: $albumId[0],
             image: $binaryString,
-            mimeType: $mimeTypeEnum
+            mimeType: $mimeTypeEnum,
+            orientation: $orientation,
         );
 
         return $this->repository->store($snap);

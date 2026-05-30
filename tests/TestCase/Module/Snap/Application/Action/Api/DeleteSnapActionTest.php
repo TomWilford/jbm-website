@@ -10,6 +10,7 @@ use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Module\Album\Application\Action\Api\DeleteAlbumAction;
 use App\Module\Album\Infrastructure\AlbumRepository;
 use App\Module\Snap\Application\Action\Api\DeleteSnapAction;
+use App\Module\Snap\Domain\Orientation;
 use App\Module\Snap\Domain\Snap;
 use App\Module\Snap\Infrastructure\SnapRepository;
 use App\Test\Traits\AppTestTrait;
@@ -38,6 +39,7 @@ class DeleteSnapActionTest extends TestCase
             1,
             '/sdfssd/gfd/sdddf-dfdfdf',
             MimeTypeEnum::ImageWebp,
+            Orientation::PORTRAIT
         );
 
         $snap = $repository->store($snap);
