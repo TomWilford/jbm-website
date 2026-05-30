@@ -25,7 +25,7 @@ readonly class CreateAlbumValidator extends Validator
         $this->v::key('name', $this->v::stringType()->length(1, 255))
             ->key('camera', $this->v::in(array_column(Camera::cases(), 'value')))
             ->key('location', $this->v::stringType()->length(1, 255))
-            ->key('date', $this->v::date())
+            ->key('date', $this->v::stringType()->length(1, 255))
             ->assert($data);
     }
 }

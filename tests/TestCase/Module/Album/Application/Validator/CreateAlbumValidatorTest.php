@@ -59,19 +59,6 @@ class CreateAlbumValidatorTest extends TestCase
         $this->validator->validate($data);
     }
 
-    public function testValidateWithInvalidDate(): void
-    {
-        $data = [
-            'name' => 'Summer Holiday 2025',
-            'camera' => Camera::OLYMPUS_PEN->value,
-            'location' => 'Greece',
-            'date' => 'not-a-valid-date', // Invalid: Not a valid date format
-        ];
-
-        $this->expectException(ValidationException::class);
-        $this->validator->validate($data);
-    }
-
     public function testValidateWithInvalidLocation(): void
     {
         $data = [

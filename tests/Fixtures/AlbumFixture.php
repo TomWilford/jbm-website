@@ -20,7 +20,7 @@ class AlbumFixture extends BaseFixture
         [
             'id' => 99,
             'name' => 'Album 99',
-            'camera' => 'olympus35RC',
+            'camera' => 'olympus35Rc',
             'location' => 'Leeds',
             'date' => '2023-01-01',
             'created_at' => 1471298400,

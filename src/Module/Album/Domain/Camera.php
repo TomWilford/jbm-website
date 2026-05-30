@@ -8,7 +8,7 @@ enum Camera: string
 {
     case YASHICA_635 = 'yashica635';
     case OLYMPUS_PEN = 'olympusPen';
-    case OLYMPUS_35RC = 'olympus35RC';
+    case OLYMPUS_35RC = 'olympus35Rc';
     case CHAIKA_2 = 'chaika2';
     case PENTAX_LX = 'pentaxLX';
     case PENTAX_ME_SUPER = 'pentaxMESuper';
