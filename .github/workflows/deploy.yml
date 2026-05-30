@@ -52,3 +52,8 @@ jobs:
             --exclude='bkp/' \
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_DIR }}/
+
+      - name: Run migrations
+        run: |
+          ssh -p${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            'cd ${{ secrets.SSH_DIR }} && php ./vendor/bin/doctrine-migrations migrate --no-interaction'
