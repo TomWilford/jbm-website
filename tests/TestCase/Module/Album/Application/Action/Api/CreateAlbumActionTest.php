@@ -30,6 +30,7 @@ class CreateAlbumActionTest extends TestCase
             'camera' => 'olympusPen',
             'location' => 'Japan',
             'date' => '2025-04-12',
+            'sort_date' => '2025-04-12',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -50,6 +51,7 @@ class CreateAlbumActionTest extends TestCase
             'camera' => 'noCamera',
             'location' => 'Japan',
             'date' => '2025-04-12',
+            'sort_date' => '2025-04-12',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 
@@ -90,6 +92,7 @@ class CreateAlbumActionTest extends TestCase
             'camera' => 'noCamera',
             'location' => 'Japan',
             'date' => '2025-04-12',
+            'sort_date' => '2025-04-12',
         ];
         $body = (new Psr17Factory())->createStream(http_build_query($formData));
 

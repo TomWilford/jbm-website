@@ -12,10 +12,7 @@
         </p>
         <ul class="link-list">
             {% for album in albums %}
-                <li class="mb-2">
-                    <strong>{{ album.name }}</strong>
-                    <a href="{{ url_for('albums.show', {sqid: album.sqid}) }}">View</a>
-                </li>
+                {% include '/albums/components/albums-list.twig' with {'album': album} %}
             {% endfor %}
         </ul>
     </section>

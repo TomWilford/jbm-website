@@ -59,7 +59,7 @@ class SnapRepositoryTest extends TestCase
         $result = $repository->store($snap);
 
         $this->assertInstanceOf(Snap::class, $result);
-        $this->assertSame(100, $result->getId());
+        $this->assertSame(2000, $result->getId());
         $this->assertSame(5, $result->getAlbumId());
         $this->assertSame(MimeTypeEnum::ImageWebp, $result->getMimeType());
         $this->assertSame(Orientation::PORTRAIT, $result->getOrientation());

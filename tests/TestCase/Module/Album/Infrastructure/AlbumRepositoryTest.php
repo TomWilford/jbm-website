@@ -10,6 +10,7 @@ use App\Module\Album\Domain\Camera;
 use App\Module\Album\Infrastructure\AlbumRepository;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
+use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -38,14 +39,15 @@ class AlbumRepositoryTest extends TestCase
             name: 'Summer Holiday',
             camera: Camera::OLYMPUS_PEN,
             location: 'Greece',
-            date: '2023-08-15'
+            date: '2023-08-15',
+            sortDate: new DateTimeImmutable('2023-08-15')->getTimestamp(),
         );
 
         $repository = new AlbumRepository($this->container?->get(Connection::class));
         $result = $repository->store($album);
 
         $this->assertInstanceOf(Album::class, $result);
-        $this->assertSame(100, $result->getId());
+        $this->assertSame(1000, $result->getId());
         $this->assertSame('Summer Holiday', $result->getName());
         $this->assertSame(Camera::OLYMPUS_PEN, $result->getCamera());
     }
@@ -60,6 +62,15 @@ class AlbumRepositoryTest extends TestCase
         $this->assertSame(1, $result[0]->getId());
     }
 
+    public function testRecent(): void
+    {
+        $repository = new AlbumRepository($this->container?->get(Connection::class));
+        $result = $repository->recent();
+        $this->assertIsArray($result);
+        $this->assertInstanceOf(Album::class, $result[0]);
+        $this->assertSame(1, $result[0]->getId());
+    }
+
     public function testUpdate(): void
     {
         $album = new Album(
@@ -67,7 +78,8 @@ class AlbumRepositoryTest extends TestCase
             name: 'Original Name',
             camera: Camera::OLYMPUS_PEN,
             location: 'Original Location',
-            date: '2023-01-01'
+            date: '2023-01-01',
+            sortDate: new DateTimeImmutable('2023-01-01')->getTimestamp(),
         );
 
         $repository = new AlbumRepository($this->container?->get(Connection::class));
@@ -93,7 +105,8 @@ class AlbumRepositoryTest extends TestCase
             name: 'To Be Deleted',
             camera: Camera::OLYMPUS_PEN,
             location: 'Wastebasket',
-            date: '2023-01-01'
+            date: '2023-01-01',
+            sortDate: new DateTimeImmutable('2023-01-01')->getTimestamp(),
         );
 
         $repository = new AlbumRepository($this->container?->get(Connection::class));
@@ -114,7 +127,8 @@ class AlbumRepositoryTest extends TestCase
             name: 'Ghost Album',
             camera: Camera::OLYMPUS_PEN,
             location: 'Nowhere',
-            date: '2023-01-01'
+            date: '2023-01-01',
+            sortDate: new DateTimeImmutable('2023-01-01')->getTimestamp(),
         );
         $repository = new AlbumRepository($this->container?->get(Connection::class));
 

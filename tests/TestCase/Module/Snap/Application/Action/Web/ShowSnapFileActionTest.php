@@ -39,7 +39,7 @@ class ShowSnapFileActionTest extends TestCase
 
         $snap = new Snap(
             id: null,
-            albumId: 1,
+            albumId: 1000,
             image: $this->fixtureBinary,
             mimeType: MimeTypeEnum::ImageWebp,
             orientation: Orientation::PORTRAIT

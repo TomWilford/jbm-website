@@ -15,7 +15,8 @@ readonly class CreateAlbumValidator extends Validator
      *     name: string,
      *     camera: string,
      *     location: string,
-     *     date: string
+     *     date: string,
+     *     sort_date: string
      * }|array<string, mixed> $data
      *
      * @throws ValidationException
@@ -26,6 +27,7 @@ readonly class CreateAlbumValidator extends Validator
             ->key('camera', $this->v::in(array_column(Camera::cases(), 'value')))
             ->key('location', $this->v::stringType()->length(1, 255))
             ->key('date', $this->v::stringType()->length(1, 255))
+            ->key('sort_date', $this->v::date())
             ->assert($data);
     }
 }
