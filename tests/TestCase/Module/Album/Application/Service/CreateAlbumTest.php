@@ -11,6 +11,7 @@ use App\Module\Album\Domain\Camera;
 use App\Module\Album\Infrastructure\AlbumRepository;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
+use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -29,6 +30,7 @@ class CreateAlbumTest extends TestCase
             'camera' => 'olympusPen',
             'location' => 'Japan',
             'date' => '2025-04-12',
+            'sort_date' => '2025-04-12',
         ];
 
         $validator = new CreateAlbumValidator();
@@ -43,6 +45,7 @@ class CreateAlbumTest extends TestCase
         $this->assertSame(Camera::OLYMPUS_PEN, $result->getCamera());
         $this->assertSame('Japan', $result->getLocation());
         $this->assertSame('2025-04-12', $result->getDate());
+        $this->assertSame(new DateTimeImmutable('2025-04-12')->getTimestamp(), $result->getSortDate());
         $this->assertNotNull($result->getCreatedAt());
         $this->assertNotNull($result->getUpdatedAt());
     }
@@ -65,6 +68,7 @@ class CreateAlbumTest extends TestCase
             'camera' => 'invalid-camera',
             'location' => 'Nowhere',
             'date' => 'not-a-date',
+            'sort_date' => 'beepboop',
         ];
 
         $this->expectException(ValidationException::class);

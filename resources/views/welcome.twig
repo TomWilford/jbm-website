@@ -17,4 +17,14 @@
         <a href="/things" class="mt-3">More...</a>
     </section>
     <hr class="my-5">
+    <section>
+        {% include 'components/subtitle.twig' with {'subtitle': 'Recent Snaps'} %}
+        <ul class="link-list">
+            {% for album in albums %}
+                {% include '/albums/components/albums-list.twig' with {'album': album} %}
+            {% endfor %}
+        </ul>
+        <a href="/albums" class="mt-3">More...</a>
+    </section>
+    <hr class="my-5">
 {% endblock %}

@@ -9,6 +9,8 @@ use App\Module\Album\Application\Validator\CreateAlbumValidator;
 use App\Module\Album\Domain\Album;
 use App\Module\Album\Domain\Camera;
 use App\Module\Album\Infrastructure\AlbumRepository;
+use DateMalformedStringException;
+use DateTimeImmutable;
 use Respect\Validation\Exceptions\ValidationException;
 
 readonly class CreateAlbum implements CreatorInterface
@@ -22,7 +24,7 @@ readonly class CreateAlbum implements CreatorInterface
     /**
      * @param array<string, mixed> $data
      *
-     * @throws ValidationException
+     * @throws ValidationException|DateMalformedStringException
      */
     public function createFromArray(array $data): Album
     {
@@ -33,7 +35,8 @@ readonly class CreateAlbum implements CreatorInterface
             name: $data['name'],
             camera: Camera::from($data['camera']),
             location: $data['location'],
-            date: $data['date']
+            date: $data['date'],
+            sortDate: new DateTimeImmutable($data['sort_date'])->getTimestamp(),
         );
 
         return $this->repository->store($album);

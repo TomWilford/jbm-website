@@ -75,7 +75,7 @@ class ThingRepository extends Repository
     /**
      * @param int $id
      *
-     * @throws DomainRecordNotFoundException
+     * @return Thing
      * @throws Exception
      */
     public function ofId(int $id): Thing
@@ -92,6 +92,7 @@ class ThingRepository extends Repository
     /**
      * @param object $entity
      *
+     * @return Thing
      * @throws Exception
      */
     public function update(object $entity): Thing

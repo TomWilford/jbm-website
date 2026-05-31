@@ -8,6 +8,7 @@ use App\Infrastructure\Persistence\RepositoryInterface;
 use App\Module\Album\Domain\Album;
 use App\Module\Album\Domain\Camera;
 use App\Module\Album\Infrastructure\AlbumRepository;
+use DateTimeImmutable;
 
 class AlbumsSeed implements SeedInterface
 {
@@ -34,6 +35,7 @@ class AlbumsSeed implements SeedInterface
                 camera: Camera::OLYMPUS_35RC,
                 location: 'Netherlands',
                 date: '2026-04-25 - 2026-04-30',
+                sortDate: new DateTimeImmutable('2026-04-30')->getTimestamp()
             )
         ];
     }

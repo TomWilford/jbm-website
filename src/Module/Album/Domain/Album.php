@@ -22,6 +22,7 @@ class Album implements JsonSerializable
         private readonly Camera $camera,
         private readonly string $location,
         private readonly string $date,
+        private readonly int $sortDate,
         private readonly ?int $createdAt = null,
         private readonly ?int $updatedAt = null,
     ) {
@@ -52,6 +53,11 @@ class Album implements JsonSerializable
         return $this->date;
     }
 
+    public function getSortDate(): int
+    {
+        return $this->sortDate;
+    }
+
     public function getCreatedAt(): ?int
     {
         return $this->createdAt;
@@ -69,6 +75,7 @@ class Album implements JsonSerializable
      *     camera: string,
      *     location: string,
      *     date: string,
+     *     sortDate: int,
      *     createdAt: ?int,
      *     updatedAt: ?int
      * }
@@ -81,6 +88,7 @@ class Album implements JsonSerializable
             'camera' => $this->getCamera()->value,
             'location' => $this->getLocation(),
             'date' => $this->getDate(),
+            'sortDate' => $this->getSortDate(),
             'createdAt' => $this->getCreatedAt(),
             'updatedAt' => $this->getUpdatedAt(),
         ];
@@ -92,6 +100,7 @@ class Album implements JsonSerializable
         Unchanged|Camera $camera = Unchanged::VALUE,
         Unchanged|string $location = Unchanged::VALUE,
         Unchanged|string $date = Unchanged::VALUE,
+        Unchanged|int $sortDate = Unchanged::VALUE,
         Unchanged|int|null $createdAt = Unchanged::VALUE,
         Unchanged|int|null $updatedAt = Unchanged::VALUE,
     ): self {
@@ -101,6 +110,7 @@ class Album implements JsonSerializable
             $this->resolveValue($camera, $this->camera),
             $this->resolveValue($location, $this->location),
             $this->resolveValue($date, $this->date),
+            $this->resolveValue($sortDate, $this->sortDate),
             $this->resolveValue($createdAt, $this->createdAt),
             $this->resolveValue($updatedAt, $this->updatedAt),
         );

@@ -27,6 +27,7 @@ class CreateAlbumValidatorTest extends TestCase
             'camera' => Camera::OLYMPUS_PEN->value,
             'location' => 'Greece',
             'date' => '2025-08-15',
+            'sort_date' => '2025-08-15',
         ];
 
         $this->expectNotToPerformAssertions();
@@ -40,6 +41,7 @@ class CreateAlbumValidatorTest extends TestCase
             'camera' => Camera::OLYMPUS_PEN->value,
             'location' => 'Greece',
             'date' => '2025-08-15',
+            'sort_date' => '2025-08-15',
         ];
 
         $this->expectException(ValidationException::class);
@@ -53,6 +55,7 @@ class CreateAlbumValidatorTest extends TestCase
             'camera' => 'Nikon_D850', // Invalid: Not an allowed value in Camera backed enum
             'location' => 'Greece',
             'date' => '2025-08-15',
+            'sort_date' => '2025-08-15',
         ];
 
         $this->expectException(ValidationException::class);
@@ -66,6 +69,49 @@ class CreateAlbumValidatorTest extends TestCase
             'camera' => Camera::OLYMPUS_PEN->value,
             'location' => str_repeat('A', 256), // Invalid: Exceeds maximum length of 255
             'date' => '2025-08-15',
+            'sort_date' => '2025-08-15',
+        ];
+
+        $this->expectException(ValidationException::class);
+        $this->validator->validate($data);
+    }
+
+    public function testValidateWithMissingDate(): void
+    {
+        $data = [
+            'name' => 'Summer Holiday 2025',
+            'camera' => Camera::OLYMPUS_PEN->value,
+            'location' => 'Somewhere',
+            'date' => '', // Invalid: string required
+            'sort_date' => '2025-08-15',
+        ];
+
+        $this->expectException(ValidationException::class);
+        $this->validator->validate($data);
+    }
+
+    public function testValidateWithMissingSortDate(): void
+    {
+        $data = [
+            'name' => 'Summer Holiday 2025',
+            'camera' => Camera::OLYMPUS_PEN->value,
+            'location' => 'Somewhere',
+            'date' => '2025-08-15',
+            'sort_date' => '', // Invalid: date required
+        ];
+
+        $this->expectException(ValidationException::class);
+        $this->validator->validate($data);
+    }
+
+    public function testValidateWithInvalidSortDate(): void
+    {
+        $data = [
+            'name' => 'Summer Holiday 2025',
+            'camera' => Camera::OLYMPUS_PEN->value,
+            'location' => 'Somewhere',
+            'date' => '2025-08-15',
+            'sort_date' => 'foobarbaz', // Invalid: incorrect format
         ];
 
         $this->expectException(ValidationException::class);

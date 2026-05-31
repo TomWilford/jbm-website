@@ -8,7 +8,9 @@ use App\Infrastructure\Exception\DomainRecordNotFoundException;
 use App\Infrastructure\Persistence\Repository;
 use App\Module\Album\Domain\Album;
 use App\Module\Album\Domain\Camera;
+use App\Module\Thing\Domain\Thing;
 use DateTimeImmutable;
+use Doctrine\DBAL\Exception;
 use InvalidArgumentException;
 
 class AlbumRepository extends Repository
@@ -28,6 +30,7 @@ class AlbumRepository extends Repository
                 'camera' => ':camera',
                 'location' => ':location',
                 'date' => ':date',
+                'sort_date' => ':sort_date',
                 'created_at' => ':created_at',
                 'updated_at' => ':updated_at',
             ])
@@ -36,6 +39,7 @@ class AlbumRepository extends Repository
                 'camera' => $entity->getCamera()->value,
                 'location' => $entity->getLocation(),
                 'date' => $entity->getDate(),
+                'sort_date' => $entity->getSortDate(),
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);
@@ -52,7 +56,19 @@ class AlbumRepository extends Repository
      */
     public function all(): iterable
     {
-        $result = $this->fetch('albums');
+        $result = $this->fetch(table: 'albums', orderBy: 'sort_date', orderDirection: 'DESC');
+
+        return $this->arrayToObjects($result);
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @return Thing[]
+     */
+    public function recent(): iterable
+    {
+        $result = $this->fetch(table: 'albums', limit: 3, orderBy: 'sort_date', orderDirection: 'DESC');
 
         return $this->arrayToObjects($result);
     }
@@ -81,6 +97,7 @@ class AlbumRepository extends Repository
             ->set('camera', ':camera')
             ->set('location', ':location')
             ->set('date', ':date')
+            ->set('sort_date', ':sort_date')
             ->set('updated_at', ':updated_at')
             ->where('id = :id')
             ->setParameters([
@@ -88,7 +105,8 @@ class AlbumRepository extends Repository
                 'camera' => $entity->getCamera()->value,
                 'location' => $entity->getLocation(),
                 'date' => $entity->getDate(),
-                'updated_at' => (new DateTimeImmutable())->getTimestamp(),
+                'sort_date' => $entity->getSortDate(),
+                'updated_at' => new DateTimeImmutable()->getTimestamp(),
                 'id' => $entity->getId(),
             ]);
 
@@ -120,6 +138,7 @@ class AlbumRepository extends Repository
      *     camera: string,
      *     location: string,
      *     date: string,
+     *     sort_date: int,
      *     created_at: int,
      *     updated_at: int
      * }|array<string, mixed> $array
@@ -134,6 +153,7 @@ class AlbumRepository extends Repository
             Camera::from($array['camera']),
             $array['location'],
             $array['date'],
+            $array['sort_date'],
             $array['created_at'] ?? null,
             $array['updated_at'] ?? null
         );

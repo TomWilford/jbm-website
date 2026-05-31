@@ -13,6 +13,7 @@ use App\Module\Album\Domain\Camera;
 use App\Module\Album\Infrastructure\AlbumRepository;
 use App\Test\Traits\AppTestTrait;
 use App\Test\Traits\DatabaseTestTrait;
+use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use Fig\Http\Message\StatusCodeInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -37,6 +38,7 @@ class DeleteAlbumActionTest extends TestCase
             Camera::OLYMPUS_PEN,
             'Japan',
             '2025-04-12',
+            new DateTimeImmutable('2025-04-12')->getTimestamp(),
         );
 
         $album = $repository->store($album);
@@ -83,9 +85,9 @@ class DeleteAlbumActionTest extends TestCase
 
         $action = new DeleteAlbumAction($mockRenderer, $mockRepository);
 
-        $request = (new Psr17Factory())->createServerRequest('DELETE', '/api/albums/23456');
+        $request = new Psr17Factory()->createServerRequest('DELETE', '/api/albums/23456');
 
-        $response = (new Psr17Factory())->createResponse();
+        $response = new Psr17Factory()->createResponse();
 
         $action($request, $response, []);
     }
