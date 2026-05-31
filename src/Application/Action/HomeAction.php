@@ -19,7 +19,7 @@ final readonly class HomeAction
     public function __construct(
         private TwigRenderer $renderer,
         private ThingRepository $things,
-        private AlbumRepository $albums
+        private AlbumRepository $albums,
     ) {
     }
 
@@ -27,11 +27,12 @@ final readonly class HomeAction
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      *
-     * @return ResponseInterface
      * @throws Exception
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
+     * @return ResponseInterface
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {

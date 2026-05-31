@@ -75,8 +75,9 @@ class ThingRepository extends Repository
     /**
      * @param int $id
      *
-     * @return Thing
      * @throws Exception
+     *
+     * @return Thing
      */
     public function ofId(int $id): Thing
     {
@@ -92,8 +93,9 @@ class ThingRepository extends Repository
     /**
      * @param object $entity
      *
-     * @return Thing
      * @throws Exception
+     *
+     * @return Thing
      */
     public function update(object $entity): Thing
     {
